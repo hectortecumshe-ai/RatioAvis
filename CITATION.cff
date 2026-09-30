@@ -1,0 +1,15 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below. / Si usas este software, cítalo como se indica."
+title: "RatioAvis: Guided least-cost diet formulation for broiler chickens"
+version: 1.0.0
+date-released: 2026-09-29
+type: software
+license: MIT
+authors:
+  - given-names: "Héctor Tecumshé"
+    family-names: "Mojica-Zárate"
+  - given-names: "Luis Ángel"
+    family-names: "Barrera-Guzmán"
+repository-code: "https://github.com/hectortecumshe-ai/RatioAvis"
+url: "https://hectortecumshe-ai.github.io/RatioAvis/"
+keywords: [broiler, least-cost formulation, linear programming, poultry nutrition, pollo de engorda]
