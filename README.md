@@ -20,6 +20,7 @@ RatioAvis formula dietas de **mínimo costo para pollo de engorda** mediante pro
 - Condiciones de producción: altitud, calor, balance electrolítico y pigmentación.
 - 29 ingredientes con aminoácidos totales y digestibles, matriz editable.
 - Programa multifase, informe, exportación a CSV y proyecto guardable.
+- **Dos vistas (botón Productor / Científico):** la de productor muestra lo esencial en lenguaje sencillo, con hoja de mezclado en kg y costo por pollo; la científica muestra el modelo de programación lineal, precios sombra, costos reducidos, certificado de dualidad, los 20 nutrientes, validación y referencias, con exportación del modelo en JSON.
 - Ayuda contextual: cada parámetro, índice e indicador tiene un signo **?** con su concepto y escala de decisión.
 - **Validación:** reencuentra exactamente 6 de 6 fórmulas publicadas (Rev. Mex. Cienc. Pecu. 2020; *Animals* 2025; *Poultry* 2022) y coincide con HiGHS/SciPy en 400 problemas aleatorios.
 
@@ -31,12 +32,13 @@ RatioAvis formulates **least-cost broiler diets** by linear programming (two-pha
 - Production conditions: altitude, heat, electrolyte balance and pigmentation.
 - 29 ingredients with total and digestible amino acids, editable matrix.
 - Multiphase program, report, CSV export and savable project.
+- **Two views (Producer / Scientist button):** the producer view shows the essentials in plain language, with a mixing sheet in kg and cost per bird; the scientist view shows the linear-programming model, shadow prices, reduced costs, duality certificate, all 20 nutrients, validation and references, with JSON export of the model.
 - Context help: every parameter, index and indicator has a **?** sign with its concept and decision scale.
 - **Validation:** recovers exactly 6 of 6 published formulas and matches HiGHS/SciPy on 400 random problems.
 
 ## Cómo citar · How to cite
 
-Mojica-Zárate, H. T., & Barrera-Guzmán, L. A. (2026). *RatioAvis: Guided least-cost diet formulation for broiler chickens* (Version 1.0.0) [Software]. https://doi.org/10.5281/zenodo.23050777
+Mojica-Zárate, H. T., & Barrera-Guzmán, L. A. (2026). *RatioAvis: Guided least-cost diet formulation for broiler chickens* (Version 1.1.0) [Software]. https://doi.org/10.5281/zenodo.23050777
 
 ## Autores · Authors
 
