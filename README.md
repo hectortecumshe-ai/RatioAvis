@@ -2,7 +2,7 @@
 
 # RatioAvis
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23050777.svg)](https://doi.org/10.5281/zenodo.23050777)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23090714.svg)](https://doi.org/10.5281/zenodo.23090714)
 
 **La razón al servicio del ave · Reason in the service of the bird**
 
@@ -38,7 +38,7 @@ RatioAvis formulates **least-cost broiler diets** by linear programming (two-pha
 
 ## Cómo citar · How to cite
 
-Mojica-Zárate, H. T., & Barrera-Guzmán, L. A. (2026). *RatioAvis: Guided least-cost diet formulation for broiler chickens* (Version 1.1.0) [Software]. https://doi.org/10.5281/zenodo.23050777
+Mojica-Zárate, H. T., & Barrera-Guzmán, L. A. (2026). *RatioAvis: Guided least-cost diet formulation for broiler chickens* (Version 1.1.0) [Software]. https://doi.org/10.5281/zenodo.23090714
 
 ## Autores · Authors
 
