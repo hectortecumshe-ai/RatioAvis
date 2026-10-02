@@ -34,7 +34,7 @@ RatioAvis formulates **least-cost broiler diets** by linear programming (two-pha
 - Multiphase program, report, CSV export and savable project.
 - **Two views (Producer / Scientist button):** the producer view shows the essentials in plain language, with a mixing sheet in kg and cost per bird; the scientist view shows the linear-programming model, shadow prices, reduced costs, duality certificate, all 20 nutrients, validation and references, with JSON export of the model.
 - Context help: every parameter, index and indicator has a **?** sign with its concept and decision scale.
-- **Validation:** recovers exactly 6 of 6 published formulas and matches HiGHS/SciPy on 400 random problems.
+- **Validation:** recovers exactly 6 of 6 published formulas (Rev. Mex. Cienc. Pecu. 2020; *Animals* 2025; *Poultry* 2022) and matches HiGHS/SciPy on 400 random problems.
 
 ## Cómo citar · How to cite
 
