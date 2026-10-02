@@ -8,6 +8,8 @@
 
 👉 **App:** https://hectortecumshe-ai.github.io/RatioAvis/ — botón **ES / EN** para cambiar de idioma.
 
+📘 **Instructivo del Productor · Producer Guide:** https://hectortecumshe-ai.github.io/RatioAvis/instructivo-productor.html — [PDF ES](instructivo/RatioAvis-Instructivo-Productor.pdf) · [PDF EN](instructivo/RatioAvis-Producer-Guide.pdf)
+
 *Ratio* (latín): razón, cálculo, origen de la palabra «ración». *Avis*: ave.
 
 ---
