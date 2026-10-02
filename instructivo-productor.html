@@ -1,0 +1,1273 @@
+<!doctype html>
+<html lang="es" data-lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RatioAvis · Instructivo del Productor</title>
+<meta name="description" content="Instructivo del Productor de RatioAvis: formula paso a paso la dieta de mínimo costo para tus pollos de engorda. · RatioAvis Producer Guide: formulate the least-cost broiler diet step by step.">
+<link rel="icon" href="logo.svg" type="image/svg+xml">
+<style>
+/* =====================================================================
+   RatioAvis · Instructivo del Productor
+   Misma familia visual que la app: serif clásica, verde pino y cobre.
+   ===================================================================== */
+:root{
+  color-scheme: light;
+  --bg:#f6f5f0; --paper:#fffefb; --soft:#efede5; --text:#1d2420; --muted:#5a645e; --faint:#8a918b;
+  --line:#e0ded4; --line2:#c9c6b8;
+  --pri:#2f5d50; --pri-d:#21453b; --pri-s:rgba(47,93,80,.09);
+  --acc:#c0772b; --acc-d:#8a5214; --acc-s:rgba(192,119,43,.12);
+  --ok:#2f8f4a; --ok-s:#e9f5ec; --warn:#b5730c; --warn-s:#fcf3e2; --bad:#b8382e; --bad-s:#fbeae8; --info:#2d78b0; --info-s:#e8f1f8;
+  --b1:#2f5d50; --b2:#5c8538; --b3:#2f6f8f; --b4:#b0841f; --b5:#c0772b; --b6:#a0502e; --b7:#755a8c; --b8:#4a5d6b;
+  --font:"Palatino Linotype",Palatino,"Book Antiqua","URW Palladio L",P052,"TeX Gyre Pagella",Georgia,serif;
+  --sans:"Segoe UI",system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
+  --shadow:0 1px 2px rgba(30,36,24,.06),0 10px 30px rgba(30,36,24,.08);
+  --shadow-lg:0 2px 6px rgba(30,36,24,.08),0 24px 60px rgba(30,36,24,.14);
+  --r:14px; --side:290px; --col:780px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme: dark;
+    --bg:#121614; --paper:#191e1b; --soft:#202622; --text:#e7ebe5; --muted:#a9b2ab; --faint:#7c857e;
+    --line:#2c342f; --line2:#3b453f;
+    --pri:#8fc2ad; --pri-d:#b5dccb; --pri-s:rgba(143,194,173,.12);
+    --acc:#e2a15c; --acc-d:#f0c08a; --acc-s:rgba(226,161,92,.14);
+    --ok:#6cc488; --ok-s:rgba(108,196,136,.12); --warn:#e7b052; --warn-s:rgba(231,176,82,.12); --bad:#ee8a7f; --bad-s:rgba(238,138,127,.12); --info:#78b8e4; --info-s:rgba(120,184,228,.12);
+    --b1:#8fc2ad; --b2:#a9cf7e; --b3:#7fbddb; --b4:#e3c063; --b5:#e2a15c; --b6:#e39272; --b7:#bba3d6; --b8:#9fb4c2;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 30px rgba(0,0,0,.35); --shadow-lg:0 2px 6px rgba(0,0,0,.45),0 24px 60px rgba(0,0,0,.5);
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme: dark;
+  --bg:#121614; --paper:#191e1b; --soft:#202622; --text:#e7ebe5; --muted:#a9b2ab; --faint:#7c857e;
+  --line:#2c342f; --line2:#3b453f;
+  --pri:#8fc2ad; --pri-d:#b5dccb; --pri-s:rgba(143,194,173,.12);
+  --acc:#e2a15c; --acc-d:#f0c08a; --acc-s:rgba(226,161,92,.14);
+  --ok:#6cc488; --ok-s:rgba(108,196,136,.12); --warn:#e7b052; --warn-s:rgba(231,176,82,.12); --bad:#ee8a7f; --bad-s:rgba(238,138,127,.12); --info:#78b8e4; --info-s:rgba(120,184,228,.12);
+  --b1:#8fc2ad; --b2:#a9cf7e; --b3:#7fbddb; --b4:#e3c063; --b5:#e2a15c; --b6:#e39272; --b7:#bba3d6; --b8:#9fb4c2;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 30px rgba(0,0,0,.35); --shadow-lg:0 2px 6px rgba(0,0,0,.45),0 24px 60px rgba(0,0,0,.5);
+}
+
+/* ---------- idioma: solo se ve el activo ---------- */
+html[data-lang="es"] [lang="en"]:not(html), html[data-lang="en"] [lang="es"]:not(html){display:none!important}
+
+*{box-sizing:border-box}
+html,body{overflow-x:clip}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--font);font-size:18px;line-height:1.68;
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;font-variant-numeric:lining-nums proportional-nums}
+img{max-width:100%;display:block}
+a{color:var(--pri);text-decoration-thickness:1px;text-underline-offset:3px}
+b,strong{font-weight:700}
+h1,h2,h3,h4{font-weight:700;line-height:1.18;color:var(--text);font-variant-numeric:lining-nums}
+table,.num,.kpi b,figure figcaption .fn{font-variant-numeric:lining-nums tabular-nums}
+.sc{font-variant:small-caps;letter-spacing:.06em}
+.eyebrow{font-family:var(--sans);font-size:11.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--acc)}
+
+/* ---------- barra superior ---------- */
+.top{position:sticky;top:0;z-index:50;display:flex;align-items:center;gap:12px;padding:10px 22px;
+  background:color-mix(in srgb,var(--bg) 86%,transparent);backdrop-filter:saturate(1.4) blur(12px);-webkit-backdrop-filter:saturate(1.4) blur(12px);border-bottom:1px solid var(--line)}
+.top .brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--text);min-width:0}
+.top .brand img{width:34px;height:34px;border-radius:9px;flex:none}
+.top .brand span{font-size:17px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.top .brand i{color:var(--acc)}
+.top .brand small{color:var(--muted);font-style:italic;font-size:14px}
+.top .sp{flex:1}
+.seg{display:inline-flex;border:1px solid var(--line2);border-radius:999px;padding:3px;background:var(--paper)}
+.seg button{border:0;background:none;font:700 12.5px/1 var(--sans);letter-spacing:.06em;color:var(--muted);padding:7px 12px;border-radius:999px;cursor:pointer}
+.seg button.on{background:var(--pri);color:var(--paper)}
+:root[data-theme="dark"] .seg button.on{color:#10221b}
+.ib{display:inline-grid;place-items:center;width:38px;height:38px;border-radius:50%;border:1px solid var(--line2);background:var(--paper);color:var(--text);cursor:pointer;font-size:16px;text-decoration:none}
+.btn{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--pri);background:var(--pri);color:var(--paper);font:700 13.5px/1 var(--sans);letter-spacing:.02em;padding:10px 16px;border-radius:999px;cursor:pointer;text-decoration:none}
+.btn.ghost{background:var(--paper);color:var(--pri);border-color:var(--line2)}
+.btn svg{width:16px;height:16px}
+#leido{position:absolute;left:0;bottom:-1px;height:2px;width:0;background:linear-gradient(90deg,var(--pri),var(--acc))}
+#menuBtn{display:none}
+
+/* ---------- maqueta ---------- */
+.layout{display:grid;grid-template-columns:var(--side) minmax(0,1fr);max-width:1320px;margin:0 auto}
+aside.toc{position:sticky;top:59px;align-self:start;height:calc(100vh - 59px);overflow:auto;padding:26px 18px 40px 22px;border-right:1px solid var(--line);font-family:var(--sans);font-size:13.5px}
+.search{position:relative;margin-bottom:18px}
+.search input{width:100%;padding:10px 12px 10px 36px;border:1px solid var(--line2);border-radius:10px;background:var(--paper);color:var(--text);font:14px var(--sans)}
+.search svg{position:absolute;left:11px;top:50%;width:16px;height:16px;transform:translateY(-50%);color:var(--faint)}
+.search .hits{font-size:12px;color:var(--muted);margin:6px 2px 0;min-height:1em}
+.toc ol{list-style:none;margin:0;padding:0}
+.toc li{margin:1px 0}
+.toc a{display:flex;gap:10px;align-items:baseline;padding:6px 10px;border-radius:8px;color:var(--muted);text-decoration:none;line-height:1.35}
+.toc a:hover{background:var(--soft);color:var(--text)}
+.toc a.act{background:var(--pri-s);color:var(--text);font-weight:600}
+.toc .n{flex:none;display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;font-size:11.5px;font-weight:700;color:#fff;background:var(--c,var(--faint))}
+:root[data-theme="dark"] .toc .n{color:#111}
+.toc .sub a{padding-left:42px;font-size:12.8px}
+.toc .sub a.act{font-weight:600}
+.toc .grp{margin:18px 10px 6px;font-size:10.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
+.toc li.hide{display:none}
+
+main{min-width:0;padding:0 40px 120px}
+.doc{max-width:var(--col);margin:0 auto}
+
+/* ---------- portada ---------- */
+.cover{position:relative;margin:34px auto 30px;max-width:1040px;border-radius:24px;overflow:hidden;background:var(--paper);box-shadow:var(--shadow-lg);border:1px solid var(--line)}
+.cover .band{display:flex;height:8px}.cover .band i{flex:1}
+.cover .in{display:grid;grid-template-columns:1.1fr .9fr;gap:34px;padding:52px 56px 46px}
+.cover .kick{display:flex;align-items:center;gap:12px;margin-bottom:22px}
+.cover .kick img{width:52px;height:52px;border-radius:13px}
+.cover h1{font-size:clamp(38px,4.6vw,56px);margin:0 0 6px;letter-spacing:-.015em;line-height:1.02}
+.cover h1 em{font-style:italic;color:var(--pri);font-weight:600}
+.cover h1 .a{color:var(--acc)}
+.cover .sub{font-size:21px;color:var(--muted);margin:14px 0 22px;max-width:30ch;line-height:1.45}
+.cover .meta{font-family:var(--sans);font-size:13px;color:var(--muted);line-height:1.7}
+.cover .meta b{color:var(--text)}
+.cover .who{margin-top:26px;padding-top:18px;border-top:1px solid var(--line);font-size:15.5px}
+.cover .who span{color:var(--muted);font-style:italic}
+.cover .art{position:relative;min-height:380px}
+.cover .art .frame{position:absolute;right:-110px;top:16px;width:calc(100% + 110px);border-radius:14px;overflow:hidden;box-shadow:var(--shadow-lg);border:1px solid var(--line);transform:rotate(-2.2deg)}
+.cover .art .frame.b{top:210px;right:auto;left:-14px;width:46%;transform:rotate(3deg)}
+.cover .steps{display:grid;grid-template-columns:repeat(8,1fr);border-top:1px solid var(--line);font-family:var(--sans)}
+.cover .steps div{padding:14px 12px 16px;border-right:1px solid var(--line);font-size:12.5px;color:var(--muted);line-height:1.3}
+.cover .steps div:last-child{border-right:0}
+.cover .steps b{display:block;font-size:20px;font-family:var(--font);color:var(--c);margin-bottom:2px}
+
+/* ---------- capítulos ---------- */
+.chap{position:relative;margin-top:80px;padding-top:4px}
+.chap-head{position:relative;display:grid;grid-template-columns:auto 1fr;gap:4px 26px;align-items:end;padding:34px 0 26px;margin-bottom:26px;border-bottom:1px solid var(--line)}
+.chap-head .big{grid-row:span 3;font-size:118px;line-height:.8;font-weight:400;color:var(--c);font-variant-numeric:lining-nums;letter-spacing:-.04em}
+.chap-head .eyebrow{color:var(--c)}
+.chap-head h2{font-size:clamp(30px,3.6vw,42px);margin:4px 0 0;letter-spacing:-.01em;padding-right:76px}
+.chap-head p{grid-column:2;margin:10px 0 0;color:var(--muted);font-size:19px;line-height:1.5;max-width:56ch}
+.chap-head .rule{position:absolute;left:0;bottom:-1px;width:120px;height:3px;background:var(--c)}
+.chap-head .ico{position:absolute;right:0;top:20px;width:64px;height:64px;color:var(--c);opacity:.9}
+.inchap{display:flex;flex-wrap:wrap;gap:6px 18px;margin:-6px 0 28px;font-family:var(--sans);font-size:13px}
+.inchap a{color:var(--muted);text-decoration:none}
+.inchap a::before{content:attr(data-n)" ";color:var(--c);font-weight:700}
+.inchap a:hover{color:var(--text)}
+
+h3{font-size:25px;margin:46px 0 12px;letter-spacing:-.005em;scroll-margin-top:84px}
+h3 .sn{font-family:var(--sans);font-size:14px;font-weight:700;color:var(--c,var(--acc));margin-right:12px;vertical-align:3px;letter-spacing:.04em}
+h4{font-size:19px;margin:28px 0 8px}
+p{margin:0 0 16px}
+.lead{font-size:20.5px;line-height:1.6;color:var(--text)}
+.lead::first-letter{float:left;font-size:3.35em;line-height:.9;padding:6px 10px 0 0;color:var(--c,var(--pri));font-weight:600}
+ul,ol{padding-left:24px;margin:0 0 18px}
+li{margin:5px 0}
+li::marker{color:var(--c,var(--acc))}
+kbd,.ui{font-family:var(--sans);font-size:.78em;font-weight:700;letter-spacing:.01em;white-space:nowrap;padding:3px 9px 3px;border-radius:7px;border:1px solid var(--line2);border-bottom-width:2px;background:var(--paper);color:var(--text);vertical-align:1px}
+.ui.pri{background:var(--pri);border-color:var(--pri-d);color:var(--paper)}
+.path{font-family:var(--sans);font-size:.8em;font-weight:600;color:var(--pri);white-space:nowrap}
+.path i{font-style:normal;color:var(--faint);margin:0 5px}
+.val{font-family:var(--sans);font-size:.84em;font-weight:600;background:var(--soft);padding:1px 7px;border-radius:5px;white-space:nowrap}
+
+/* ---------- recuadros ---------- */
+.box{position:relative;margin:24px 0;padding:18px 22px 16px 62px;border-radius:var(--r);background:var(--paper);border:1px solid var(--line);box-shadow:0 1px 2px rgba(0,0,0,.03)}
+.box::before{content:"";position:absolute;left:0;top:14px;bottom:14px;width:3px;border-radius:0 3px 3px 0;background:var(--k)}
+.box .bi{position:absolute;left:18px;top:18px;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:var(--ks);color:var(--k);font:700 14px/1 var(--sans)}
+.box .bt{display:block;font:700 11.5px/1.2 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--k);margin:6px 0 8px}
+.box p:last-child,.box ul:last-child,.box ol:last-child{margin-bottom:0}
+.box.tip{--k:var(--pri);--ks:var(--pri-s)}
+.box.warn{--k:var(--warn);--ks:var(--warn-s);background:color-mix(in srgb,var(--warn-s) 55%,var(--paper))}
+.box.why{--k:var(--info);--ks:var(--info-s)}
+.box.farm{--k:var(--acc);--ks:var(--acc-s);background:linear-gradient(135deg,color-mix(in srgb,var(--acc-s) 70%,var(--paper)),var(--paper) 60%)}
+.box.rule{--k:var(--ok);--ks:var(--ok-s)}
+.box.rule table{margin:6px 0 2px}
+.box.rule td:first-child{min-width:200px}
+
+/* ---------- reglas de decisión ---------- */
+table{width:100%;border-collapse:collapse;margin:14px 0 22px;font-size:16px}
+th{font:700 11.5px/1.3 var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:2px solid var(--line2)}
+td{padding:11px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+td.r,th.r{text-align:right}
+tr.hl td{background:var(--acc-s)}
+.tbl{overflow-x:auto;margin:0 -4px}
+.dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:8px;vertical-align:1px;background:var(--k)}
+.dot.ok{--k:var(--ok)} .dot.warn{--k:var(--warn)} .dot.bad{--k:var(--bad)} .dot.info{--k:var(--info)}
+.badge{display:inline-block;font:700 12px/1 var(--sans);padding:5px 10px;border-radius:999px;white-space:nowrap}
+.badge.ok{background:var(--ok-s);color:var(--ok)} .badge.warn{background:var(--warn-s);color:var(--warn)} .badge.info{background:var(--info-s);color:var(--info)} .badge.acc{background:var(--acc-s);color:var(--acc-d)} .badge.pri{background:var(--pri-s);color:var(--pri)}
+
+/* ---------- figuras con marcas ---------- */
+figure{margin:28px -40px 30px;padding:0}
+figure.narrow{margin-left:0;margin-right:0}
+.shot{position:relative;border-radius:12px;overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow);background:var(--paper);cursor:zoom-in}
+.shot img{width:100%;height:auto}
+.mk{position:absolute;pointer-events:none}
+.mk .ring{position:absolute;inset:-5px;border:2.5px solid var(--acc);border-radius:10px;box-shadow:0 0 0 4px color-mix(in srgb,var(--acc) 18%,transparent)}
+.mk .num{position:absolute;left:-14px;top:-14px;width:28px;height:28px;border-radius:50%;background:var(--acc);color:#fff;font:700 14px/28px var(--sans);text-align:center;box-shadow:0 2px 6px rgba(0,0,0,.25);border:2px solid #fff}
+.mk.dotonly .ring{display:none}
+figcaption{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;margin:14px 40px 0;font-size:15.5px;color:var(--muted);line-height:1.5}
+figure.narrow figcaption{margin-left:0;margin-right:0}
+figcaption .fn{font:700 12px/1.6 var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--c,var(--acc));white-space:nowrap;padding-top:2px}
+figcaption b{color:var(--text)}
+.legend{list-style:none;counter-reset:lg;margin:14px 40px 0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px 22px;font-size:16px}
+figure.narrow .legend{margin-left:0;margin-right:0}
+.legend li{counter-increment:lg;display:grid;grid-template-columns:28px 1fr;gap:12px;margin:0;align-items:start}
+.legend li::before{content:counter(lg);display:grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--acc);color:#fff;font:700 13px/1 var(--sans);margin-top:1px}
+.legend li::marker{content:none}
+.pair{display:grid;grid-template-columns:1.7fr 1fr;gap:22px;align-items:start;margin:28px -40px}
+.pair figure{margin:0}
+.pair figcaption{margin:12px 0 0}
+.phone{border-radius:28px;padding:10px;background:#1b1f1c;box-shadow:var(--shadow-lg);max-width:290px;margin:0 auto}
+.phone .shot{border-radius:20px;border:0}
+
+/* ---------- tarjetas de datos ---------- */
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:18px 0 24px}
+.kpi{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.kpi span{display:block;font:600 11.5px/1.3 var(--sans);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.kpi b{display:block;font-size:26px;color:var(--pri-d);margin-top:4px;line-height:1.1}
+.kpi small{color:var(--muted);font-size:13.5px}
+.case{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:var(--paper);margin:20px 0 26px}
+.case div{padding:14px 18px;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+.case div:nth-child(3n){border-right:0}
+.case div:nth-last-child(-n+3){border-bottom:0}
+.case span{display:block;font:600 11px/1.3 var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--faint)}
+.case b{font-size:19px}
+
+/* ---------- flujo de 8 pasos ---------- */
+.flow{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:22px 0 28px;counter-reset:f}
+.flow a{position:relative;display:block;padding:16px 16px 14px;border-radius:12px;background:var(--paper);border:1px solid var(--line);text-decoration:none;color:var(--text);transition:transform .15s,box-shadow .15s}
+.flow a:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+.flow a::before{content:"";position:absolute;left:0;right:0;top:0;height:4px;border-radius:12px 12px 0 0;background:var(--c)}
+.flow b{display:block;font-size:17px}
+.flow .k{font:700 11px/1 var(--sans);letter-spacing:.12em;color:var(--c);text-transform:uppercase}
+.flow small{display:block;color:var(--muted);font-size:14px;line-height:1.4;margin-top:4px}
+.flow .t{position:absolute;right:12px;top:14px;font:600 11px/1 var(--sans);color:var(--faint)}
+
+/* ---------- comparación antes/después ---------- */
+.versus{display:grid;grid-template-columns:1fr auto 1fr;gap:14px;align-items:center;margin:22px 0}
+.versus .s{border:1px solid var(--line);border-radius:12px;padding:16px 18px;background:var(--paper)}
+.versus .s span{font:600 11.5px/1.3 var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.versus .s b{display:block;font-size:28px;line-height:1.2;margin-top:4px}
+.versus .s.win{border-color:var(--ok);background:color-mix(in srgb,var(--ok-s) 60%,var(--paper))}
+.versus .s.win b{color:var(--ok)}
+.versus .arrow{font-size:28px;color:var(--faint)}
+
+/* ---------- diagrama de decisión ---------- */
+.dtree{margin:24px 0 30px;padding:22px;border-radius:var(--r);background:var(--paper);border:1px solid var(--line)}
+.dtree .q{font-weight:700;font-size:17.5px;margin-bottom:12px}
+.dtree ol{list-style:none;padding:0;margin:0;display:grid;gap:10px;counter-reset:d}
+.dtree li{counter-increment:d;display:grid;grid-template-columns:34px 1fr;gap:12px;margin:0;padding:12px 14px;border-radius:10px;background:var(--soft)}
+.dtree li::before{content:counter(d);display:grid;place-items:center;width:30px;height:30px;border-radius:8px;background:var(--c,var(--acc));color:#fff;font:700 14px/1 var(--sans)}
+.dtree li b{display:block}
+.dtree li span{color:var(--muted);font-size:16px}
+
+/* ---------- checklist ---------- */
+.check{list-style:none;padding:0}
+.check li{position:relative;padding-left:34px;margin:10px 0}
+.check li::before{content:"";position:absolute;left:0;top:4px;width:20px;height:20px;border:2px solid var(--line2);border-radius:5px;background:var(--paper)}
+
+/* ---------- FAQ ---------- */
+details{border:1px solid var(--line);border-radius:12px;background:var(--paper);margin:10px 0;padding:0 18px}
+summary{cursor:pointer;list-style:none;padding:14px 0;font-weight:700;display:flex;gap:12px;align-items:baseline}
+summary::-webkit-details-marker{display:none}
+summary::before{content:"+";font:700 18px/1 var(--sans);color:var(--acc);width:14px;flex:none}
+details[open] summary::before{content:"−"}
+details>div{padding:0 0 14px 26px;color:var(--text)}
+
+/* ---------- glosario ---------- */
+dl.glos{display:grid;grid-template-columns:minmax(150px,220px) 1fr;gap:0;margin:16px 0}
+dl.glos dt,dl.glos dd{padding:11px 0;border-bottom:1px solid var(--line);margin:0}
+dl.glos dt{font-weight:700;padding-right:18px}
+dl.glos dt small{display:block;font-weight:400;font-style:italic;color:var(--muted);font-size:14px}
+
+/* ---------- hoja de inicio rápido ---------- */
+.quick{margin:40px -40px 0;padding:40px 44px;border-radius:22px;background:var(--paper);border:1px solid var(--line);box-shadow:var(--shadow-lg)}
+.quick .qh{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;border-bottom:2px solid var(--text);padding-bottom:14px;margin-bottom:18px}
+.quick h2{margin:0;font-size:32px}
+.quick .qr{display:flex;gap:12px;align-items:center;font-family:var(--sans);font-size:12px;color:var(--muted);text-align:right}
+.quick .qr #qr{width:86px;height:86px;background:#fff;padding:5px;border-radius:6px}
+.quick .qr #qr img,.quick .qr #qr canvas{width:76px!important;height:76px!important}
+.quick ol{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:1fr 1fr;gap:0 30px}
+.quick ol li{display:grid;grid-template-columns:40px 1fr;gap:12px;padding:12px 0;border-bottom:1px solid var(--line);margin:0;break-inside:avoid}
+.quick ol li i{font-style:normal;display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--c);color:#fff;font:700 15px/1 var(--sans)}
+.quick ol li b{display:block;font-size:17px}
+.quick ol li span{font-size:15px;color:var(--muted);line-height:1.45}
+.quick .foot{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:20px;font-size:15px}
+.quick .foot h4{margin:0 0 6px;font-size:15px;font-family:var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--acc)}
+.quick .foot ul{margin:0;padding-left:18px}
+.quick .foot li{margin:3px 0}
+
+/* ---------- colofón ---------- */
+.colophon{margin:90px 0 0;padding-top:24px;border-top:1px solid var(--line);font-size:14.5px;color:var(--muted)}
+.colophon p{margin:0 0 8px}
+
+/* ---------- visor de imagen ---------- */
+#zoom{position:fixed;inset:0;z-index:100;background:rgba(10,14,12,.86);display:none;place-items:center;padding:24px;cursor:zoom-out}
+#zoom.on{display:grid}
+#zoom .zi{position:relative;max-width:min(1600px,96vw)}
+#zoom img{max-height:92vh;width:auto;border-radius:10px}
+
+.totop{position:fixed;right:22px;bottom:22px;z-index:40;opacity:0;pointer-events:none;transition:opacity .2s}
+.totop.on{opacity:1;pointer-events:auto}
+mark{background:color-mix(in srgb,var(--acc) 30%,transparent);color:inherit;border-radius:3px;padding:0 1px}
+
+/* ---------- pantallas medianas y celular ---------- */
+@media screen and (max-width:1100px){
+  .layout{grid-template-columns:1fr}
+  aside.toc{position:fixed;left:0;top:59px;width:min(330px,88vw);z-index:45;background:var(--bg);transform:translateX(-102%);transition:transform .25s;box-shadow:var(--shadow-lg)}
+  aside.toc.open{transform:none}
+  #menuBtn{display:inline-grid}
+  main{padding:0 28px 100px}
+  figure,.pair,.quick{margin-left:0;margin-right:0}
+  figcaption,.legend{margin-left:0;margin-right:0}
+}
+@media screen and (max-width:760px){
+  body{font-size:17px}
+  .top{padding:8px 14px;gap:8px}
+  .top .brand small,.top .pdf span,.top .btn.ghost{display:none}
+  .top .brand span{font-size:15.5px}
+  .seg button{padding:6px 9px}
+  .top .btn.pdf{padding:9px 11px}
+  .cover h1{font-size:34px}
+  .cover .sub{font-size:18px}
+  main{padding:0 16px 80px}
+  .cover{margin:16px 0 20px;border-radius:18px}
+  .cover .in{grid-template-columns:1fr;padding:30px 22px 26px}
+  .cover .art{min-height:240px;overflow:hidden}
+  .cover .art .frame{position:relative;right:auto;top:0;width:100%;transform:none}
+  .cover .art .frame.b{display:none}
+  .cover .steps{grid-template-columns:repeat(4,1fr)}
+  .cover .steps div:nth-child(4){border-right:0}
+  .cover .steps div:nth-child(-n+4){border-bottom:1px solid var(--line)}
+  .chap-head{grid-template-columns:1fr}
+  .chap-head .big{grid-row:auto;font-size:76px}
+  .chap-head p{grid-column:1}
+  .chap-head .ico{width:44px;height:44px}
+  .kpis,.flow{grid-template-columns:1fr 1fr}
+  .case{grid-template-columns:1fr 1fr}
+  .case div{border-right:1px solid var(--line)!important;border-bottom:1px solid var(--line)!important}
+  .pair{grid-template-columns:1fr}
+  .versus{grid-template-columns:1fr}
+  .versus .arrow{transform:rotate(90deg);justify-self:center}
+  .quick{padding:24px 18px}
+  .quick ol{grid-template-columns:1fr}
+  .quick .foot{grid-template-columns:1fr}
+  .quick .qh{flex-direction:column}
+  dl.glos{grid-template-columns:1fr}
+  dl.glos dt{border-bottom:0;padding-bottom:0}
+  .box{padding:16px 16px 14px 54px}
+  .box .bi{left:14px}
+  .mk .num{width:22px;height:22px;font-size:12px;line-height:22px;left:-11px;top:-11px}
+  .mk .ring{border-width:2px;inset:-3px}
+  .box.rule td:first-child{min-width:0}
+  .box.rule table,.box.rule tbody,.box.rule tr,.box.rule td{display:block}
+  .box.rule thead{display:none}
+  .box.rule td{padding:4px 0;border:0}
+  .box.rule tr{padding:8px 0;border-bottom:1px solid var(--line)}
+}
+
+/* ---------- impresión / PDF ---------- */
+@page{size:A4;margin:18mm 17mm 20mm}
+@page{@bottom-center{content:counter(page);font-family:"Palatino Linotype",Palatino,serif;font-size:9pt;color:#777}}
+@page :first{margin:0;@bottom-center{content:none}}
+@media print{
+  :root{--bg:#fff;--paper:#fff}
+  html{scroll-behavior:auto}
+  body{font-size:10.6pt;line-height:1.55;background:#fff;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .top,aside.toc,.totop,#zoom,.no-print,.inchap{display:none!important}
+  .layout{display:block;max-width:none}
+  main{padding:0}
+  .doc{max-width:none}
+  .cover{margin:0;border-radius:0;box-shadow:none;border:0;min-height:297mm;display:flex;flex-direction:column;page-break-after:always}
+  .cover .in{flex:1;padding:24mm 18mm 10mm}
+  .cover .in{grid-template-columns:1fr;gap:6mm}
+  .cover h1{font-size:40pt}
+  .cover .sub{max-width:none}
+  .cover .art{min-height:92mm}
+  .cover .art .frame{right:-18mm;top:0;width:150mm}
+  .cover .art .frame.b{left:4mm;right:auto;top:14mm;width:52mm}
+  .chap{margin-top:0;break-before:page}
+  .chap-head{padding-top:0}
+  .chap-head .big{font-size:84pt}
+  h3{break-after:avoid;margin-top:26px}
+  figure,.box,.dtree,.kpis,.case,.versus,table,details,.flow,.pair{break-inside:avoid}
+  figure{margin:16px 0 18px}
+  figcaption,.legend{margin-left:0;margin-right:0}
+  .pair{margin:16px 0}
+  .shot{box-shadow:none}
+  details{border:0;padding:0}
+  details>div{display:block!important;padding-left:0}
+  summary::before{content:none}
+  .quick{margin:0;break-before:page;box-shadow:none;border:0;padding:0}
+  a{color:inherit;text-decoration:none}
+  .lead::first-letter{font-size:3.1em}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <button class="ib" id="menuBtn" aria-label="Índice / Contents">☰</button>
+  <a class="brand" href="./" title="RatioAvis">
+    <img src="logo.svg" alt="">
+    <span>Ratio<i>Avis</i> <small lang="es">· Instructivo del Productor</small><small lang="en">· Producer Guide</small></span>
+  </a>
+  <span class="sp"></span>
+  <a class="btn ghost no-print" href="./" target="_blank" rel="noopener"><span lang="es">Abrir la app</span><span lang="en">Open the app</span> ↗</a>
+  <div class="seg" role="group" aria-label="Idioma / Language"><button data-lang="es">ES</button><button data-lang="en">EN</button></div>
+  <a class="btn pdf" id="pdfBtn" title="PDF" href="instructivo/RatioAvis-Instructivo-Productor.pdf" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-5-5m5 5l5-5M5 21h14"/></svg><span>PDF</span></a>
+  <button class="ib" id="temaBtn" aria-label="Tema / Theme">☾</button>
+  <div id="leido"></div>
+</header>
+
+<div class="layout">
+<aside class="toc" id="toc">
+  <div class="search">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-5-5"/></svg>
+    <input id="q" type="search" autocomplete="off" placeholder="Buscar en el instructivo…" aria-label="Buscar / Search">
+    <div class="hits" id="hits"></div>
+  </div>
+  <ol id="tocList"></ol>
+</aside>
+
+<main>
+<!-- ============================ PORTADA ============================ -->
+<section class="cover" id="portada">
+  <div class="band"><i style="background:var(--b1)"></i><i style="background:var(--b2)"></i><i style="background:var(--b3)"></i><i style="background:var(--b4)"></i><i style="background:var(--b5)"></i><i style="background:var(--b6)"></i><i style="background:var(--b7)"></i><i style="background:var(--b8)"></i></div>
+  <div class="in">
+    <div>
+      <div class="kick"><img src="logo.svg" alt="RatioAvis"><div><div class="eyebrow" lang="es">Instructivo del Productor</div><div class="eyebrow" lang="en">Producer Guide</div><div style="font-size:15px;color:var(--muted)">RatioAvis 1.1.0</div></div></div>
+      <h1 lang="es">La dieta <em>más barata</em> para tus pollos, <span class="a">paso a paso</span></h1>
+      <h1 lang="en">The <em>cheapest</em> diet for your broilers, <span class="a">step by step</span></h1>
+      <p class="sub" lang="es">Una guía práctica para formular, mezclar y costear el alimento de tu granja con RatioAvis, explicada con un caso real de principio a fin.</p>
+      <p class="sub" lang="en">A practical guide to formulating, mixing and costing your farm’s feed with RatioAvis, explained through one real case from start to finish.</p>
+      <div class="meta">
+        <div lang="es"><b>1.ª edición</b> · octubre de 2026 · describe RatioAvis 1.1.0</div>
+        <div lang="en"><b>1st edition</b> · October 2026 · covers RatioAvis 1.1.0</div>
+        <div>DOI <a href="https://doi.org/10.5281/zenodo.23090714">10.5281/zenodo.23090714</a> · <span lang="es">Licencia MIT</span><span lang="en">MIT License</span></div>
+      </div>
+      <div class="who">Héctor Tecumshé Mojica-Zárate · Luis Ángel Barrera-Guzmán<br><span lang="es">Hay otra guía para investigación y docencia: el Instructivo del Científico.</span><span lang="en">There is a companion guide for research and teaching: the Scientist Guide.</span></div>
+    </div>
+    <div class="art" aria-hidden="true">
+      <div class="frame"><img lang="es" src="instructivo/img/resultado-es.jpg" alt=""><img lang="en" src="instructivo/img/resultado-en.jpg" alt=""></div>
+      <div class="frame b"><img lang="es" src="instructivo/img/mezclado-movil-es.jpg" alt="" style="height:300px;object-fit:cover;object-position:top"><img lang="en" src="instructivo/img/mezclado-movil-en.jpg" alt="" style="height:300px;object-fit:cover;object-position:top"></div>
+    </div>
+  </div>
+  <div class="steps">
+    <div style="--c:var(--b1)"><b>1</b><span lang="es">Genética</span><span lang="en">Genetics</span></div>
+    <div style="--c:var(--b2)"><b>2</b><span lang="es">Etapa</span><span lang="en">Phase</span></div>
+    <div style="--c:var(--b3)"><b>3</b><span lang="es">Condiciones</span><span lang="en">Conditions</span></div>
+    <div style="--c:var(--b4)"><b>4</b><span lang="es">Ingredientes</span><span lang="en">Ingredients</span></div>
+    <div style="--c:var(--b5)"><b>5</b><span lang="es">Precios</span><span lang="en">Prices</span></div>
+    <div style="--c:var(--b6)"><b>6</b><span lang="es">Formulación</span><span lang="en">Formulation</span></div>
+    <div style="--c:var(--b7)"><b>7</b><span lang="es">Programa</span><span lang="en">Program</span></div>
+    <div style="--c:var(--b8)"><b>8</b><span lang="es">Informe</span><span lang="en">Report</span></div>
+  </div>
+</section>
+
+<div class="doc">
+
+<!-- ============================ PRELIMINARES ============================ -->
+<section class="chap" id="leer" data-toc="P" data-c="var(--acc)" style="--c:var(--acc)">
+  <div class="chap-head"><span class="big">P</span>
+    <div class="eyebrow" lang="es">Antes de leer</div><div class="eyebrow" lang="en">Before reading</div>
+    <h2 lang="es">Cómo usar este instructivo</h2><h2 lang="en">How to use this guide</h2>
+    <p lang="es">Para quién es, cómo está organizado y qué significa cada señal que encontrarás en las páginas.</p>
+    <p lang="en">Who it is for, how it is organised and what each sign on the page means.</p>
+    <span class="rule"></span></div>
+
+  <p class="lead" lang="es">Este instructivo es para quien decide qué comen los pollos de una granja: el productor, el encargado de la planta de alimento, el técnico que asesora a varios productores. No necesitas saber programación ni matemáticas; necesitas conocer tu granja.</p>
+  <p class="lead" lang="en">This guide is for whoever decides what the birds on a farm eat: the producer, the feed-mill manager, the advisor who works with several farms. You need no coding or maths; you need to know your farm.</p>
+
+  <p lang="es">Sigue el mismo orden que la app: un capítulo por cada bloque de la barra superior, del 1 al 8, cada uno con su color. Todos los ejemplos usan <b>un solo caso</b>, una granja de altura con 10,000 pollos, así que los números de un capítulo son los que entran al siguiente. Si lo lees de corrido, al terminar habrás formulado, mezclado y costeado una dieta real.</p>
+  <p lang="en">It follows the app’s order: one chapter for each block in the top bar, 1 to 8, each with its own colour. Every example uses <b>a single case</b>, a high-altitude farm with 10,000 broilers, so the numbers in one chapter are the ones that feed the next. Read it start to finish and you will have formulated, mixed and costed a real diet.</p>
+
+  <h3 id="convenciones"><span lang="es">Convenciones</span><span lang="en">Conventions</span></h3>
+  <div class="tbl"><table>
+    <thead><tr><th lang="es">Así se escribe</th><th lang="en">Written as</th><th lang="es">Significa</th><th lang="en">Means</th></tr></thead>
+    <tbody>
+      <tr><td><span class="ui pri" lang="es">⚙ Formular</span><span class="ui pri" lang="en">⚙ Formulate</span></td><td lang="es">Un botón o casilla de la app, con su texto tal como aparece en pantalla.</td><td lang="en">An app button or field, with its text exactly as on screen.</td></tr>
+      <tr><td><span class="path" lang="es">Informe<i>›</i>Guardar proyecto</span><span class="path" lang="en">Report<i>›</i>Save project</span></td><td lang="es">Una ruta: abre el primer elemento y luego el siguiente.</td><td lang="en">A path: open the first item, then the next.</td></tr>
+      <tr><td><span class="val">2200</span></td><td lang="es">Un valor que escribes tal cual.</td><td lang="en">A value you type as shown.</td></tr>
+      <tr><td><b style="display:inline-grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--acc);color:#fff;font:700 12px var(--sans)">1</b></td><td lang="es">Una marca sobre la captura; su explicación está debajo con el mismo número.</td><td lang="en">A marker on a screenshot; it is explained below with the same number.</td></tr>
+    </tbody></table></div>
+
+  <h3 id="recuadros"><span lang="es">Los cinco recuadros</span><span lang="en">The five boxes</span></h3>
+  <div class="box farm"><span class="bi">◆</span><span class="bt" lang="es">En la granja</span><span class="bt" lang="en">On the farm</span><p lang="es">El caso de ejemplo, paso a paso, con los números reales que da la app.</p><p lang="en">The worked case, step by step, with the real numbers the app returns.</p></div>
+  <div class="box tip"><span class="bi">✓</span><span class="bt" lang="es">Consejo</span><span class="bt" lang="en">Tip</span><p lang="es">Atajos y buenas prácticas que ahorran tiempo o dinero.</p><p lang="en">Shortcuts and good practice that save time or money.</p></div>
+  <div class="box warn"><span class="bi">!</span><span class="bt" lang="es">Atención</span><span class="bt" lang="en">Caution</span><p lang="es">Lo que, si se pasa por alto, puede dar una dieta equivocada.</p><p lang="en">What, if overlooked, can lead to a wrong diet.</p></div>
+  <div class="box why"><span class="bi">?</span><span class="bt" lang="es">¿Por qué?</span><span class="bt" lang="en">Why?</span><p lang="es">La razón detrás de una recomendación, en dos o tres frases y sin fórmulas.</p><p lang="en">The reason behind a recommendation, in two or three sentences and without formulas.</p></div>
+  <div class="box rule"><span class="bi">→</span><span class="bt" lang="es">Regla de decisión</span><span class="bt" lang="en">Decision rule</span><p lang="es"><b>Si</b> ves esto en pantalla… <b>entonces</b> haz esto. Son guías: lo que sabes de tu granja siempre manda.</p><p lang="en"><b>If</b> you see this on screen… <b>then</b> do this. They are guides: what you know about your farm always comes first.</p></div>
+
+  <h3 id="citar"><span lang="es">Cómo citar</span><span lang="en">How to cite</span></h3>
+  <p lang="es"><b>El programa:</b> Mojica-Zárate, H. T., y Barrera-Guzmán, L. A. (2026). <i>RatioAvis: Guided least-cost diet formulation for broiler chickens</i> (Versión 1.1.0) [Software]. https://doi.org/10.5281/zenodo.23090714</p>
+  <p lang="en"><b>The software:</b> Mojica-Zárate, H. T., & Barrera-Guzmán, L. A. (2026). <i>RatioAvis: Guided least-cost diet formulation for broiler chickens</i> (Version 1.1.0) [Software]. https://doi.org/10.5281/zenodo.23090714</p>
+  <p lang="es"><b>Este instructivo:</b> Mojica-Zárate, H. T., y Barrera-Guzmán, L. A. (2026). <i>RatioAvis. Instructivo del Productor</i> (1.ª ed.). Distribuido con RatioAvis 1.1.0. https://hectortecumshe-ai.github.io/RatioAvis/instructivo-productor.html</p>
+  <p lang="en"><b>This guide:</b> Mojica-Zárate, H. T., & Barrera-Guzmán, L. A. (2026). <i>RatioAvis. Producer Guide</i> (1st ed.). Distributed with RatioAvis 1.1.0. https://hectortecumshe-ai.github.io/RatioAvis/instructivo-productor.html</p>
+
+  <div class="box tip"><span class="bi">🔒</span><span class="bt" lang="es">Tus datos no salen de tu computadora</span><span class="bt" lang="en">Your data never leave your computer</span>
+    <p lang="es">RatioAvis hace todo el cálculo dentro del navegador. Tus precios, tus fórmulas y el nombre de tu granja no se envían a ningún servidor; se guardan solo en tu equipo.</p>
+    <p lang="en">RatioAvis does every calculation inside the browser. Your prices, formulas and farm name are not sent to any server; they are stored only on your device.</p></div>
+</section>
+
+<!-- ============================ 0 · EMPEZAR ============================ -->
+<section class="chap" id="empezar" data-toc="0" style="--c:var(--pri)">
+  <div class="chap-head"><span class="big">0</span>
+    <div class="eyebrow" lang="es">Antes de los bloques</div><div class="eyebrow" lang="en">Before the blocks</div>
+    <h2 lang="es">Primeros pasos</h2><h2 lang="en">Getting started</h2>
+    <p lang="es">Qué hace RatioAvis, qué datos conviene tener a la mano y cómo se recorre la pantalla.</p>
+    <p lang="en">What RatioAvis does, what data to have at hand and how the screen is laid out.</p>
+    <span class="rule"></span></div>
+  <nav class="inchap"></nav>
+
+  <h3 id="que-es" data-n="0.1"><span lang="es">Qué hace RatioAvis</span><span lang="en">What RatioAvis does</span></h3>
+  <p lang="es">Le dices qué pollos tienes, en qué etapa están, qué ingredientes puedes comprar y a qué precio. RatioAvis prueba todas las combinaciones posibles y te entrega <b>la mezcla más barata que cubre todo lo que tus pollos necesitan</b>, con los kilos exactos que debes pesar para tu mezcladora y lo que te cuesta cada pollo.</p>
+  <p lang="en">You tell it which birds you have, their growth phase, which ingredients you can buy and at what price. RatioAvis tries every possible combination and returns <b>the cheapest mix that covers everything your birds need</b>, with the exact kilos to weigh for your mixer and what each bird costs you.</p>
+  <div class="box why"><span class="bi">?</span><span class="bt" lang="es">¿Por qué la más barata no es la de peor calidad?</span><span class="bt" lang="en">Why is the cheapest not the poorest?</span>
+    <p lang="es">Porque el precio bajo solo se busca <i>entre las fórmulas que ya cumplen</i> con la energía, la proteína, los aminoácidos y los minerales que pide la tabla de tu línea genética. Ninguna fórmula que se quede corta en un nutriente puede ganar, aunque sea más barata.</p>
+    <p lang="en">Because the low price is sought only <i>among formulas that already meet</i> the energy, protein, amino acids and minerals required by your genetic line’s table. No formula that falls short on a nutrient can win, however cheap.</p></div>
+
+  <h3 id="necesitas" data-n="0.2"><span lang="es">Qué necesitas tener a la mano</span><span lang="en">What to have at hand</span></h3>
+  <div class="tbl"><table>
+    <thead><tr><th lang="es">Dato</th><th lang="en">Data</th><th lang="es">Dónde lo encuentras</th><th lang="en">Where to find it</th><th lang="es">Bloque</th><th lang="en">Block</th></tr></thead>
+    <tbody>
+      <tr><td lang="es">Línea genética de tus pollitos</td><td lang="en">Genetic line of your chicks</td><td lang="es">Factura o caja de la incubadora</td><td lang="en">Hatchery invoice or chick box</td><td>1</td></tr>
+      <tr><td lang="es">Consumo y ganancia de peso por fase</td><td lang="en">Feed intake and weight gain per phase</td><td lang="es">Tus registros de lotes anteriores (o los valores de la tabla)</td><td lang="en">Your records from past flocks (or the table values)</td><td>2</td></tr>
+      <tr><td lang="es">Altitud y temperatura de la caseta</td><td lang="en">Altitude and house temperature</td><td lang="es">GPS del teléfono · termómetro de la caseta</td><td lang="en">Phone GPS · house thermometer</td><td>3</td></tr>
+      <tr><td lang="es">Número de aves y capacidad de tu mezcladora</td><td lang="en">Number of birds and mixer capacity</td><td lang="es">Tu lote · placa de la mezcladora</td><td lang="en">Your flock · mixer nameplate</td><td>3</td></tr>
+      <tr><td lang="es">Ingredientes que puedes comprar y su precio puesto en granja</td><td lang="en">Ingredients you can buy and their delivered price</td><td lang="es">Tus proveedores (con flete)</td><td lang="en">Your suppliers (freight included)</td><td>4 · 5</td></tr>
+    </tbody></table></div>
+
+  <h3 id="abrir" data-n="0.3"><span lang="es">Abrir la app</span><span lang="en">Opening the app</span></h3>
+  <p lang="es">Abre <a href="./">hectortecumshe-ai.github.io/RatioAvis</a> en cualquier navegador moderno: Chrome, Edge, Firefox o Safari, en computadora, tableta o celular. No hay nada que instalar ni cuenta que crear. Una vez abierta, sigue funcionando aunque se vaya el internet.</p>
+  <p lang="en">Open <a href="./">hectortecumshe-ai.github.io/RatioAvis</a> in any modern browser (Chrome, Edge, Firefox or Safari) on a computer, tablet or phone. There is nothing to install and no account to create. Once open, it keeps working even if the internet drops.</p>
+
+  <h3 id="pantalla" data-n="0.4"><span lang="es">Recorrido por la pantalla</span><span lang="en">A tour of the screen</span></h3>
+  <figure data-fig="inicio" data-marks="3,0,1,2,4">
+    <figcaption><span class="fn"></span><span lang="es"><b>La pantalla de inicio.</b> La barra superior te acompaña en todos los bloques.</span><span lang="en"><b>The home screen.</b> The top bar stays with you in every block.</span></figcaption>
+    <ol class="legend">
+      <li><span lang="es"><b>Barra de bloques.</b> Los ocho pasos en orden. El bloque actual se resalta y los que ya visitaste se marcan en verde.</span><span lang="en"><b>Block bar.</b> The eight steps in order. The current block is highlighted and those already visited turn green.</span></li>
+      <li><span lang="es"><b>ES / EN.</b> Cambia el idioma en cualquier momento; tus datos se conservan.</span><span lang="en"><b>ES / EN.</b> Switch language at any time; your data are kept.</span></li>
+      <li><span lang="es"><b>Productor / Científico.</b> Este instructivo usa la vista <b>Productor</b>: lo esencial, en lenguaje sencillo.</span><span lang="en"><b>Producer / Scientist.</b> This guide uses the <b>Producer</b> view: the essentials, in plain language.</span></li>
+      <li><span lang="es"><b>Ayuda (?).</b> Un resumen de cómo usar la app.</span><span lang="en"><b>Help (?).</b> A summary of how to use the app.</span></li>
+      <li><span lang="es"><b>Empezar a formular.</b> Te lleva al Bloque 1.</span><span lang="en"><b>Start formulating.</b> Takes you to Block 1.</span></li>
+    </ol>
+  </figure>
+
+  <figure class="narrow" data-fig="tooltip">
+    <figcaption><span class="fn"></span><span lang="es"><b>El signo ? junto a cada dato.</b> Al pasar el ratón (o tocarlo en el celular) explica qué es y trae una <b>escala de decisión</b> con colores: verde, ámbar y rojo.</span><span lang="en"><b>The ? sign next to each field.</b> Hovering (or tapping it on a phone) explains what it is and shows a colour-coded <b>decision scale</b>: green, amber and red.</span></figcaption>
+  </figure>
+
+  <h3 id="caso" data-n="0.5"><span lang="es">El caso de este instructivo</span><span lang="en">The case in this guide</span></h3>
+  <p lang="es">Para que cada paso tenga números concretos, seguiremos una sola granja de principio a fin:</p>
+  <p lang="en">So that every step has concrete numbers, we will follow one farm from start to finish:</p>
+  <div class="case">
+    <div><span lang="es">Línea</span><span lang="en">Line</span><b>Ross 308</b></div>
+    <div><span lang="es">Sexo</span><span lang="en">Sex</span><b lang="es">Mixto</b><b lang="en">As-hatched</b></div>
+    <div><span lang="es">Fase</span><span lang="en">Phase</span><b lang="es">Iniciación · 0–10 d</b><b lang="en">Starter · 0–10 d</b></div>
+    <div><span lang="es">Altitud</span><span lang="en">Altitude</span><b lang="es">2,200 msnm</b><b lang="en">2,200 m a.s.l.</b></div>
+    <div><span lang="es">Lote</span><span lang="en">Flock</span><b lang="es">10,000 aves</b><b lang="en">10,000 birds</b></div>
+    <div><span lang="es">Mezcladora</span><span lang="en">Mixer</span><b lang="es">bache de 1,000 kg</b><b lang="en">1,000 kg batch</b></div>
+  </div>
+  <p lang="es">Una granja a esa altura es común en el centro de México y en los Andes. Como verás en el Bloque 3, la altitud cambia lo que conviene formular y también el costo.</p>
+  <p lang="en">A farm at that height is common in central Mexico and the Andes. As you will see in Block 3, altitude changes what is worth formulating, and the cost too.</p>
+
+  <h3 id="camino" data-n="0.6"><span lang="es">El camino en ocho pasos</span><span lang="en">The path in eight steps</span></h3>
+  <p lang="es">La primera vez te tomará unos 20 minutos. Después, con tus datos ya guardados, actualizar precios y volver a formular toma menos de dos.</p>
+  <p lang="en">The first time takes about 20 minutes. After that, with your data saved, updating prices and reformulating takes under two.</p>
+  <div class="flow">
+    <a href="#b1" style="--c:var(--b1)"><span class="k" lang="es">Paso 1</span><span class="k" lang="en">Step 1</span><span class="t">1 min</span><b lang="es">Genética</b><b lang="en">Genetics</b><small lang="es">Línea y sexo de tus aves</small><small lang="en">Line and sex of your birds</small></a>
+    <a href="#b2" style="--c:var(--b2)"><span class="k" lang="es">Paso 2</span><span class="k" lang="en">Step 2</span><span class="t">2 min</span><b lang="es">Etapa</b><b lang="en">Phase</b><small lang="es">Fase y desempeño esperado</small><small lang="en">Phase and expected performance</small></a>
+    <a href="#b3" style="--c:var(--b3)"><span class="k" lang="es">Paso 3</span><span class="k" lang="en">Step 3</span><span class="t">2 min</span><b lang="es">Condiciones</b><b lang="en">Conditions</b><small lang="es">Altitud, calor, lote, mezcladora</small><small lang="en">Altitude, heat, flock, mixer</small></a>
+    <a href="#b4" style="--c:var(--b4)"><span class="k" lang="es">Paso 4</span><span class="k" lang="en">Step 4</span><span class="t">3 min</span><b lang="es">Ingredientes</b><b lang="en">Ingredients</b><small lang="es">Los que puedes comprar</small><small lang="en">The ones you can buy</small></a>
+    <a href="#b5" style="--c:var(--b5)"><span class="k" lang="es">Paso 5</span><span class="k" lang="en">Step 5</span><span class="t">5 min</span><b lang="es">Precios</b><b lang="en">Prices</b><small lang="es">Tu costo y los límites</small><small lang="en">Your cost and the limits</small></a>
+    <a href="#b6" style="--c:var(--b6)"><span class="k" lang="es">Paso 6</span><span class="k" lang="en">Step 6</span><span class="t">3 min</span><b lang="es">Formulación</b><b lang="en">Formulation</b><small lang="es">La dieta y la hoja de mezclado</small><small lang="en">The diet and mixing sheet</small></a>
+    <a href="#b7" style="--c:var(--b7)"><span class="k" lang="es">Paso 7</span><span class="k" lang="en">Step 7</span><span class="t">2 min</span><b lang="es">Programa</b><b lang="en">Program</b><small lang="es">Todas las fases y costo por ave</small><small lang="en">All phases, cost per bird</small></a>
+    <a href="#b8" style="--c:var(--b8)"><span class="k" lang="es">Paso 8</span><span class="k" lang="en">Step 8</span><span class="t">1 min</span><b lang="es">Informe</b><b lang="en">Report</b><small lang="es">Imprimir, exportar y guardar</small><small lang="en">Print, export and save</small></a>
+  </div>
+</section>
+
+<!-- ============================ 1 · GENÉTICA ============================ -->
+<section class="chap" id="b1" data-toc="1" style="--c:var(--b1)">
+  <div class="chap-head"><span class="big">1</span>
+    <div class="eyebrow" lang="es">Bloque 1 · Genética</div><div class="eyebrow" lang="en">Block 1 · Genetics</div>
+    <h2 lang="es">Línea genética y sexo</h2><h2 lang="en">Genetic line and sex</h2>
+    <p lang="es">La línea define qué tan rápido crece tu pollo y, con ello, qué tan concentrado debe ser su alimento.</p>
+    <p lang="en">The line sets how fast your bird grows and, with it, how concentrated its feed must be.</p>
+    <svg class="ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M16 4c0 10 16 10 16 20S16 34 16 44M32 4c0 10-16 10-16 20s16 10 16 20M18 10h12M16 24h16M18 38h12"/></svg>
+    <span class="rule"></span></div>
+  <nav class="inchap"></nav>
+
+  <h3 id="b1-linea" data-n="1.1"><span lang="es">Elige tu línea genética</span><span lang="en">Choose your genetic line</span></h3>
+  <p lang="es">Cada casa genética publica cuánta energía, proteína y aminoácidos necesita su pollo en cada fase. RatioAvis trae esas tablas cargadas: solo tienes que tocar la tarjeta de la línea que crías.</p>
+  <p lang="en">Each breeding company publishes how much energy, protein and amino acids its bird needs in each phase. RatioAvis has those tables built in: just tap the card for the line you raise.</p>
+  <figure data-fig="genetica" data-marks="0,1">
+    <figcaption><span class="fn"></span><span lang="es"><b>Bloque 1.</b> La tarjeta seleccionada lleva una palomita. La etiqueta de color dice qué tan confiable es la tabla.</span><span lang="en"><b>Block 1.</b> The selected card shows a tick. The coloured label tells you how reliable the table is.</span></figcaption>
+    <ol class="legend">
+      <li><span lang="es"><b>Ross 308</b>, la línea de nuestro caso.</span><span lang="en"><b>Ross 308</b>, the line in our case.</span></li>
+      <li><span lang="es">El <b>?</b> explica qué es una línea genética y cómo elegirla.</span><span lang="en">The <b>?</b> explains what a genetic line is and how to choose it.</span></li>
+    </ol>
+  </figure>
+
+  <div class="box rule"><span class="bi">→</span><span class="bt" lang="es">Regla de decisión · ¿qué significa la etiqueta?</span><span class="bt" lang="en">Decision rule · what does the label mean?</span>
+    <table>
+      <tbody>
+        <tr><td><span class="badge ok" lang="es">Tabla oficial vigente</span><span class="badge ok" lang="en">Current official table</span></td><td lang="es">Úsala tal cual. Es la publicada por la casa genética.</td><td lang="en">Use it as is. It is the one published by the breeder.</td></tr>
+        <tr><td><span class="badge warn" lang="es">Verificar con el manual</span><span class="badge warn" lang="en">Check against the manual</span></td><td lang="es">Compara los valores del Bloque 2 con el manual vigente que te dio tu proveedor de pollito.</td><td lang="en">Compare the Block 2 values with the current manual from your chick supplier.</td></tr>
+        <tr><td><span class="badge acc" lang="es">Perfil orientativo</span><span class="badge acc" lang="en">Guideline profile</span></td><td lang="es">Es un punto de partida. Ajústalo con tu asesor y con tus registros.</td><td lang="en">It is a starting point. Adjust it with your advisor and your records.</td></tr>
+        <tr><td><span class="badge info" lang="es">Referencia histórica</span><span class="badge info" lang="en">Historical reference</span></td><td lang="es">NRC (1994). Útil para clase; se queda corto para los pollos de hoy.</td><td lang="en">NRC (1994). Useful for teaching; it falls short for today’s birds.</td></tr>
+        <tr><td><span class="badge pri" lang="es">Tus valores</span><span class="badge pri" lang="en">Your values</span></td><td lang="es">Perfil personalizado: capturas tus propios requerimientos en el Bloque 2.</td><td lang="en">Custom profile: you enter your own requirements in Block 2.</td></tr>
+      </tbody></table></div>
+
+  <div class="box tip"><span class="bi">✓</span><span class="bt" lang="es">Consejo</span><span class="bt" lang="en">Tip</span>
+    <p lang="es">¿Crías pollo criollo, de rancho o de color? Elige <b>Pollo criollo / crecimiento lento</b>. Estas aves comen un alimento menos concentrado y tienen un ciclo de 8 semanas o más.</p>
+    <p lang="en">Raising native, free-range or coloured birds? Choose <b>Slow-growing / native chicken</b>. These birds eat a less concentrated feed and have a cycle of 8 weeks or more.</p></div>
+
+  <h3 id="b1-sexo" data-n="1.2"><span lang="es">Indica el sexo de las aves</span><span lang="en">Set the sex of the birds</span></h3>
+  <p lang="es">Debajo de las líneas está la tarjeta <b>Sexo de las aves</b>. Casi todas las granjas comerciales crían <b>mixto (sin sexar)</b>, y así está marcado de inicio.</p>
+  <p lang="en">Below the lines is the <b>Sex of the birds</b> card. Almost every commercial farm raises <b>as-hatched (mixed)</b>, and that is the default.</p>
+  <div class="tbl"><table>
+    <thead><tr><th lang="es">Opción</th><th lang="en">Option</th><th lang="es">Qué hace con la tabla</th><th lang="en">What it does to the table</th></tr></thead>
+    <tbody>
+      <tr><td lang="es"><b>Mixto</b> (sin sexar)</td><td lang="en"><b>As-hatched</b> (mixed)</td><td lang="es">La usa tal cual.</td><td lang="en">Uses it as is.</td></tr>
+      <tr><td lang="es"><b>Machos</b></td><td lang="en"><b>Males</b></td><td lang="es">+3 % aminoácidos y +2 % proteína: crecen más y hacen más músculo.</td><td lang="en">+3 % amino acids and +2 % protein: they grow faster and lay down more muscle.</td></tr>
+      <tr><td lang="es"><b>Hembras</b></td><td lang="en"><b>Females</b></td><td lang="es">−4 % aminoácidos y −2 % proteína: crecen menos y hacen más grasa.</td><td lang="en">−4 % amino acids and −2 % protein: they grow slower and lay down more fat.</td></tr>
+    </tbody></table></div>
+
+  <div class="box farm"><span class="bi">◆</span><span class="bt" lang="es">En la granja</span><span class="bt" lang="en">On the farm</span>
+    <p lang="es">Nuestros pollitos son <b>Ross 308</b> y llegan sin sexar: tocamos <b>Ross 308</b> y dejamos <b>Mixto</b>. La app avisa abajo de dónde salen los requerimientos (Aviagen, 2022) y avanzamos con <span class="ui pri">Siguiente →</span>.</p>
+    <p lang="en">Our chicks are <b>Ross 308</b> and arrive unsexed: we tap <b>Ross 308</b> and leave <b>As-hatched</b>. The app notes below where the requirements come from (Aviagen, 2022) and we move on with <span class="ui pri">Next →</span>.</p></div>
+</section>
+
+<!-- ============================ 2 · ETAPA ============================ -->
+<section class="chap" id="b2" data-toc="2" style="--c:var(--b2)">
+  <div class="chap-head"><span class="big">2</span>
+    <div class="eyebrow" lang="es">Bloque 2 · Etapa</div><div class="eyebrow" lang="en">Block 2 · Phase</div>
+    <h2 lang="es">Etapa de desarrollo y requerimientos</h2><h2 lang="en">Growth phase and requirements</h2>
+    <p lang="es">Conforme el pollo crece, necesita menos proteína y más energía por kilo de alimento. Por eso se formula una dieta por fase.</p>
+    <p lang="en">As the bird grows it needs less protein and more energy per kilo of feed. That is why one diet is formulated per phase.</p>
+    <svg class="ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 40h36M10 34l8-8 7 5 13-15"/><path d="M33 16h5v5"/></svg>
+    <span class="rule"></span></div>
+  <nav class="inchap"></nav>
+
+  <h3 id="b2-fase" data-n="2.1"><span lang="es">Elige la fase</span><span lang="en">Choose the phase</span></h3>
+  <p lang="es">Cada línea divide la vida del pollo en tres o cuatro fases. Toca la que vas a formular; cada tarjeta muestra los días, la energía y la lisina que pide.</p>
+  <p lang="en">Each line splits the bird’s life into three or four phases. Tap the one you will formulate; each card shows its days, energy and lysine.</p>
+  <div class="tbl"><table>
+    <thead><tr><th lang="es">Ross 308</th><th lang="en">Ross 308</th><th lang="es">Días</th><th lang="en">Days</th><th class="r" lang="es">Energía (kcal/kg)</th><th class="r" lang="en">Energy (kcal/kg)</th><th class="r" lang="es">Proteína</th><th class="r" lang="en">Protein</th><th class="r" lang="es">Lisina dig.</th><th class="r" lang="en">Dig. lysine</th></tr></thead>
+    <tbody>
+      <tr class="hl"><td lang="es"><b>Iniciación</b></td><td lang="en"><b>Starter</b></td><td>0–10</td><td class="r">2,975</td><td class="r">23.0 %</td><td class="r">1.32 %</td></tr>
+      <tr><td lang="es">Crecimiento</td><td lang="en">Grower</td><td>11–24</td><td class="r">3,050</td><td class="r">21.5 %</td><td class="r">1.18 %</td></tr>
+      <tr><td lang="es">Finalización 1</td><td lang="en">Finisher 1</td><td>25–39</td><td class="r">3,100</td><td class="r">19.5 %</td><td class="r">1.08 %</td></tr>
+      <tr><td lang="es">Finalización 2</td><td lang="en">Finisher 2</td><td lang="es">40 – venta</td><td lang="en">40 – market</td><td class="r">3,125</td><td class="r">18.0 %</td><td class="r">1.02 %</td></tr>
+    </tbody></table></div>
+
+  <h3 id="b2-desempeno" data-n="2.2"><span lang="es">Captura el desempeño esperado</span><span lang="en">Enter the expected performance</span></h3>
+  <p lang="es">La tarjeta <b>Desempeño esperado en la fase</b> pide cuánto alimento come cada pollo y cuánto peso gana en esa fase. La app trae los valores de la tabla, pero <b>los tuyos son mejores</b>: usa el promedio de tus últimos lotes. Con ellos calcula la <b>conversión alimenticia</b> y, más adelante, el costo por pollo.</p>
+  <p lang="en">The <b>Expected performance in the phase</b> card asks how much feed each bird eats and how much weight it gains in that phase. The app fills in the table values, but <b>yours are better</b>: use the average of your last flocks. From them it computes the <b>feed conversion ratio</b> and, later, the cost per bird.</p>
+  <figure data-fig="etapa" data-marks="0,1,2">
+    <figcaption><span class="fn"></span><span lang="es"><b>Bloque 2.</b> Fase, desempeño y, más abajo, la tabla de requerimientos.</span><span lang="en"><b>Block 2.</b> Phase, performance and, further down, the requirements table.</span></figcaption>
+    <ol class="legend">
+      <li><span lang="es"><b>Iniciación</b> seleccionada: de 0 a 10 días.</span><span lang="en"><b>Starter</b> selected: days 0 to 10.</span></li>
+      <li><span lang="es"><b>Consumo por ave</b> en la fase: 0.30 kg. Cámbialo por el de tus registros.</span><span lang="en"><b>Intake per bird</b> in the phase: 0.30 kg. Replace it with your records.</span></li>
+      <li><span lang="es"><b>Conversión</b>: la app la calcula sola (0.30 ÷ 0.27 = 1.11).</span><span lang="en"><b>FCR</b>: the app computes it (0.30 ÷ 0.27 = 1.11).</span></li>
+    </ol>
+  </figure>
+
+  <h3 id="b2-req" data-n="2.3"><span lang="es">Los requerimientos: mira, pero no toques</span><span lang="en">Requirements: look, but don’t touch</span></h3>
+  <p lang="es">Más abajo está la tabla <b>Requerimientos nutricionales</b>, con el mínimo y el máximo de cada nutriente. En la vista Productor ves los <b>8 nutrientes clave</b>: energía, proteína, lisina, metionina + cistina, treonina, calcio, fósforo disponible y sodio. Los otros 12 siguen cuidándose al formular aunque no los veas.</p>
+  <p lang="en">Further down is the <b>Nutrient requirements</b> table, with each nutrient’s minimum and maximum. In the Producer view you see the <b>8 key nutrients</b>: energy, protein, lysine, methionine + cystine, threonine, calcium, available phosphorus and sodium. The other 12 are still enforced when formulating, even if you do not see them.</p>
+  <div class="box warn"><span class="bi">!</span><span class="bt" lang="es">Atención</span><span class="bt" lang="en">Caution</span>
+    <p lang="es">Cambia un requerimiento solo si tu nutriólogo te lo indica. Si editas alguno, aparece la etiqueta <span class="badge warn" lang="es">editados</span><span class="badge warn" lang="en">edited</span>; para volver a la tabla original usa <span class="ui" lang="es">↺ Restaurar valores de la tabla</span><span class="ui" lang="en">↺ Restore table values</span>. Una casilla vacía significa «sin límite».</p>
+    <p lang="en">Change a requirement only if your nutritionist tells you to. If you edit one, the <span class="badge warn">edited</span> label appears; to go back to the original table use <span class="ui">↺ Restore table values</span>. An empty cell means “no limit”.</p></div>
+</section>
+
+<!-- ============================ 3 · CONDICIONES ============================ -->
+<section class="chap" id="b3" data-toc="3" style="--c:var(--b3)">
+  <div class="chap-head"><span class="big">3</span>
+    <div class="eyebrow" lang="es">Bloque 3 · Condiciones</div><div class="eyebrow" lang="en">Block 3 · Conditions</div>
+    <h2 lang="es">Condiciones de producción</h2><h2 lang="en">Production conditions</h2>
+    <p lang="es">La altura, el calor y tu mercado cambian lo que conviene formular. Este bloque recomienda; tú decides.</p>
+    <p lang="en">Altitude, heat and your market change what is worth formulating. This block recommends; you decide.</p>
+    <svg class="ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 40l13-20 8 11 6-8 13 17z"/><circle cx="36" cy="10" r="4"/></svg>
+    <span class="rule"></span></div>
+  <nav class="inchap"></nav>
+
+  <h3 id="b3-datos" data-n="3.1"><span lang="es">Los datos de tu granja</span><span lang="en">Your farm’s data</span></h3>
+  <figure data-fig="condiciones" data-marks="0,1,2,3,4">
+    <figcaption><span class="fn"></span><span lang="es"><b>Bloque 3 con los datos del caso.</b> A 2,200 msnm la app detecta riesgo de ascitis y propone un ajuste.</span><span lang="en"><b>Block 3 with the case data.</b> At 2,200 m the app detects an ascites risk and proposes an adjustment.</span></figcaption>
+    <ol class="legend">
+      <li><span lang="es"><b>Altitud</b> en metros sobre el nivel del mar.</span><span lang="en"><b>Altitude</b> in metres above sea level.</span></li>
+      <li><span lang="es"><b>Temperatura media</b> dentro de la caseta, no la del pueblo.</span><span lang="en"><b>Mean temperature</b> inside the house, not in town.</span></li>
+      <li><span lang="es"><b>Número de aves</b> del lote: da los kilos totales de alimento.</span><span lang="en"><b>Number of birds</b> in the flock: gives the total feed needed.</span></li>
+      <li><span lang="es"><b>Bache</b>: lo que cabe en tu mezcladora en una tanda.</span><span lang="en"><b>Batch</b>: what your mixer holds in one load.</span></li>
+      <li><span lang="es"><b>Botón de ajuste</b>: aplica la recomendación a los requerimientos del Bloque 2.</span><span lang="en"><b>Adjustment button</b>: applies the recommendation to the Block 2 requirements.</span></li>
+    </ol>
+  </figure>
+  <p lang="es">Escribe también la <b>moneda</b> (el símbolo que aparecerá en los costos) y, si vendes pollo de piel amarilla, marca <b>Pollo pigmentado</b>.</p>
+  <p lang="en">Also type the <b>currency</b> (the symbol shown on costs) and, if you sell yellow-skinned birds, tick <b>Pigmented broiler</b>.</p>
+
+  <h3 id="b3-reglas" data-n="3.2"><span lang="es">Qué recomienda la app y cuándo</span><span lang="en">What the app recommends, and when</span></h3>
+  <div class="box rule"><span class="bi">→</span><span class="bt" lang="es">Regla de decisión</span><span class="bt" lang="en">Decision rule</span>
+    <table>
+      <thead><tr><th lang="es">Si…</th><th lang="en">If…</th><th lang="es">la app propone…</th><th lang="en">the app proposes…</th></tr></thead>
+      <tbody>
+        <tr><td lang="es"><span class="dot bad"></span>altitud ≥ 1,500 msnm</td><td lang="en"><span class="dot bad"></span>altitude ≥ 1,500 m</td><td lang="es"><b>Reducir 50 kcal la EM de esta fase</b>, para no forzar el corazón del ave (ascitis).</td><td lang="en"><b>Lower this phase’s ME by 50 kcal</b>, so as not to strain the bird’s heart (ascites).</td></tr>
+        <tr><td lang="es"><span class="dot bad"></span>temperatura ≥ 30 °C</td><td lang="en"><span class="dot bad"></span>temperature ≥ 30 °C</td><td lang="es"><b>Balance electrolítico de 230–300 mEq/kg</b>: el ave come menos con calor.</td><td lang="en"><b>Electrolyte balance of 230–300 mEq/kg</b>: birds eat less in the heat.</td></tr>
+        <tr><td lang="es"><span class="dot info"></span>temperatura ≤ 18 °C</td><td lang="en"><span class="dot info"></span>temperature ≤ 18 °C</td><td lang="es">Solo un aviso: revisa la calefacción; el ave gasta energía en calentarse.</td><td lang="en">Only a note: check the heating; birds spend energy keeping warm.</td></tr>
+        <tr><td lang="es"><span class="dot warn"></span>pollo pigmentado</td><td lang="en"><span class="dot warn"></span>pigmented broiler</td><td lang="es"><b>Xantofilas</b> (≈ 70 mg/kg) en las últimas fases, y elegir el pigmento en el Bloque 4.</td><td lang="en"><b>Xanthophylls</b> (≈ 70 mg/kg) in the last phases, and choose the pigment in Block 4.</td></tr>
+        <tr><td lang="es"><span class="dot ok"></span>nada de lo anterior</td><td lang="en"><span class="dot ok"></span>none of the above</td><td lang="es">«Sin ajustes especiales».</td><td lang="en">“No special adjustments”.</td></tr>
+      </tbody></table>
+    <p lang="es">Nada cambia hasta que <b>tú</b> presionas el botón de la recomendación.</p>
+    <p lang="en">Nothing changes until <b>you</b> press the recommendation’s button.</p></div>
+
+  <div class="box why"><span class="bi">?</span><span class="bt" lang="es">¿Por qué bajar la energía en la altura?</span><span class="bt" lang="en">Why lower energy at altitude?</span>
+    <p lang="es">Arriba de 1,500 m hay menos oxígeno. Un pollo de crecimiento rápido con alimento muy energético crece más de lo que su corazón y sus pulmones pueden sostener, y aparece el síndrome ascítico, una causa importante de mortalidad. Moderar la energía en las primeras fases frena un poco ese crecimiento inicial.</p>
+    <p lang="en">Above 1,500 m there is less oxygen. A fast-growing bird on a very energy-dense feed grows faster than its heart and lungs can sustain, and ascites syndrome appears, a major cause of mortality. Moderating energy in the early phases slows that early growth slightly.</p></div>
+
+  <div class="pair">
+    <figure data-fig="aplicado" data-marks="0">
+      <figcaption><span class="fn"></span><span lang="es"><b>Ajuste aplicado.</b> El botón se convierte en una confirmación verde.</span><span lang="en"><b>Adjustment applied.</b> The button turns into a green confirmation.</span></figcaption>
+    </figure>
+    <div class="box farm" style="margin:0"><span class="bi">◆</span><span class="bt" lang="es">En la granja</span><span class="bt" lang="en">On the farm</span>
+      <p lang="es">Escribimos <span class="val">2200</span> de altitud, <span class="val">24</span> °C, <span class="val">10000</span> aves y un bache de <span class="val">1000</span> kg. La app advierte riesgo de ascitis y presionamos <span class="ui" lang="es">Reducir 50 kcal la EM de esta fase</span>.</p>
+      <p lang="es">La energía mínima de la iniciación baja de 2,975 a <b>2,925 kcal/kg</b>. En el Bloque 6 veremos cuánto dinero ahorra esto.</p>
+      <p lang="en">We type <span class="val">2200</span> altitude, <span class="val">24</span> °C, <span class="val">10000</span> birds and a <span class="val">1000</span> kg batch. The app warns of ascites risk and we press <span class="ui">Lower this phase’s ME by 50 kcal</span>.</p>
+      <p lang="en">The starter’s minimum energy drops from 2,975 to <b>2,925 kcal/kg</b>. In Block 6 we will see how much money this saves.</p></div>
+  </div>
+</section>
+
+<!-- ============================ 4 · INGREDIENTES ============================ -->
+<section class="chap" id="b4" data-toc="4" style="--c:var(--b4)">
+  <div class="chap-head"><span class="big">4</span>
+    <div class="eyebrow" lang="es">Bloque 4 · Ingredientes</div><div class="eyebrow" lang="en">Block 4 · Ingredients</div>
+    <h2 lang="es">Ingredientes disponibles</h2><h2 lang="en">Available ingredients</h2>
+    <p lang="es">La app solo puede usar lo que tú marques. Marca lo que de verdad puedes conseguir.</p>
+    <p lang="en">The app can only use what you tick. Tick what you can actually get.</p>
+    <svg class="ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M24 6c6 4 8 10 8 18s-2 14-8 18c-6-4-8-10-8-18s2-14 8-18z"/><path d="M24 12v28M18 18l6 4 6-4M18 26l6 4 6-4"/></svg>
+    <span class="rule"></span></div>
+  <nav class="inchap"></nav>
+
+  <h3 id="b4-marcar" data-n="4.1"><span lang="es">Marca lo que puedes comprar</span><span lang="en">Tick what you can buy</span></h3>
+  <p lang="es">La biblioteca trae <b>29 ingredientes</b> agrupados por tipo: granos, pastas proteicas, aceites, minerales, aminoácidos y aditivos. De inicio vienen marcados los 14 de una dieta típica de maíz y soya.</p>
+  <p lang="en">The library holds <b>29 ingredients</b> grouped by type: grains, protein meals, oils, minerals, amino acids and additives. The 14 of a typical corn–soy diet are ticked by default.</p>
+  <figure data-fig="ingredientes" data-marks="0,1,2">
+    <figcaption><span class="fn"></span><span lang="es"><b>Bloque 4.</b> Cada fila muestra la energía, la proteína, el calcio y una nota práctica del ingrediente.</span><span lang="en"><b>Block 4.</b> Each row shows the ingredient’s energy, protein, calcium and a practical note.</span></figcaption>
+    <ol class="legend">
+      <li><span lang="es"><b>Casilla</b>: marcada, la app puede usarlo; desmarcada, no.</span><span lang="en"><b>Checkbox</b>: ticked, the app may use it; unticked, it may not.</span></li>
+      <li><span lang="es"><b>Editar</b>: cambia su composición con tu análisis de laboratorio.</span><span lang="en"><b>Edit</b>: change its composition with your lab analysis.</span></li>
+      <li><span lang="es"><b>Agregar</b>: crea un ingrediente que no esté en la lista.</span><span lang="en"><b>Add</b>: create an ingredient that is not on the list.</span></li>
+    </ol>
+  </figure>
+
+  <div class="box rule"><span class="bi">→</span><span class="bt" lang="es">Regla de decisión</span><span class="bt" lang="en">Decision rule</span>
+    <ul>
+      <li lang="es"><b>Si</b> un ingrediente no lo puedes conseguir todo el ciclo, <b>desmárcalo</b>: una fórmula que no puedes fabricar no sirve.</li>
+      <li lang="en"><b>If</b> you cannot get an ingredient for the whole cycle, <b>untick it</b>: a formula you cannot make is useless.</li>
+      <li lang="es"><b>Si</b> tienes un ingrediente barato que no aparece (salvado, harina de pescado local…), <b>agrégalo</b> con su análisis.</li>
+      <li lang="en"><b>If</b> you have a cheap ingredient that is not listed (bran, local fishmeal…), <b>add it</b> with its analysis.</li>
+      <li lang="es"><b>Siempre</b> deja marcados la premezcla vitamínico-mineral, la sal y una fuente de calcio y fósforo.</li>
+      <li lang="en"><b>Always</b> keep the vitamin–mineral premix, salt and a calcium and phosphorus source ticked.</li>
+    </ul></div>
+
+  <div class="box warn"><span class="bi">!</span><span class="bt" lang="es">Atención · los valores son de tabla</span><span class="bt" lang="en">Caution · values come from tables</span>
+    <p lang="es">La composición viene de tablas reconocidas (Rostagno, FEDNA, NRC) y está expresada «tal como se ofrece», con unos 88–90 % de materia seca. Un maíz húmedo o una pasta de soya de menor proteína cambian el resultado. Si tienes un análisis reciente, captúralo con <span class="ui" lang="es">Editar</span><span class="ui" lang="en">Edit</span>; para regresar al valor original usa <span class="ui" lang="es">↺ Valores de tabla</span><span class="ui" lang="en">↺ Table values</span>.</p>
+    <p lang="en">Composition comes from recognised tables (Rostagno, FEDNA, NRC) and is expressed “as fed”, at about 88–90 % dry matter. A wet corn or a lower-protein soybean meal changes the result. If you have a recent analysis, enter it with <span class="ui">Edit</span>; to go back to the original value use <span class="ui">↺ Table values</span>.</p></div>
+
+  <div class="box farm"><span class="bi">◆</span><span class="bt" lang="es">En la granja</span><span class="bt" lang="en">On the farm</span>
+    <p lang="es">Nuestro proveedor tiene maíz, sorgo, pasta de soya y los minerales y aminoácidos de costumbre: dejamos los 14 ingredientes que ya vienen marcados.</p>
+    <p lang="en">Our supplier stocks corn, sorghum, soybean meal and the usual minerals and amino acids: we keep the 14 ingredients already ticked.</p></div>
+</section>
+
+<!-- ============================ 5 · PRECIOS ============================ -->
+<section class="chap" id="b5" data-toc="5" style="--c:var(--b5)">
+  <div class="chap-head"><span class="big">5</span>
+    <div class="eyebrow" lang="es">Bloque 5 · Precios</div><div class="eyebrow" lang="en">Block 5 · Prices</div>
+    <h2 lang="es">Precios locales y límites de inclusión</h2><h2 lang="en">Local prices and inclusion limits</h2>
+    <p lang="es">El resultado solo es tan bueno como tus precios. Este es el bloque que más vale la pena cuidar.</p>
+    <p lang="en">The result is only as good as your prices. This is the block most worth getting right.</p>
+    <svg class="ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M26 6H40v14L22 38 8 24z"/><circle cx="33" cy="13" r="2.5"/></svg>
+    <span class="rule"></span></div>
+  <nav class="inchap"></nav>
+
+  <h3 id="b5-precio" data-n="5.1"><span lang="es">Escribe lo que tú pagas</span><span lang="en">Enter what you pay</span></h3>
+  <p lang="es">Para cada ingrediente marcado escribe el <b>precio por kilo puesto en tu granja</b>, es decir, con flete y maniobras incluidos. La app calcula sola el precio por tonelada.</p>
+  <p lang="en">For each ticked ingredient enter the <b>price per kilo delivered to your farm</b>, freight and handling included. The app works out the price per tonne.</p>
+  <figure data-fig="precios" data-marks="0,1,2">
+    <figcaption><span class="fn"></span><span lang="es"><b>Bloque 5.</b> Una fila por ingrediente marcado. Las dos últimas columnas comparan qué tan barata sale la energía y la proteína de cada uno.</span><span lang="en"><b>Block 5.</b> One row per ticked ingredient. The last two columns compare how cheap energy and protein are from each.</span></figcaption>
+    <ol class="legend">
+      <li><span lang="es"><b>Precio por kg</b> puesto en granja.</span><span lang="en"><b>Price per kg</b> delivered to the farm.</span></li>
+      <li><span lang="es"><b>Mínimo %</b>: lo menos que debe llevar la dieta.</span><span lang="en"><b>Minimum %</b>: the least the diet must contain.</span></li>
+      <li><span lang="es"><b>Máximo %</b>: lo más que puede llevar.</span><span lang="en"><b>Maximum %</b>: the most it may contain.</span></li>
+    </ol>
+  </figure>
+  <div class="box warn"><span class="bi">!</span><span class="bt" lang="es">Atención · los precios que trae la app son de ejemplo</span><span class="bt" lang="en">Caution · the preloaded prices are examples</span>
+    <p lang="es">Los precios precargados solo sirven para probar la app. Antes de fabricar, <b>reemplázalos con tus cotizaciones de esta semana</b>: un peso de diferencia en el maíz cambia la fórmula.</p>
+    <p lang="en">The preloaded prices are only for trying the app. Before mixing, <b>replace them with this week’s quotes</b>: a small change in the price of corn changes the formula.</p></div>
+
+  <h3 id="b5-limites" data-n="5.2"><span lang="es">Los límites de inclusión</span><span lang="en">Inclusion limits</span></h3>
+  <p lang="es">Los límites evitan fórmulas baratas pero poco prácticas o riesgosas: demasiado aceite que no se mezcla bien, demasiado sorgo que no pigmenta, demasiada sal. La app ya trae límites sensatos; cámbialos solo si tienes una razón.</p>
+  <p lang="en">Limits prevent cheap but impractical or risky formulas: too much oil that does not mix well, too much sorghum that does not pigment, too much salt. The app comes with sensible limits; change them only if you have a reason.</p>
+  <div class="box tip"><span class="bi">✓</span><span class="bt" lang="es">Consejo · inclusión fija</span><span class="bt" lang="en">Tip · fixed inclusion</span>
+    <p lang="es">Para que un ingrediente entre en una cantidad exacta, escribe el <b>mismo valor en mínimo y máximo</b>. Así viene la premezcla vitamínico-mineral: <span class="val">0.25</span> y <span class="val">0.25</span>, que es lo que suele indicar su etiqueta.</p>
+    <p lang="en">To make an ingredient go in at an exact amount, enter the <b>same value as minimum and maximum</b>. That is how the vitamin–mineral premix comes: <span class="val">0.25</span> and <span class="val">0.25</span>, as its label usually indicates.</p></div>
+
+  <h3 id="b5-leer" data-n="5.3"><span lang="es">Cómo leer las dos últimas columnas</span><span lang="en">Reading the last two columns</span></h3>
+  <p lang="es"><b>$ por 1,000 kcal</b> y <b>$ por kg de PC</b> dicen cuánto te cuesta la energía y la proteína de cada ingrediente. Entre dos granos, el que tenga el número más bajo en energía es la fuente de energía más barata. En el ejemplo, el sorgo da la energía a 1.56 y el maíz a 1.63. Aun así, la fórmula final depende de todos los nutrientes a la vez, y por eso hay que formular.</p>
+  <p lang="en"><b>$ per 1,000 kcal</b> and <b>$ per kg CP</b> tell you what the energy and protein from each ingredient cost you. Between two grains, the one with the lower energy figure is the cheaper energy source. In the example, sorghum supplies energy at 1.56 and corn at 1.63. Even so, the final formula depends on all nutrients at once, which is why you formulate.</p>
+</section>
+
+<!-- ============================ 6 · FORMULACIÓN ============================ -->
+<section class="chap" id="b6" data-toc="6" style="--c:var(--b6)">
+  <div class="chap-head"><span class="big">6</span>
+    <div class="eyebrow" lang="es">Bloque 6 · Formulación</div><div class="eyebrow" lang="en">Block 6 · Formulation</div>
+    <h2 lang="es">Formulación de mínimo costo</h2><h2 lang="en">Least-cost formulation</h2>
+    <p lang="es">Un botón, y obtienes la dieta, su costo por pollo y la hoja de mezclado lista para imprimir.</p>
+    <p lang="en">One button, and you get the diet, its cost per bird and a mixing sheet ready to print.</p>
+    <svg class="ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M24 6v34M14 40h20M8 14h32"/><path d="M8 14l-5 12a5 5 0 0010 0zM40 14l-5 12a5 5 0 0010 0z"/></svg>
+    <span class="rule"></span></div>
+  <nav class="inchap"></nav>
+
+  <h3 id="b6-formular" data-n="6.1"><span lang="es">Presiona Formular</span><span lang="en">Press Formulate</span></h3>
+  <p lang="es">Arriba del bloque ves un resumen de lo que capturaste: línea, sexo, fase, número de ingredientes y, si cambiaste algo, la etiqueta <span class="badge warn" lang="es">requerimientos editados</span><span class="badge warn" lang="en">edited requirements</span>. Revísalo y presiona <span class="ui pri" lang="es">⚙ Formular</span><span class="ui pri" lang="en">⚙ Formulate</span>.</p>
+  <p lang="en">At the top of the block you see a summary of your inputs: line, sex, phase, number of ingredients and, if you changed something, the <span class="badge warn">edited requirements</span> label. Check it and press <span class="ui pri">⚙ Formulate</span>.</p>
+  <figure data-fig="formular" data-marks="0">
+    <figcaption><span class="fn"></span><span lang="es"><b>Antes de formular.</b> El resumen confirma que la app trabajará con lo que capturaste.</span><span lang="en"><b>Before formulating.</b> The summary confirms the app will work with your inputs.</span></figcaption>
+  </figure>
+
+  <h3 id="b6-resultado" data-n="6.2"><span lang="es">El resultado en cuatro números</span><span lang="en">The result in four numbers</span></h3>
+  <figure data-fig="resultado" data-marks="0,1">
+    <figcaption><span class="fn"></span><span lang="es"><b>Resultado del caso.</b> La franja verde confirma que es la dieta más barata posible y que cumple todo.</span><span lang="en"><b>Result of the case.</b> The green band confirms it is the cheapest possible diet and that it meets every requirement.</span></figcaption>
+    <ol class="legend">
+      <li><span lang="es"><b>Confirmación.</b> Si en vez de verde ves un recuadro rojo, ve a la sección 6.7.</span><span lang="en"><b>Confirmation.</b> If you see a red box instead of green, go to section 6.7.</span></li>
+      <li><span lang="es"><b>Las cuatro tarjetas</b> que se explican abajo.</span><span lang="en"><b>The four cards</b> explained below.</span></li>
+    </ol>
+  </figure>
+  <div class="kpis">
+    <div class="kpi"><span lang="es">Costo por tonelada</span><span lang="en">Cost per tonne</span><b>$ 8,805</b><small lang="es">$ 8.81 por kg</small><small lang="en">$ 8.81 per kg</small></div>
+    <div class="kpi"><span lang="es">Alimento por ave</span><span lang="en">Feed per bird</span><b>$ 2.64</b><small lang="es">0.30 kg en la fase</small><small lang="en">0.30 kg in the phase</small></div>
+    <div class="kpi"><span lang="es">Por kg ganado</span><span lang="en">Per kg gained</span><b>$ 9.78</b><small lang="es">conversión 1.11</small><small lang="en">FCR 1.11</small></div>
+    <div class="kpi"><span lang="es">Para el lote</span><span lang="en">For the flock</span><b>3.0 t</b><small>$ 26,415</small></div>
+  </div>
+  <div class="tbl"><table>
+    <thead><tr><th lang="es">Tarjeta</th><th lang="en">Card</th><th lang="es">Qué te dice</th><th lang="en">What it tells you</th></tr></thead>
+    <tbody>
+      <tr><td lang="es"><b>Costo por tonelada</b></td><td lang="en"><b>Cost per tonne</b></td><td lang="es">Lo que cuesta fabricar 1,000 kg de esta dieta. Es el número para comparar con el alimento comercial.</td><td lang="en">What it costs to make 1,000 kg of this diet. It is the figure to compare against commercial feed.</td></tr>
+      <tr><td lang="es"><b>Alimento por ave en la fase</b></td><td lang="en"><b>Feed cost per bird (phase)</b></td><td lang="es">Costo por kg × lo que come cada pollo en la fase.</td><td lang="en">Cost per kg × what each bird eats in the phase.</td></tr>
+      <tr><td lang="es"><b>Costo / kg ganado</b></td><td lang="en"><b>Feed cost / kg gained</b></td><td lang="es">Cuánto alimento pagas por cada kilo de carne que gana el pollo. El mejor número para comparar dietas.</td><td lang="en">How much feed you pay for each kilo the bird gains. The best figure for comparing diets.</td></tr>
+      <tr><td lang="es"><b>Alimento para el lote</b></td><td lang="en"><b>Feed for the flock</b></td><td lang="es">Toneladas que necesitas para tus aves en esta fase, y su costo. Útil para comprar.</td><td lang="en">Tonnes you need for your birds in this phase, and their cost. Useful for purchasing.</td></tr>
+    </tbody></table></div>
+
+  <h3 id="b6-granja" data-n="6.3"><span lang="es">«Qué significa para tu granja»</span><span lang="en">“What it means for your farm”</span></h3>
+  <p lang="es">Debajo de las tarjetas, la app traduce el resultado a frases. Las dos últimas son las más valiosas: dicen <b>qué encarece tu dieta</b> y <b>qué ingrediente podría abaratarla</b> si consigues mejor precio.</p>
+  <p lang="en">Below the cards, the app turns the result into sentences. The last two are the most valuable: they tell you <b>what drives your diet’s cost</b> and <b>which ingredient could cut it</b> if you find a better price.</p>
+  <figure data-fig="granja">
+    <figcaption><span class="fn"></span><span lang="es"><b>Lectura en lenguaje sencillo.</b> En el caso, lo que más encarece es la energía, y el sorgo empezaría a convenir a $4.84 por kg o menos.</span><span lang="en"><b>Plain-language reading.</b> In the case, energy is the main cost driver, and sorghum would start to pay off at $4.84 per kg or less.</span></figcaption>
+  </figure>
+
+  <h3 id="b6-mezclado" data-n="6.4"><span lang="es">La hoja de mezclado</span><span lang="en">The mixing sheet</span></h3>
+  <p lang="es">Es lo que llevas a la planta: los kilos exactos de cada ingrediente para <b>un bache</b> de tu mezcladora, ordenados de mayor a menor, con una casilla para marcar conforme pesas. El botón <span class="ui" lang="es">🖨 Imprimir</span><span class="ui" lang="en">🖨 Print</span> la saca en papel. En el celular se ve en una sola columna, cómoda para llevar junto a la báscula.</p>
+  <p lang="en">This is what you take to the mill: the exact kilos of each ingredient for <b>one batch</b> of your mixer, largest first, with a box to tick as you weigh. The <span class="ui">🖨 Print</span> button puts it on paper. On a phone it shows as a single column, handy to keep next to the scale.</p>
+  <div class="pair">
+    <figure data-fig="mezclado" data-marks="0,1">
+      <figcaption><span class="fn"></span><span lang="es"><b>Hoja de mezclado del caso.</b> 13 ingredientes, 1,000 kg, $8,805 por bache.</span><span lang="en"><b>The case’s mixing sheet.</b> 13 ingredients, 1,000 kg, $8,805 per batch.</span></figcaption>
+      <ol class="legend">
+        <li><span lang="es"><b>Ingrediente y kilos</b>; marca la casilla al pesarlo.</span><span lang="en"><b>Ingredient and kilos</b>; tick the box once weighed.</span></li>
+        <li><span lang="es"><b>Total del bache</b> y lo que cuesta.</span><span lang="en"><b>Batch total</b> and what it costs.</span></li>
+      </ol>
+    </figure>
+    <figure data-fig="mezclado-movil" data-phone="1">
+      <figcaption><span class="fn"></span><span lang="es"><b>En el celular.</b></span><span lang="en"><b>On a phone.</b></span></figcaption>
+    </figure>
+  </div>
+
+  <div class="box warn"><span class="bi">!</span><span class="bt" lang="es">Atención · los ingredientes de menos de 0.5 %</span><span class="bt" lang="en">Caution · ingredients below 0.5 %</span>
+    <p lang="es">Metionina, lisina, treonina, valina, colina, sal, bicarbonato y premezcla entran en pocos kilos por tonelada. Si los echas directo a la mezcladora no se reparten bien y unos pollos comen de más y otros de menos. <b>Mézclalos antes con unos 20 kg de maíz molido</b> (una «premezcla») y agrega esa premezcla al bache.</p>
+    <p lang="en">Methionine, lysine, threonine, valine, choline, salt, bicarbonate and premix go in at just a few kilos per tonne. Tipped straight into the mixer they do not spread evenly, and some birds get too much and others too little. <b>Blend them first with about 20 kg of ground corn</b> (a “premix”) and add that premix to the batch.</p></div>
+
+  <div class="box farm"><span class="bi">◆</span><span class="bt" lang="es">En la granja · de la hoja a la mezcladora</span><span class="bt" lang="en">On the farm · from sheet to mixer</span>
+    <ol>
+      <li lang="es">Pesa los 8 ingredientes pequeños (≈ 15.6 kg en total) y revuélvelos con 20 kg del maíz del bache.</li>
+      <li lang="en">Weigh the 8 small ingredients (≈ 15.6 kg in total) and blend them with 20 kg of the batch’s corn.</li>
+      <li lang="es">Carga la mitad del maíz restante, luego la pasta de soya, el fosfato y el carbonato.</li>
+      <li lang="en">Load half of the remaining corn, then the soybean meal, phosphate and limestone.</li>
+      <li lang="es">Agrega la premezcla del paso 1 y el resto del maíz.</li>
+      <li lang="en">Add the premix from step 1 and the rest of the corn.</li>
+      <li lang="es">Al final, el aceite (20.8 kg), poco a poco y con la mezcladora en marcha.</li>
+      <li lang="en">Last, the oil (20.8 kg), slowly and with the mixer running.</li>
+      <li lang="es">Mezcla el tiempo que indique el fabricante de tu mezcladora.</li>
+      <li lang="en">Mix for the time your mixer’s manufacturer recommends.</li>
+    </ol>
+    <p lang="es" style="font-size:15px;color:var(--muted)">Es un orden de carga práctico y general. Si tu planta ya tiene un procedimiento validado, síguelo.</p>
+    <p lang="en" style="font-size:15px;color:var(--muted)">This is a general, practical loading order. If your mill already has a validated procedure, follow it.</p></div>
+
+  <h3 id="b6-ajuste" data-n="6.5"><span lang="es">Lo que valió el ajuste por altitud</span><span lang="en">What the altitude adjustment was worth</span></h3>
+  <p lang="es">Formulamos el mismo caso dos veces: con la tabla original y con el ajuste de −50 kcal del Bloque 3. El aceite, que cuesta más de cinco veces lo que el maíz, bajó de 3.04 % a 2.08 % de la fórmula:</p>
+  <p lang="en">We formulated the same case twice: with the original table and with the −50 kcal adjustment from Block 3. Oil, which costs more than five times as much as corn, dropped from 3.04 % to 2.08 % of the formula:</p>
+  <div class="versus">
+    <div class="s"><span lang="es">Tabla original · 2,975 kcal</span><span lang="en">Original table · 2,975 kcal</span><b>$ 9,052 /t</b></div>
+    <div class="arrow">→</div>
+    <div class="s win"><span lang="es">Con ajuste · 2,925 kcal</span><span lang="en">Adjusted · 2,925 kcal</span><b>$ 8,805 /t</b></div>
+  </div>
+  <p lang="es">Son <b>$247 menos por tonelada</b>; para las 3 toneladas de iniciación del lote, unos <b>$740</b>. Además de ahorrar, protege a las aves de la ascitis. Es un buen ejemplo de por qué conviene llenar el Bloque 3 con cuidado.</p>
+  <p lang="en">That is <b>$247 less per tonne</b>; for the flock’s 3 tonnes of starter, about <b>$740</b>. Besides saving money, it protects the birds from ascites. A good example of why Block 3 is worth filling in carefully.</p>
+
+  <h3 id="b6-vigilar" data-n="6.6"><span lang="es">¿Qué ingredientes conviene vigilar?</span><span lang="en">Which ingredients are worth watching?</span></h3>
+  <p lang="es">La tabla <b>Ingredientes no usados · precio de entrada</b> dice a qué precio empezaría a convenirte un ingrediente que quedó fuera. Úsala para negociar con tu proveedor.</p>
+  <p lang="en">The <b>Unused ingredients · entry price</b> table tells you at what price an ingredient left out would start to pay off. Use it when negotiating with your supplier.</p>
+  <figure data-fig="vigilar">
+    <figcaption><span class="fn"></span><span lang="es"><b>Precio de entrada.</b> El sorgo cuesta $5.00 y no entró; a $4.84 o menos, sí entraría. Abajo, <b>Evaluar una fórmula existente</b> calcula el costo y el aporte de la fórmula que usas hoy, para compararla con la óptima.</span><span lang="en"><b>Entry price.</b> Sorghum costs $5.00 and did not enter; at $4.84 or less it would. Below, <b>Evaluate an existing formula</b> computes the cost and nutrient supply of the formula you use today, to compare it with the optimum.</span></figcaption>
+  </figure>
+  <div class="box tip"><span class="bi">✓</span><span class="bt" lang="es">Consejo · compara contra tu fórmula actual</span><span class="bt" lang="en">Tip · compare against your current formula</span>
+    <p lang="es">Escribe en <b>Evaluar una fórmula existente</b> los porcentajes de la dieta que usas hoy y presiona <span class="ui" lang="es">Evaluar fórmula</span><span class="ui" lang="en">Evaluate formula</span>. La tarjeta <b>Diferencia vs. fórmula óptima</b> te dice cuánto pagas de más por tonelada.</p>
+    <p lang="en">Type the percentages of the diet you use today into <b>Evaluate an existing formula</b> and press <span class="ui">Evaluate formula</span>. The <b>Difference vs. optimal formula</b> card shows how much extra you pay per tonne.</p></div>
+
+  <h3 id="b6-sinsol" data-n="6.7"><span lang="es">Si aparece «Sin solución»</span><span lang="en">If “No solution” appears</span></h3>
+  <p lang="es">Significa que <b>ninguna combinación</b> de tus ingredientes cumple todo a la vez. No es un error de la app: es información. RatioAvis te dice qué restricción relajar para que sí haya solución.</p>
+  <p lang="en">It means that <b>no combination</b> of your ingredients meets everything at once. It is not an app error: it is information. RatioAvis tells you which constraint to relax so that there is a solution.</p>
+  <figure data-fig="infactible">
+    <figcaption><span class="fn"></span><span lang="es"><b>Diagnóstico.</b> Aquí se pidió, a propósito, un imposible: 30 % de proteína. La app indica que bastaría con relajar <b>una</b> de las restricciones de la lista.</span><span lang="en"><b>Diagnosis.</b> Here an impossible 30 % protein was requested on purpose. The app shows that relaxing <b>one</b> of the listed constraints would be enough.</span></figcaption>
+  </figure>
+  <div class="dtree" style="--c:var(--b6)">
+    <div class="q" lang="es">¿Qué hago si no hay solución? Prueba en este orden:</div>
+    <div class="q" lang="en">What do I do if there is no solution? Try in this order:</div>
+    <ol>
+      <li><div><b lang="es">¿Editaste algún requerimiento?</b><b lang="en">Did you edit a requirement?</b><span lang="es">Presiona <i>Restaurar valores de la tabla</i> en el Bloque 2 y formula otra vez.</span><span lang="en">Press <i>Restore table values</i> in Block 2 and formulate again.</span></div></li>
+      <li><div><b lang="es">¿La app dice «Ningún ingrediente aporta…»?</b><b lang="en">Does the app say “No selected ingredient supplies…”?</b><span lang="es">Marca en el Bloque 4 un ingrediente que lo aporte: fosfato para el fósforo, sal para el sodio, aminoácidos sintéticos.</span><span lang="en">Tick an ingredient in Block 4 that supplies it: phosphate for phosphorus, salt for sodium, synthetic amino acids.</span></div></li>
+      <li><div><b lang="es">¿Pusiste un límite máximo muy bajo?</b><b lang="en">Did you set a very low maximum?</b><span lang="es">Revisa los máximos del Bloque 5, sobre todo los de aceite y aminoácidos.</span><span lang="en">Check the maximums in Block 5, especially oil and amino acids.</span></div></li>
+      <li><div><b lang="es">¿Sigue sin solución?</b><b lang="en">Still no solution?</b><span lang="es">Relaja la restricción que la app señala en la lista y consúltalo con tu nutriólogo.</span><span lang="en">Relax the constraint the app lists and check with your nutritionist.</span></div></li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============================ 7 · PROGRAMA ============================ -->
+<section class="chap" id="b7" data-toc="7" style="--c:var(--b7)">
+  <div class="chap-head"><span class="big">7</span>
+    <div class="eyebrow" lang="es">Bloque 7 · Programa</div><div class="eyebrow" lang="en">Block 7 · Program</div>
+    <h2 lang="es">Programa de alimentación multifase</h2><h2 lang="en">Multiphase feeding program</h2>
+    <p lang="es">Todas las fases de una vez: cuánto te cuesta alimentar a cada pollo de principio a fin.</p>
+    <p lang="en">Every phase at once: what it costs to feed each bird from start to finish.</p>
+    <svg class="ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><rect x="6" y="10" width="36" height="32" rx="4"/><path d="M6 19h36M16 6v8M32 6v8M13 27h6M13 34h6M25 27h10"/></svg>
+    <span class="rule"></span></div>
+  <nav class="inchap"></nav>
+
+  <h3 id="b7-ciclo" data-n="7.1"><span lang="es">El costo del ciclo completo</span><span lang="en">The cost of the whole cycle</span></h3>
+  <p lang="es">Presiona <span class="ui pri" lang="es">⚙ Formular todas las fases</span><span class="ui pri" lang="en">⚙ Formulate all phases</span>. Con los mismos ingredientes y precios, la app formula cada fase de tu línea y suma lo que come y lo que cuesta cada ave en todo el ciclo.</p>
+  <p lang="en">Press <span class="ui pri">⚙ Formulate all phases</span>. With the same ingredients and prices, the app formulates every phase of your line and adds up what each bird eats and costs over the whole cycle.</p>
+  <figure data-fig="programa" data-marks="0">
+    <figcaption><span class="fn"></span><span lang="es"><b>El programa del caso.</b> Alimentar a cada pollo cuesta $52.94 en todo el ciclo, y la finalización 1 se lleva casi la mitad del dinero.</span><span lang="en"><b>The case’s program.</b> Feeding each bird costs $52.94 over the cycle, and finisher 1 takes almost half the money.</span></figcaption>
+    <ol class="legend">
+      <li><span lang="es"><b>Costo de alimento por ave</b> en todo el ciclo: el número que más importa para tu utilidad.</span><span lang="en"><b>Feed cost per bird</b> over the cycle: the figure that matters most for your margin.</span></li>
+    </ol>
+  </figure>
+
+  <div class="box rule"><span class="bi">→</span><span class="bt" lang="es">Regla de decisión · ¿dónde buscar ahorros?</span><span class="bt" lang="en">Decision rule · where to look for savings?</span>
+    <p lang="es">Mira la barra <b>¿Dónde se va el dinero del alimento?</b>. <b>Si</b> una fase se lleva la mayor parte (aquí la finalización 1, con 48 %), <b>entonces</b> es ahí donde vale más la pena negociar precios o ajustar la fórmula. Un ahorro pequeño en esa fase pesa más que uno grande en la iniciación, que solo se lleva el 5 %.</p>
+    <p lang="en">Look at the <b>Where does the feed money go?</b> bar. <b>If</b> one phase takes the largest share (here finisher 1, at 48 %), <b>then</b> that is where negotiating prices or adjusting the formula pays off most. A small saving in that phase weighs more than a large one in the starter, which takes only 5 %.</p></div>
+
+  <div class="box warn"><span class="bi">!</span><span class="bt" lang="es">Atención · el programa usa la tabla de cada fase</span><span class="bt" lang="en">Caution · the program uses each phase’s table</span>
+    <p lang="es">El programa aplica los ajustes por sexo, pigmentación y calor, pero <b>no las ediciones manuales del Bloque 2</b> ni el ajuste por altitud, que solo valen para la fase que formulaste en el Bloque 6. Por eso la iniciación aparece aquí a $9,052 y no a $8,805. Si tu granja está en la altura, formula cada fase en el Bloque 6 con su ajuste antes de fabricar.</p>
+    <p lang="en">The program applies the sex, pigmentation and heat adjustments, but <b>not manual edits in Block 2</b> nor the altitude adjustment, which only apply to the phase you formulated in Block 6. That is why the starter shows here at $9,052 rather than $8,805. If your farm is at altitude, formulate each phase in Block 6 with its adjustment before mixing.</p></div>
+  <p lang="es">Más abajo, <b>Resumen por fase</b> y <b>Fórmulas del programa</b> muestran cada dieta lado a lado; <span class="ui" lang="es">⬇ Descargar programa (CSV)</span><span class="ui" lang="en">⬇ Download program (CSV)</span> las lleva a Excel.</p>
+  <p lang="en">Further down, <b>Summary by phase</b> and <b>Program formulas</b> show each diet side by side; <span class="ui">⬇ Download program (CSV)</span> takes them to Excel.</p>
+</section>
+
+<!-- ============================ 8 · INFORME ============================ -->
+<section class="chap" id="b8" data-toc="8" style="--c:var(--b8)">
+  <div class="chap-head"><span class="big">8</span>
+    <div class="eyebrow" lang="es">Bloque 8 · Informe</div><div class="eyebrow" lang="en">Block 8 · Report</div>
+    <h2 lang="es">Informe y exportación</h2><h2 lang="en">Report and export</h2>
+    <p lang="es">Tu dieta en una página para tu nutriólogo, tus tablas en Excel y tu proyecto guardado para la próxima vez.</p>
+    <p lang="en">Your diet on one page for your nutritionist, your tables in Excel and your project saved for next time.</p>
+    <svg class="ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4h17l9 9v31H12z"/><path d="M29 4v9h9M18 24h14M18 31h14M18 38h9"/></svg>
+    <span class="rule"></span></div>
+  <nav class="inchap"></nav>
+
+  <h3 id="b8-informe" data-n="8.1"><span lang="es">El informe redactado</span><span lang="en">The written report</span></h3>
+  <p lang="es">La app redacta un resumen con el nombre de tu dieta y de tu granja (los capturas en la pantalla de Inicio, en <b>Datos del proyecto</b>), la fecha, el costo y la fórmula en porcentaje y en kilos por tonelada.</p>
+  <p lang="en">The app writes a summary with your diet’s and farm’s names (entered on the Home screen under <b>Project details</b>), the date, the cost and the formula as percentages and kilos per tonne.</p>
+  <figure data-fig="informe">
+    <figcaption><span class="fn"></span><span lang="es"><b>Informe del caso.</b> Listo para imprimir o guardar como PDF y entregar a tu nutriólogo.</span><span lang="en"><b>The case’s report.</b> Ready to print or save as PDF for your nutritionist.</span></figcaption>
+  </figure>
+
+  <h3 id="b8-exportar" data-n="8.2"><span lang="es">Exportar y guardar tu proyecto</span><span lang="en">Exporting and saving your project</span></h3>
+  <figure data-fig="exportar" data-marks="0,1,2,3">
+    <figcaption><span class="fn"></span><span lang="es"><b>La tarjeta Exportar.</b></span><span lang="en"><b>The Export card.</b></span></figcaption>
+    <ol class="legend">
+      <li><span lang="es"><b>Imprimir / PDF</b>: el informe en papel o en PDF.</span><span lang="en"><b>Print / PDF</b>: the report on paper or as PDF.</span></li>
+      <li><span lang="es"><b>Fórmula (CSV)</b> y <b>Nutrientes (CSV)</b>: tablas para Excel.</span><span lang="en"><b>Formula (CSV)</b> and <b>Nutrients (CSV)</b>: tables for Excel.</span></li>
+      <li><span lang="es"><b>Guardar proyecto (.json)</b>: todo tu trabajo en un archivo.</span><span lang="en"><b>Save project (.json)</b>: all your work in one file.</span></li>
+      <li><span lang="es"><b>Abrir proyecto</b>: recupera ese archivo en cualquier computadora.</span><span lang="en"><b>Open project</b>: reload that file on any computer.</span></li>
+    </ol>
+  </figure>
+  <div class="box tip"><span class="bi">✓</span><span class="bt" lang="es">Consejo · tu trabajo se guarda solo, pero…</span><span class="bt" lang="en">Tip · your work saves itself, but…</span>
+    <p lang="es">RatioAvis guarda automáticamente en el navegador que estás usando. Si cambias de computadora o de navegador, o borras el historial, no lo verás ahí. Por eso, al terminar, usa <span class="path" lang="es">Informe<i>›</i>Guardar proyecto</span> y guarda el archivo junto con tus registros del lote.</p>
+    <p lang="en">RatioAvis saves automatically in the browser you are using. If you switch computer or browser, or clear your history, it will not be there. So when you finish, use <span class="path">Report<i>›</i>Save project</span> and keep the file with your flock records.</p></div>
+  <div class="box warn"><span class="bi">!</span><span class="bt" lang="es">Atención · Reiniciar todo</span><span class="bt" lang="en">Caution · Reset everything</span>
+    <p lang="es"><span class="ui" lang="es">Reiniciar todo</span> borra tu proyecto y regresa la app a sus valores de inicio. Para evitar accidentes pide confirmación: hay que presionarlo dos veces. Guarda tu proyecto antes.</p>
+    <p lang="en"><span class="ui">Reset everything</span> erases your project and returns the app to its defaults. To prevent accidents it asks for confirmation: you must press it twice. Save your project first.</p></div>
+</section>
+
+<!-- ============================ ANTES DE MEZCLAR ============================ -->
+<section class="chap" id="mezclar" data-toc="✓" style="--c:var(--ok)">
+  <div class="chap-head"><span class="big">✓</span>
+    <div class="eyebrow" lang="es">Del papel a la mezcladora</div><div class="eyebrow" lang="en">From paper to mixer</div>
+    <h2 lang="es">Antes de fabricar</h2><h2 lang="en">Before you mix</h2>
+    <p lang="es">Siete comprobaciones que toman cinco minutos y evitan un lote de alimento equivocado.</p>
+    <p lang="en">Seven checks that take five minutes and prevent a wrong batch of feed.</p>
+    <span class="rule"></span></div>
+  <ul class="check">
+    <li lang="es">Los <b>precios</b> del Bloque 5 son de esta semana y con flete.</li>
+    <li lang="en">The <b>prices</b> in Block 5 are this week’s, with freight.</li>
+    <li lang="es">La <b>fase</b> formulada corresponde a la edad de las aves que la van a comer.</li>
+    <li lang="en">The <b>phase</b> formulated matches the age of the birds that will eat it.</li>
+    <li lang="es">Todos los ingredientes de la fórmula están <b>en bodega</b>, en la cantidad necesaria.</li>
+    <li lang="en">Every ingredient in the formula is <b>in stock</b>, in the amount needed.</li>
+    <li lang="es">El <b>bache</b> del Bloque 3 es el de tu mezcladora y la báscula está calibrada.</li>
+    <li lang="en">The <b>batch</b> in Block 3 matches your mixer, and the scale is calibrated.</li>
+    <li lang="es">Si analizaste tus ingredientes, capturaste los <b>valores de laboratorio</b> en el Bloque 4.</li>
+    <li lang="en">If you analysed your ingredients, you entered the <b>lab values</b> in Block 4.</li>
+    <li lang="es">Tu <b>nutriólogo</b> revisó el informe. RatioAvis es una herramienta de apoyo, no un sustituto.</li>
+    <li lang="en">Your <b>nutritionist</b> has reviewed the report. RatioAvis is a support tool, not a substitute.</li>
+    <li lang="es">Guardaste el <b>proyecto</b> (.json) con la fecha del lote.</li>
+    <li lang="en">You saved the <b>project</b> (.json) with the flock date.</li>
+  </ul>
+</section>
+
+<!-- ============================ PROBLEMAS FRECUENTES ============================ -->
+<section class="chap" id="problemas" data-toc="?" style="--c:var(--info)">
+  <div class="chap-head"><span class="big">?</span>
+    <div class="eyebrow" lang="es">Consulta rápida</div><div class="eyebrow" lang="en">Quick reference</div>
+    <h2 lang="es">Problemas frecuentes</h2><h2 lang="en">Troubleshooting</h2>
+    <p lang="es">Lo que más se pregunta, con su causa y su solución.</p>
+    <p lang="en">The most common questions, with cause and fix.</p>
+    <span class="rule"></span></div>
+
+  <details><summary><span lang="es">Cambié un precio y el resultado desapareció.</span><span lang="en">I changed a price and the result disappeared.</span></summary>
+    <div><p lang="es">Es a propósito. Cualquier cambio en precios, ingredientes o requerimientos invalida la fórmula anterior para que nunca fabriques con un resultado viejo. Vuelve a presionar <span class="ui pri">⚙ Formular</span>.</p><p lang="en">That is deliberate. Any change in prices, ingredients or requirements invalidates the previous formula so that you never mix from a stale result. Press <span class="ui pri">⚙ Formulate</span> again.</p></div></details>
+  <details><summary><span lang="es">El costo por ave aparece como «—».</span><span lang="en">The cost per bird shows “—”.</span></summary>
+    <div><p lang="es">Falta el consumo por ave. Captúralo en el Bloque 2, tarjeta <b>Desempeño esperado en la fase</b>.</p><p lang="en">The intake per bird is missing. Enter it in Block 2, <b>Expected performance in the phase</b> card.</p></div></details>
+  <details><summary><span lang="es">Aparece «Sin solución».</span><span lang="en">“No solution” appears.</span></summary>
+    <div><p lang="es">Sigue el diagrama de la <a href="#b6-sinsol">sección 6.7</a>.</p><p lang="en">Follow the chart in <a href="#b6-sinsol">section 6.7</a>.</p></div></details>
+  <details><summary><span lang="es">Abrí la app en otra computadora y no están mis datos.</span><span lang="en">I opened the app on another computer and my data are gone.</span></summary>
+    <div><p lang="es">Cada navegador guarda su propia copia. En la computadora original usa <span class="path" lang="es">Informe<i>›</i>Guardar proyecto</span><span class="path" lang="en">Report<i>›</i>Save project</span>, lleva el archivo .json y ábrelo con <span class="path" lang="es">Informe<i>›</i>Abrir proyecto</span><span class="path" lang="en">Report<i>›</i>Open project</span>.</p><p lang="en">Each browser keeps its own copy. On the original computer use <span class="path">Report<i>›</i>Save project</span>, take the .json file and open it with <span class="path">Report<i>›</i>Open project</span>.</p></div></details>
+  <details><summary><span lang="es">Un ingrediente que uso siempre no entró a la fórmula.</span><span lang="en">An ingredient I always use did not enter the formula.</span></summary>
+    <div><p lang="es">A tus precios no conviene. Revisa su <b>precio de entrada</b> en la sección 6.6. Si de todos modos debes usarlo, por ejemplo para acabar el inventario, ponle un <b>mínimo %</b> en el Bloque 5.</p><p lang="en">At your prices it does not pay. Check its <b>entry price</b> in section 6.6. If you must use it anyway, for example to clear stock, give it a <b>minimum %</b> in Block 5.</p></div></details>
+  <details><summary><span lang="es">La fórmula usa mucho de un ingrediente que me preocupa.</span><span lang="en">The formula uses a lot of an ingredient that worries me.</span></summary>
+    <div><p lang="es">Bájale el <b>máximo %</b> en el Bloque 5 y vuelve a formular. La app buscará la mejor dieta sin pasar de ese límite.</p><p lang="en">Lower its <b>maximum %</b> in Block 5 and reformulate. The app will find the best diet without exceeding that limit.</p></div></details>
+  <details><summary><span lang="es">¿Cambiar de idioma o de vista borra algo?</span><span lang="en">Does switching language or view erase anything?</span></summary>
+    <div><p lang="es">No. <b>ES / EN</b> y <b>Productor / Científico</b> solo cambian cómo se muestra la información.</p><p lang="en">No. <b>ES / EN</b> and <b>Producer / Scientist</b> only change how information is shown.</p></div></details>
+  <details><summary><span lang="es">¿Puedo usar RatioAvis sin internet?</span><span lang="en">Can I use RatioAvis offline?</span></summary>
+    <div><p lang="es">Sí. Ábrela una vez con conexión y déjala abierta; todo el cálculo ocurre en tu equipo. También puedes descargar el archivo <code>index.html</code> del repositorio y abrirlo directamente.</p><p lang="en">Yes. Open it once while online and keep it open; every calculation runs on your device. You can also download the repository’s <code>index.html</code> file and open it directly.</p></div></details>
+</section>
+
+<!-- ============================ GLOSARIO ============================ -->
+<section class="chap" id="glosario" data-toc="G" style="--c:var(--acc)">
+  <div class="chap-head"><span class="big">G</span>
+    <div class="eyebrow" lang="es">Consulta</div><div class="eyebrow" lang="en">Reference</div>
+    <h2 lang="es">Glosario</h2><h2 lang="en">Glossary</h2>
+    <p lang="es">Las palabras de la app, en lenguaje de granja, con su nombre en inglés.</p>
+    <p lang="en">The app’s words in plain farm language, with their Spanish name.</p>
+    <span class="rule"></span></div>
+  <dl class="glos" id="glos"></dl>
+</section>
+
+<!-- ============================ INICIO RÁPIDO ============================ -->
+<section class="chap" id="rapido" data-toc="★" style="--c:var(--pri)">
+  <div class="quick">
+    <div class="qh">
+      <div><div class="eyebrow" lang="es">Para imprimir y pegar junto a la mezcladora</div><div class="eyebrow" lang="en">Print it and pin it by the mixer</div>
+        <h2 lang="es">RatioAvis en una página</h2><h2 lang="en">RatioAvis on one page</h2></div>
+      <div class="qr"><div><b>hectortecumshe-ai.github.io/RatioAvis</b><br><span lang="es">Escanea para abrir la app</span><span lang="en">Scan to open the app</span></div><div id="qr"></div></div>
+    </div>
+    <ol>
+      <li style="--c:var(--b1)"><i>1</i><div><b lang="es">Genética</b><b lang="en">Genetics</b><span lang="es">Toca tu línea (Ross 308, Cobb 500…) y el sexo. Mixto si no están sexados.</span><span lang="en">Tap your line (Ross 308, Cobb 500…) and sex. As-hatched if unsexed.</span></div></li>
+      <li style="--c:var(--b2)"><i>2</i><div><b lang="es">Etapa</b><b lang="en">Phase</b><span lang="es">Elige la fase y escribe el consumo y la ganancia de tus lotes.</span><span lang="en">Pick the phase and enter your flocks’ intake and gain.</span></div></li>
+      <li style="--c:var(--b3)"><i>3</i><div><b lang="es">Condiciones</b><b lang="en">Conditions</b><span lang="es">Altitud, temperatura, aves y bache. Aplica el ajuste si la app lo propone.</span><span lang="en">Altitude, temperature, birds and batch. Apply the adjustment if proposed.</span></div></li>
+      <li style="--c:var(--b4)"><i>4</i><div><b lang="es">Ingredientes</b><b lang="en">Ingredients</b><span lang="es">Marca solo lo que puedes comprar. Captura tus análisis con Editar.</span><span lang="en">Tick only what you can buy. Enter your analyses with Edit.</span></div></li>
+      <li style="--c:var(--b5)"><i>5</i><div><b lang="es">Precios</b><b lang="en">Prices</b><span lang="es">Precio por kg puesto en granja, de esta semana. Revisa los límites.</span><span lang="en">This week’s price per kg delivered. Check the limits.</span></div></li>
+      <li style="--c:var(--b6)"><i>6</i><div><b lang="es">Formulación</b><b lang="en">Formulation</b><span lang="es">⚙ Formular. Imprime la hoja de mezclado. Premezcla lo de menos de 0.5 %.</span><span lang="en">⚙ Formulate. Print the mixing sheet. Premix anything below 0.5 %.</span></div></li>
+      <li style="--c:var(--b7)"><i>7</i><div><b lang="es">Programa</b><b lang="en">Program</b><span lang="es">⚙ Formular todas las fases: costo por ave en el ciclo.</span><span lang="en">⚙ Formulate all phases: cost per bird over the cycle.</span></div></li>
+      <li style="--c:var(--b8)"><i>8</i><div><b lang="es">Informe</b><b lang="en">Report</b><span lang="es">PDF para tu nutriólogo y Guardar proyecto (.json).</span><span lang="en">PDF for your nutritionist and Save project (.json).</span></div></li>
+    </ol>
+    <div class="foot">
+      <div><h4 lang="es">Si sale «Sin solución»</h4><h4 lang="en">If “No solution”</h4>
+        <ul><li lang="es">Restaura la tabla del Bloque 2.</li><li lang="en">Restore the Block 2 table.</li><li lang="es">Marca el ingrediente que falta.</li><li lang="en">Tick the missing ingredient.</li><li lang="es">Sube el máximo que la app señala.</li><li lang="en">Raise the maximum the app flags.</li></ul></div>
+      <div><h4 lang="es">Antes de mezclar</h4><h4 lang="en">Before mixing</h4>
+        <ul><li lang="es">Precios de esta semana.</li><li lang="en">This week’s prices.</li><li lang="es">Báscula calibrada, bache correcto.</li><li lang="en">Scale calibrated, batch correct.</li><li lang="es">Informe revisado por tu nutriólogo.</li><li lang="en">Report reviewed by your nutritionist.</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<div class="colophon">
+  <p lang="es"><b>RatioAvis · Instructivo del Productor</b>, 1.ª edición, octubre de 2026. Describe RatioAvis 1.1.0. Todas las capturas son de la app real, con los datos del caso descrito en la sección 0.5; los precios son ilustrativos.</p>
+  <p lang="en"><b>RatioAvis · Producer Guide</b>, 1st edition, October 2026. Covers RatioAvis 1.1.0. Every screenshot comes from the real app with the case data in section 0.5; prices are illustrative.</p>
+  <p lang="es">Herramienta de apoyo: los resultados deben ser revisados por un profesional en nutrición animal. © 2026 Héctor Tecumshé Mojica-Zárate y Luis Ángel Barrera-Guzmán. El programa se distribuye con licencia MIT.</p>
+  <p lang="en">Decision-support tool: results should be reviewed by a qualified animal nutritionist. © 2026 Héctor Tecumshé Mojica-Zárate and Luis Ángel Barrera-Guzmán. The software is distributed under the MIT License.</p>
+</div>
+
+</div><!-- .doc -->
+</main>
+</div>
+
+<a class="ib totop" href="#portada" aria-label="Arriba / Top">↑</a>
+<div id="zoom" role="dialog" aria-label="Imagen ampliada / Enlarged image"><div class="zi"></div></div>
+
+<script src="instructivo/capturas.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" defer></script>
+<script>
+"use strict";
+const $ = (s, el = document) => el.querySelector(s), $$ = (s, el = document) => [...el.querySelectorAll(s)];
+const CAP = window.CAPTURAS || {};
+
+/* ---------- idioma ---------- */
+function getLang(){
+  const u = new URLSearchParams(location.search).get('lang');
+  if (u === 'es' || u === 'en') return u;
+  try { const s = localStorage.getItem('ratioavis_lang'); if (s === 'es' || s === 'en') return s; } catch (_) {}
+  return (navigator.language || 'es').toLowerCase().startsWith('es') ? 'es' : 'en';
+}
+let LANG = getLang();
+function setLang(l){
+  LANG = l; document.documentElement.lang = l; document.documentElement.dataset.lang = l;
+  $$('.seg button').forEach(b => b.classList.toggle('on', b.dataset.lang === l));
+  $('#q').placeholder = l === 'es' ? 'Buscar en el instructivo…' : 'Search the guide…';
+  document.title = l === 'es' ? 'RatioAvis · Instructivo del Productor' : 'RatioAvis · Producer Guide';
+  try { localStorage.setItem('ratioavis_lang', l); } catch (_) {}
+  $('#pdfBtn').href = l === 'es' ? 'instructivo/RatioAvis-Instructivo-Productor.pdf' : 'instructivo/RatioAvis-Producer-Guide.pdf';
+  buildToc(); numberFigures(); buscar();
+}
+$$('.seg button').forEach(b => b.addEventListener('click', () => setLang(b.dataset.lang)));
+
+/* ---------- tema ---------- */
+function setTheme(t){
+  if (t) document.documentElement.dataset.theme = t; else delete document.documentElement.dataset.theme;
+  const dark = t ? t === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
+  $('#temaBtn').textContent = dark ? '☀' : '☾';
+}
+try { setTheme(localStorage.getItem('ratioavis_tema')); } catch (_) { setTheme(null); }
+$('#temaBtn').addEventListener('click', () => {
+  const cur = document.documentElement.dataset.theme || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  const nt = cur === 'dark' ? 'light' : 'dark'; setTheme(nt); try { localStorage.setItem('ratioavis_tema', nt); } catch (_) {}
+});
+
+/* ---------- figuras: dos idiomas + marcas sobre la captura ---------- */
+$$('figure[data-fig]').forEach(fig => {
+  const id = fig.dataset.fig, cap = fig.querySelector('figcaption');
+  const order = (fig.dataset.marks || '').split(',').filter(Boolean).map(Number);
+  const fix = Object.fromEntries((fig.dataset.fix || '').split(';').filter(Boolean).map(s => { const [k, v] = s.split(':'); return [+k, v.split(',').map(Number)]; }));
+  const holder = document.createElement('div');
+  ['es', 'en'].forEach(l => {
+    const shot = document.createElement('div'); shot.className = 'shot'; shot.lang = l;
+    const img = new Image(); img.src = `instructivo/img/${id}-${l}.jpg`; img.loading = new URLSearchParams(location.search).has('eager') ? 'eager' : 'lazy'; img.decoding = 'async';
+    img.alt = (cap ? cap.querySelector(`[lang="${l}"] b, [lang="${l}"]`)?.textContent : '') || id;
+    shot.appendChild(img);
+    const data = CAP[`${id}-${l}`];
+    order.forEach((mi, n) => {
+      const m = data && data.marks && data.marks[mi];
+      const mk = document.createElement('span'); mk.className = 'mk';
+      if (fix[n]) { mk.classList.add('dotonly'); mk.style.left = fix[n][0] + '%'; mk.style.top = fix[n][1] + '%'; mk.style.width = mk.style.height = '0'; }
+      else if (m) { mk.style.left = m.l + '%'; mk.style.top = m.t + '%'; mk.style.width = (m.r - m.l) + '%'; mk.style.height = (m.b - m.t) + '%'; }
+      else return;
+      mk.innerHTML = `<span class="ring"></span><span class="num">${n + 1}</span>`;
+      shot.appendChild(mk);
+    });
+    shot.addEventListener('click', () => abrirZoom(shot));
+    holder.appendChild(shot);
+  });
+  if (fig.dataset.phone) { holder.className = 'phone'; }
+  fig.insertBefore(holder, fig.firstChild);
+});
+function numberFigures(){
+  $$('section.chap').forEach(sec => {
+    const n = sec.dataset.toc; let i = 0;
+    $$('figure[data-fig] .fn', sec).forEach(fn => { i++; fn.textContent = (LANG === 'es' ? 'Figura ' : 'Figure ') + (/^\d$/.test(n) ? n + '.' + i : i); });
+  });
+}
+
+/* ---------- visor ---------- */
+function abrirZoom(shot){ const z = $('#zoom .zi'); z.innerHTML = ''; const c = shot.cloneNode(true); c.style.cursor = 'zoom-out'; c.querySelector('img').loading = 'eager'; z.appendChild(c); $('#zoom').classList.add('on'); }
+$('#zoom').addEventListener('click', () => $('#zoom').classList.remove('on'));
+document.addEventListener('keydown', e => { if (e.key === 'Escape') { $('#zoom').classList.remove('on'); $('#toc').classList.remove('open'); } });
+
+/* ---------- índice lateral ---------- */
+const GRUPOS = { leer: ['Para empezar', 'Getting started'], b1: ['Los ocho bloques', 'The eight blocks'], mezclar: ['Consulta', 'Reference'] };
+function txt(el){ const x = el.querySelector(`[lang="${LANG}"]`); return (x || el).textContent.trim(); }
+function buildToc(){
+  const ol = $('#tocList'); ol.innerHTML = '';
+  $$('section.chap').forEach(sec => {
+    const g = GRUPOS[sec.id]; if (g) { const li = document.createElement('li'); li.className = 'grp'; li.textContent = g[LANG === 'es' ? 0 : 1]; ol.appendChild(li); }
+    const h2 = sec.querySelector('h2[lang="' + LANG + '"]') || sec.querySelector('h2');
+    const li = document.createElement('li'); li.dataset.sec = sec.id;
+    li.innerHTML = `<a href="#${sec.id}" style="--c:${getComputedStyle(sec).getPropertyValue('--c')}"><span class="n">${sec.dataset.toc}</span><span>${h2 ? h2.textContent : ''}</span></a>`;
+    ol.appendChild(li);
+    const subs = $$('h3[id]', sec);
+    if (subs.length && /^\d$/.test(sec.dataset.toc)) {
+      const so = document.createElement('ol'); so.className = 'sub';
+      subs.forEach(h => { const s = document.createElement('li'); s.dataset.sec = h.id; s.innerHTML = `<a href="#${h.id}">${txt(h)}</a>`; so.appendChild(s); });
+      li.appendChild(so);
+    }
+    const nav = sec.querySelector('.inchap');
+    if (nav) nav.innerHTML = subs.map(h => `<a href="#${h.id}" data-n="${h.dataset.n || ''}">${txt(h)}</a>`).join('');
+    subs.forEach(h => { if (h.dataset.n && !h.querySelector('.sn')) h.insertAdjacentHTML('afterbegin', `<span class="sn">${h.dataset.n}</span>`); });
+  });
+  spy();
+}
+$('#tocList').addEventListener('click', e => { if (e.target.closest('a')) $('#toc').classList.remove('open'); });
+$('#menuBtn').addEventListener('click', () => $('#toc').classList.toggle('open'));
+
+/* ---------- posición de lectura ---------- */
+function spy(){
+  const y = scrollY + 120; let cur = null;
+  $$('section.chap, h3[id]').forEach(el => { if (el.getBoundingClientRect().top + scrollY <= y) cur = el.id; });
+  $$('#tocList a').forEach(a => a.classList.toggle('act', a.getAttribute('href') === '#' + cur));
+  const h = document.documentElement.scrollHeight - innerHeight;
+  $('#leido').style.width = (h > 0 ? 100 * scrollY / h : 0) + '%';
+  $('.totop').classList.toggle('on', scrollY > 900);
+}
+addEventListener('scroll', spy, { passive: true });
+
+/* ---------- buscador ---------- */
+const norm = s => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+function buscar(){
+  const q = norm($('#q').value.trim()), hits = $('#hits');
+  const items = $$('#tocList > li[data-sec]');
+  if (q.length < 2) { items.forEach(li => { li.classList.remove('hide'); $$('.sub li', li).forEach(s => s.classList.remove('hide')); }); hits.textContent = ''; return; }
+  let n = 0;
+  items.forEach(li => {
+    const sec = document.getElementById(li.dataset.sec);
+    const vis = el => norm($$(`[lang="${LANG}"]`, el).map(x => x.textContent).join(' ') + ' ' + (el.dataset.toc || ''));
+    let any = false;
+    $$('.sub li', li).forEach(s => {
+      const h = document.getElementById(s.dataset.sec); let seg = '', el = h;
+      do { seg += ' ' + (el.matches && el.matches(`[lang="${LANG}"]`) ? el.textContent : $$(`[lang="${LANG}"]`, el).map(x => x.textContent).join(' ')); el = el.nextElementSibling; } while (el && el.tagName !== 'H3');
+      const ok = norm(seg).includes(q); s.classList.toggle('hide', !ok); if (ok) { any = true; n++; }
+    });
+    const self = vis(sec).includes(q); if (self && !any) n++;
+    li.classList.toggle('hide', !(self || any));
+  });
+  hits.textContent = n ? (LANG === 'es' ? `${n} coincidencia${n > 1 ? 's' : ''}` : `${n} match${n > 1 ? 'es' : ''}`) : (LANG === 'es' ? 'Sin coincidencias' : 'No matches');
+}
+$('#q').addEventListener('input', buscar);
+$('#q').addEventListener('keydown', e => { if (e.key === 'Enter') { const a = $('#tocList li:not(.hide) .sub li:not(.hide) a') || $('#tocList li:not(.hide) a'); if (a) a.click(); } });
+
+/* ---------- glosario ---------- */
+const GLOS = [
+  ['Ascitis', 'Ascites', 'Acumulación de líquido en el abdomen por exceso de trabajo del corazón; frecuente en la altura.', 'Fluid build-up in the abdomen from an overworked heart; common at altitude.'],
+  ['Bache', 'Batch', 'Lo que se mezcla en una tanda de la mezcladora; por ejemplo, 1,000 kg.', 'What is mixed in one load of the mixer; for example, 1,000 kg.'],
+  ['Balance electrolítico', 'Electrolyte balance', 'Sodio + potasio − cloro, en mEq/kg. Con calor conviene cerca de 250.', 'Sodium + potassium − chloride, in mEq/kg. In the heat, around 250 is advisable.'],
+  ['Conversión alimenticia', 'Feed conversion ratio (FCR)', 'Kilos de alimento por kilo de peso ganado. Entre más baja, mejor.', 'Kilos of feed per kilo of weight gained. The lower, the better.'],
+  ['Energía metabolizable (EM)', 'Metabolizable energy (ME)', 'La energía del alimento que el ave sí aprovecha, en kcal/kg.', 'The feed energy the bird can actually use, in kcal/kg.'],
+  ['Fase', 'Phase', 'Periodo de la vida del pollo con su propia dieta: iniciación, crecimiento, finalización.', 'Period of the bird’s life with its own diet: starter, grower, finisher.'],
+  ['Límite de inclusión', 'Inclusion limit', 'Mínimo y máximo % que puede llevar un ingrediente en la dieta.', 'Minimum and maximum % an ingredient may have in the diet.'],
+  ['Lisina digestible', 'Digestible lysine', 'El aminoácido de referencia: el primero que falta en dietas de maíz y soya.', 'The reference amino acid: the first one lacking in corn–soy diets.'],
+  ['Mínimo costo', 'Least cost', 'La fórmula más barata entre todas las que cumplen los requerimientos.', 'The cheapest formula among all those that meet the requirements.'],
+  ['msnm', 'm a.s.l.', 'Metros sobre el nivel del mar.', 'Metres above sea level.'],
+  ['Precio de entrada', 'Entry price', 'Precio al que un ingrediente que quedó fuera empezaría a convenir.', 'Price at which an ingredient left out would start to pay off.'],
+  ['Premezcla', 'Premix', 'Mezcla previa de ingredientes de menos de 0.5 % con un poco de maíz, para repartirlos bien.', 'A pre-blend of ingredients under 0.5 % with a little corn, so they spread evenly.'],
+  ['Proteína cruda (PC)', 'Crude protein (CP)', 'Contenido total de proteína del alimento, en %.', 'Total protein content of the feed, in %.'],
+  ['Puesto en granja', 'Delivered to farm', 'Precio que incluye el flete y la descarga hasta tu granja.', 'Price including freight and unloading to your farm.'],
+  ['Requerimiento', 'Requirement', 'Cantidad de un nutriente que el ave necesita por kilo de alimento.', 'Amount of a nutrient the bird needs per kilo of feed.'],
+  ['Xantofilas', 'Xanthophylls', 'Pigmentos amarillos (maíz, gluten, cempasúchil) que dan color a la piel.', 'Yellow pigments (corn, gluten, marigold) that colour the skin.']
+];
+$('#glos').innerHTML = GLOS.map(g => `<dt><span lang="es">${g[0]}<small>${g[1]}</small></span><span lang="en">${g[1]}<small>${g[0]}</small></span></dt><dd><span lang="es">${g[2]}</span><span lang="en">${g[3]}</span></dd>`).join('');
+
+/* ---------- al imprimir, carga todas las imágenes ---------- */
+addEventListener('beforeprint', () => $$('img[loading="lazy"]').forEach(i => i.loading = 'eager'));
+
+/* ---------- QR de la hoja rápida ---------- */
+addEventListener('load', () => { try { if (window.QRCode) new QRCode($('#qr'), { text: 'https://hectortecumshe-ai.github.io/RatioAvis/', width: 152, height: 152, colorDark: '#1d2420', colorLight: '#ffffff', correctLevel: QRCode.CorrectLevel.M }); else $('#qr').style.display = 'none'; } catch (_) { $('#qr').style.display = 'none'; } });
+
+setLang(LANG);
+/* al abrir con #ancla, ir ahí cuando las figuras ya ocupan su lugar */
+addEventListener('load', () => { const h = decodeURIComponent(location.hash.slice(1)); const el = h && document.getElementById(h); if (el) { document.documentElement.style.scrollBehavior = 'auto'; el.scrollIntoView(); document.documentElement.style.scrollBehavior = ''; } });
+</script>
+</body>
+</html>
