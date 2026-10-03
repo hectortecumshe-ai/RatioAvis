@@ -375,7 +375,7 @@ dl.glos dt small{display:block;font-weight:400;font-style:italic;color:var(--mut
         <div lang="en"><b>1st edition</b> · October 2026 · covers RatioAvis 1.1.0</div>
         <div>DOI <a href="https://doi.org/10.5281/zenodo.23090714">10.5281/zenodo.23090714</a> · <span lang="es">Licencia MIT</span><span lang="en">MIT License</span></div>
       </div>
-      <div class="who">Héctor Tecumshé Mojica-Zárate · Luis Ángel Barrera-Guzmán<br><span lang="es">Guía complementaria del Instructivo del Productor.</span><span lang="en">Companion to the Producer Guide.</span></div>
+      <div class="who">Héctor Tecumshé Mojica-Zárate · Luis Ángel Barrera-Guzmán · Guadalupe Velázquez-Vázquez<br><span lang="es">Guía complementaria del Instructivo del Productor.</span><span lang="en">Companion to the Producer Guide.</span></div>
     </div>
     <div class="art">
       <div id="coverArt"></div>
@@ -432,11 +432,11 @@ dl.glos dt small{display:block;font-weight:400;font-style:italic;color:var(--mut
 
   <h3 id="citar"><span lang="es">Cómo citar</span><span lang="en">How to cite</span></h3>
   <div class="box ref"><span class="bi">“</span><span class="bt" lang="es">Programa</span><span class="bt" lang="en">Software</span>
-    <p lang="es">Mojica-Zárate, H. T., y Barrera-Guzmán, L. A. (2026). <i>RatioAvis: Guided least-cost diet formulation for broiler chickens</i> (Versión 1.1.0) [Software]. Zenodo. https://doi.org/10.5281/zenodo.23090714</p>
-    <p lang="en">Mojica-Zárate, H. T., & Barrera-Guzmán, L. A. (2026). <i>RatioAvis: Guided least-cost diet formulation for broiler chickens</i> (Version 1.1.0) [Software]. Zenodo. https://doi.org/10.5281/zenodo.23090714</p></div>
+    <p lang="es">Mojica-Zárate, H. T., Barrera-Guzmán, L. A., y Velázquez-Vázquez, G. (2026). <i>RatioAvis: Guided least-cost diet formulation for broiler chickens</i> (Versión 1.1.0) [Software]. Zenodo. https://doi.org/10.5281/zenodo.23090714</p>
+    <p lang="en">Mojica-Zárate, H. T., Barrera-Guzmán, L. A., & Velázquez-Vázquez, G. (2026). <i>RatioAvis: Guided least-cost diet formulation for broiler chickens</i> (Version 1.1.0) [Software]. Zenodo. https://doi.org/10.5281/zenodo.23090714</p></div>
   <div class="box ref"><span class="bi">“</span><span class="bt" lang="es">Este instructivo</span><span class="bt" lang="en">This guide</span>
-    <p lang="es">Mojica-Zárate, H. T., y Barrera-Guzmán, L. A. (2026). <i>RatioAvis. Instructivo del Científico</i> (1.ª ed.). Distribuido con RatioAvis 1.1.0. https://hectortecumshe-ai.github.io/RatioAvis/instructivo-cientifico.html</p>
-    <p lang="en">Mojica-Zárate, H. T., & Barrera-Guzmán, L. A. (2026). <i>RatioAvis. Scientist Guide</i> (1st ed.). Distributed with RatioAvis 1.1.0. https://hectortecumshe-ai.github.io/RatioAvis/instructivo-cientifico.html</p></div>
+    <p lang="es">Mojica-Zárate, H. T., Barrera-Guzmán, L. A., y Velázquez-Vázquez, G. (2026). <i>RatioAvis. Instructivo del Científico</i> (1.ª ed.). Distribuido con RatioAvis 1.1.0. https://hectortecumshe-ai.github.io/RatioAvis/instructivo-cientifico.html</p>
+    <p lang="en">Mojica-Zárate, H. T., Barrera-Guzmán, L. A., & Velázquez-Vázquez, G. (2026). <i>RatioAvis. Scientist Guide</i> (1st ed.). Distributed with RatioAvis 1.1.0. https://hectortecumshe-ai.github.io/RatioAvis/instructivo-cientifico.html</p></div>
   <p lang="es">En la sección <a href="#metodos">R.3</a> hay un párrafo listo para la sección de <i>Materiales y métodos</i> de un artículo.</p>
   <p lang="en">Section <a href="#metodos">R.3</a> provides a ready-made paragraph for a paper’s <i>Materials and methods</i>.</p>
 </section>
@@ -863,9 +863,9 @@ r = linprog(c, A_ub=A_ub, b_ub=b_ub, A_eq=[np.ones(len(ings))], b_eq=[100],
   <p lang="es">Un párrafo base para describir el uso de RatioAvis en un artículo. Ajuste los datos entre corchetes:</p>
   <p lang="en">A base paragraph to describe the use of RatioAvis in a paper. Adjust the bracketed data:</p>
   <div class="methods" id="metES" lang="es"><button class="copy" data-copy="metES">Copiar</button>
-    <p>Las dietas experimentales se formularon al mínimo costo mediante programación lineal con RatioAvis versión 1.1.0 (Mojica-Zárate y Barrera-Guzmán, 2026), que resuelve el modelo con el método símplex en dos fases y la regla de Bland y verifica la optimalidad de cada solución por dualidad fuerte (brecha primal–dual relativa &lt; 10⁻⁷). Los requerimientos nutricionales correspondieron a [Aviagen (2022), Ross 308, fase de iniciación de 0 a 10 d, aves mixtas], expresando los aminoácidos en base digestible estandarizada. La composición de los ingredientes se tomó de Rostagno et al. (2017) y FEDNA (2019) [o: de análisis de laboratorio de los lotes utilizados], y se impusieron límites de inclusión de [describir]. El modelo y la solución completos se exportaron en formato JSON y se incluyen como material suplementario.</p></div>
+    <p>Las dietas experimentales se formularon al mínimo costo mediante programación lineal con RatioAvis versión 1.1.0 (Mojica-Zárate et al., 2026), que resuelve el modelo con el método símplex en dos fases y la regla de Bland y verifica la optimalidad de cada solución por dualidad fuerte (brecha primal–dual relativa &lt; 10⁻⁷). Los requerimientos nutricionales correspondieron a [Aviagen (2022), Ross 308, fase de iniciación de 0 a 10 d, aves mixtas], expresando los aminoácidos en base digestible estandarizada. La composición de los ingredientes se tomó de Rostagno et al. (2017) y FEDNA (2019) [o: de análisis de laboratorio de los lotes utilizados], y se impusieron límites de inclusión de [describir]. El modelo y la solución completos se exportaron en formato JSON y se incluyen como material suplementario.</p></div>
   <div class="methods" id="metEN" lang="en"><button class="copy" data-copy="metEN">Copy</button>
-    <p>Experimental diets were formulated at least cost by linear programming with RatioAvis version 1.1.0 (Mojica-Zárate &amp; Barrera-Guzmán, 2026), which solves the model with the two-phase simplex method under Bland’s rule and verifies the optimality of every solution by strong duality (relative primal–dual gap &lt; 10⁻⁷). Nutrient requirements followed [Aviagen (2022), Ross 308, starter phase from 0 to 10 d, as-hatched birds], with amino acids on a standardized digestible basis. Ingredient composition was taken from Rostagno et al. (2017) and FEDNA (2019) [or: from laboratory analyses of the batches used], and inclusion limits of [describe] were imposed. The full model and solution were exported in JSON format and are provided as supplementary material.</p></div>
+    <p>Experimental diets were formulated at least cost by linear programming with RatioAvis version 1.1.0 (Mojica-Zárate et al., 2026), which solves the model with the two-phase simplex method under Bland’s rule and verifies the optimality of every solution by strong duality (relative primal–dual gap &lt; 10⁻⁷). Nutrient requirements followed [Aviagen (2022), Ross 308, starter phase from 0 to 10 d, as-hatched birds], with amino acids on a standardized digestible basis. Ingredient composition was taken from Rostagno et al. (2017) and FEDNA (2019) [or: from laboratory analyses of the batches used], and inclusion limits of [describe] were imposed. The full model and solution were exported in JSON format and are provided as supplementary material.</p></div>
 
   <h3 id="ficha" data-n="R.4"><span lang="es">Ficha técnica del motor</span><span lang="en">Solver technical sheet</span></h3>
   <div class="spec">
@@ -943,8 +943,8 @@ r = linprog(c, A_ub=A_ub, b_ub=b_ub, A_eq=[np.ones(len(ings))], b_eq=[100],
 <div class="colophon">
   <p lang="es"><b>RatioAvis · Instructivo del Científico</b>, 1.ª edición, octubre de 2026. Describe RatioAvis 1.1.0. Las capturas son de la app real; los gráficos son originales y se generan con los resultados numéricos de la app para el caso descrito. Los precios son ilustrativos.</p>
   <p lang="en"><b>RatioAvis · Scientist Guide</b>, 1st edition, October 2026. Covers RatioAvis 1.1.0. Screenshots come from the real app; charts are original and generated from the app’s numerical results for the case described. Prices are illustrative.</p>
-  <p lang="es">© 2026 Héctor Tecumshé Mojica-Zárate y Luis Ángel Barrera-Guzmán. El programa se distribuye con licencia MIT.</p>
-  <p lang="en">© 2026 Héctor Tecumshé Mojica-Zárate and Luis Ángel Barrera-Guzmán. The software is distributed under the MIT License.</p>
+  <p lang="es">© 2026 Héctor Tecumshé Mojica-Zárate, Luis Ángel Barrera-Guzmán y Guadalupe Velázquez-Vázquez. El programa se distribuye con licencia MIT.</p>
+  <p lang="en">© 2026 Héctor Tecumshé Mojica-Zárate, Luis Ángel Barrera-Guzmán and Guadalupe Velázquez-Vázquez. The software is distributed under the MIT License.</p>
 </div>
 
 </div>
