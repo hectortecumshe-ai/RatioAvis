@@ -823,8 +823,8 @@ dl.glos dt small{display:block;font-weight:400;font-style:italic;color:var(--mut
     </tbody></table></div>
 
   <h3 id="scipy" data-n="R.2"><span lang="es">Verificación independiente con SciPy</span><span lang="en">Independent verification with SciPy</span></h3>
-  <p lang="es">Este script lee el JSON, reconstruye el modelo (1) y lo resuelve con HiGHS. El costo por tonelada debe coincidir con el de la app hasta el redondeo.</p>
-  <p lang="en">This script reads the JSON, rebuilds model (1) and solves it with HiGHS. The cost per tonne should match the app up to rounding.</p>
+  <p lang="es">Este script lee el JSON, reconstruye el modelo (1) y lo resuelve con HiGHS. Con el modelo del caso, exportado de la app, imprime <b>$8,805.03 por tonelada</b> y la misma fórmula, ingrediente por ingrediente (probado con Python 3.12, NumPy 2.5 y SciPy 1.18).</p>
+  <p lang="en">This script reads the JSON, rebuilds model (1) and solves it with HiGHS. With the case model exported from the app it prints <b>$8,805.03 per tonne</b> and the same formula, ingredient by ingredient (tested with Python 3.12, NumPy 2.5 and SciPy 1.18).</p>
   <div class="code"><div class="bar"><span>verificar_ratioavis.py · Python ≥ 3.9 · SciPy ≥ 1.9</span><button class="copy" data-copy="py" lang="es">Copiar</button><button class="copy" data-copy="py" lang="en">Copy</button></div>
 <pre id="py"><span class="k">import</span> json
 <span class="k">import</span> numpy <span class="k">as</span> np
@@ -856,8 +856,8 @@ r = linprog(c, A_ub=A_ub, b_ub=b_ub, A_eq=[np.ones(len(ings))], b_eq=[100],
     <span class="k">if</span> x &gt; 1e-7:
         <span class="f">print</span>(f<span class="s">"{i['nombre']:&lt;34}{x:9.3f} %"</span>)</pre></div>
   <div class="box tip"><span class="bi">✓</span><span class="bt" lang="es">Para ir más lejos</span><span class="bt" lang="en">Going further</span>
-    <p lang="es">HiGHS devuelve los duales en <code>r.ineqlin.marginals</code> y <code>r.eqlin.marginals</code>. Multiplicados por 10, y con el signo cambiado en las filas de mínimo (que el script escribe como ≤ con signo negativo), deben coincidir con los precios sombra por unidad de lado derecho que reporta la app.</p>
-    <p lang="en">HiGHS returns duals in <code>r.ineqlin.marginals</code> and <code>r.eqlin.marginals</code>. Multiplied by 10, and with the sign flipped for minimum rows (which the script writes as ≤ with a negative sign), they should match the app’s shadow prices per unit of right-hand side.</p></div>
+    <p lang="es">HiGHS devuelve los duales en <code>r.ineqlin.marginals</code>. Multiplicados por 1000, y con el signo cambiado en las filas de mínimo (que el script escribe como ≤ con signo negativo), coinciden con la columna <b>∂Z/∂b · $/t</b> de la app. En el caso se verificó con SciPy 1.18: los diez precios sombra de nutrientes coinciden hasta el tercer decimal.</p>
+    <p lang="en">HiGHS returns duals in <code>r.ineqlin.marginals</code>. Multiplied by 1000, and with the sign flipped for minimum rows (which the script writes as ≤ with a negative sign), they match the app’s <b>∂Z/∂b · $/t</b> column. This was verified for the case with SciPy 1.18: all ten nutrient shadow prices match to the third decimal.</p></div>
 
   <h3 id="metodos" data-n="R.3"><span lang="es">Texto para <i>Materiales y métodos</i></span><span lang="en">Text for <i>Materials and methods</i></span></h3>
   <p lang="es">Un párrafo base para describir el uso de RatioAvis en un artículo. Ajuste los datos entre corchetes:</p>
