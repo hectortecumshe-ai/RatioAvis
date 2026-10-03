@@ -42,7 +42,7 @@ RatioAvis formulates **least-cost broiler diets** by linear programming (two-pha
 
 ## Cómo citar · How to cite
 
-Mojica-Zárate, H. T., Barrera-Guzmán, L. A., & Velázquez-Vázquez, G. (2026). *RatioAvis: Guided least-cost diet formulation for broiler chickens* (Version 1.1.0) [Software]. https://doi.org/10.5281/zenodo.23090714
+Mojica-Zárate, H. T., Barrera-Guzmán, L. A., & Velázquez-Vázquez, G. (2026). *RatioAvis: Guided least-cost diet formulation for broiler chickens* (Version 1.1.1) [Software]. https://doi.org/10.5281/zenodo.23090714
 
 ## Autores · Authors
 
