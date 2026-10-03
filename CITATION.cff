@@ -2,7 +2,7 @@ cff-version: 1.2.0
 message: "If you use this software, please cite it as below. / Si usas este software, cítalo como se indica."
 title: "RatioAvis: Guided least-cost diet formulation for broiler chickens"
 version: 1.1.1
-doi: "10.5281/zenodo.23090714"
+doi: "10.5281/zenodo.23123050"
 date-released: 2026-10-03
 type: software
 license: MIT
