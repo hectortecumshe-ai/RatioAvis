@@ -272,8 +272,8 @@ dl.glos dt small{display:block;font-weight:400;font-style:italic;color:var(--mut
 .quick .qh{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;border-bottom:2px solid var(--text);padding-bottom:14px;margin-bottom:18px}
 .quick h2{margin:0;font-size:32px}
 .quick .qr{display:flex;gap:12px;align-items:center;font-family:var(--sans);font-size:12px;color:var(--muted);text-align:right}
-.quick .qr #qr{width:86px;height:86px;background:#fff;padding:5px;border-radius:6px}
-.quick .qr #qr img,.quick .qr #qr canvas{width:76px!important;height:76px!important}
+.quick .qr #qr{width:92px;height:92px;border-radius:6px;overflow:hidden;flex:none}
+.quick .qr #qr img{width:100%;height:100%;display:block;image-rendering:pixelated}
 .quick ol{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:1fr 1fr;gap:0 30px}
 .quick ol li{display:grid;grid-template-columns:40px 1fr;gap:12px;padding:12px 0;border-bottom:1px solid var(--line);margin:0;break-inside:avoid}
 .quick ol li i{font-style:normal;display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--c);color:#fff;font:700 15px/1 var(--sans)}
@@ -433,7 +433,7 @@ mark{background:color-mix(in srgb,var(--acc) 30%,transparent);color:inherit;bord
         <div lang="en"><b>1st edition</b> · October 2026 · covers RatioAvis 1.1.0</div>
         <div>DOI <a href="https://doi.org/10.5281/zenodo.23090714">10.5281/zenodo.23090714</a> · <span lang="es">Licencia MIT</span><span lang="en">MIT License</span></div>
       </div>
-      <div class="who">Héctor Tecumshé Mojica-Zárate · Luis Ángel Barrera-Guzmán<br><span lang="es">Hay otra guía para investigación y docencia: el Instructivo del Científico.</span><span lang="en">There is a companion guide for research and teaching: the Scientist Guide.</span></div>
+      <div class="who">Héctor Tecumshé Mojica-Zárate · Luis Ángel Barrera-Guzmán<br><span lang="es">Hay otra guía para investigación y docencia: el <a href="instructivo-cientifico.html">Instructivo del Científico</a>.</span><span lang="en">There is a companion guide for research and teaching: the <a href="instructivo-cientifico.html">Scientist Guide</a>.</span></div>
     </div>
     <div class="art" aria-hidden="true">
       <div class="frame"><img lang="es" src="instructivo/img/resultado-es.jpg" alt=""><img lang="en" src="instructivo/img/resultado-en.jpg" alt=""></div>
@@ -1065,7 +1065,7 @@ mark{background:color-mix(in srgb,var(--acc) 30%,transparent);color:inherit;bord
     <div class="qh">
       <div><div class="eyebrow" lang="es">Para imprimir y pegar junto a la mezcladora</div><div class="eyebrow" lang="en">Print it and pin it by the mixer</div>
         <h2 lang="es">RatioAvis en una página</h2><h2 lang="en">RatioAvis on one page</h2></div>
-      <div class="qr"><div><b>hectortecumshe-ai.github.io/RatioAvis</b><br><span lang="es">Escanea para abrir la app</span><span lang="en">Scan to open the app</span></div><div id="qr"></div></div>
+      <div class="qr"><div><b>hectortecumshe-ai.github.io/RatioAvis</b><br><span lang="es">Escanea para abrir la app</span><span lang="en">Scan to open the app</span></div><div id="qr"><img src="instructivo/qr-app.svg" alt="QR: hectortecumshe-ai.github.io/RatioAvis"></div></div>
     </div>
     <ol>
       <li style="--c:var(--b1)"><i>1</i><div><b lang="es">Genética</b><b lang="en">Genetics</b><span lang="es">Toca tu línea (Ross 308, Cobb 500…) y el sexo. Mixto si no están sexados.</span><span lang="en">Tap your line (Ross 308, Cobb 500…) and sex. As-hatched if unsexed.</span></div></li>
@@ -1101,7 +1101,6 @@ mark{background:color-mix(in srgb,var(--acc) 30%,transparent);color:inherit;bord
 <div id="zoom" role="dialog" aria-label="Imagen ampliada / Enlarged image"><div class="zi"></div></div>
 
 <script src="instructivo/capturas.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" defer></script>
 <script>
 "use strict";
 const $ = (s, el = document) => el.querySelector(s), $$ = (s, el = document) => [...el.querySelectorAll(s)];
@@ -1262,8 +1261,6 @@ $('#glos').innerHTML = GLOS.map(g => `<dt><span lang="es">${g[0]}<small>${g[1]}<
 /* ---------- al imprimir, carga todas las imágenes ---------- */
 addEventListener('beforeprint', () => $$('img[loading="lazy"]').forEach(i => i.loading = 'eager'));
 
-/* ---------- QR de la hoja rápida ---------- */
-addEventListener('load', () => { try { if (window.QRCode) new QRCode($('#qr'), { text: 'https://hectortecumshe-ai.github.io/RatioAvis/', width: 152, height: 152, colorDark: '#1d2420', colorLight: '#ffffff', correctLevel: QRCode.CorrectLevel.M }); else $('#qr').style.display = 'none'; } catch (_) { $('#qr').style.display = 'none'; } });
 
 setLang(LANG);
 /* al abrir con #ancla, ir ahí cuando las figuras ya ocupan su lugar */
