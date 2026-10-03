@@ -1,0 +1,1351 @@
+<!doctype html>
+<html lang="es" data-lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RatioAvis · Instructivo del Científico</title>
+<meta name="description" content="Instructivo del Científico de RatioAvis: modelo de programación lineal, dualidad, precios sombra, validación y reproducibilidad. · RatioAvis Scientist Guide: linear-programming model, duality, shadow prices, validation and reproducibility.">
+<link rel="icon" href="logo.svg" type="image/svg+xml">
+<style>
+/* =====================================================================
+   RatioAvis · Instructivo del Científico
+   Tipografía: Palatino Linotype (texto), Segoe UI (rótulos pequeños),
+   Consolas (código) y MathML con Cambria Math para las ecuaciones.
+   ===================================================================== */
+:root{
+  color-scheme: light;
+  --bg:#f5f4ee; --paper:#fffefa; --soft:#efede4; --text:#1b221e; --muted:#58625c; --faint:#8a918a;
+  --line:#dfdcd1; --line2:#c6c2b3;
+  --pri:#2f5d50; --pri-d:#1f4037; --pri-s:rgba(47,93,80,.09);
+  --acc:#c0772b; --acc-d:#8a5214; --acc-s:rgba(192,119,43,.12);
+  --ink:#24425e; --ink-s:rgba(36,66,94,.09);
+  --ok:#2f8f4a; --ok-s:#e9f5ec; --warn:#b5730c; --warn-s:#fcf3e2; --bad:#b8382e; --bad-s:#fbeae8; --info:#2d78b0; --info-s:#e8f1f8;
+  --b1:#2f5d50; --b2:#5c8538; --b3:#2f6f8f; --b4:#b0841f; --b5:#c0772b; --b6:#a0502e; --b7:#755a8c; --b8:#4a5d6b;
+  --serif:"Palatino Linotype",Palatino,"Book Antiqua","URW Palladio L",P052,"TeX Gyre Pagella",Georgia,serif;
+  --sans:"Segoe UI",system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
+  --mono:Consolas,ui-monospace,"SF Mono",Menlo,monospace;
+  --math:"STIX Two Math","Cambria Math","Latin Modern Math","Libertinus Math",serif;
+  --shadow:0 1px 2px rgba(30,36,24,.06),0 10px 30px rgba(30,36,24,.08);
+  --shadow-lg:0 2px 6px rgba(30,36,24,.08),0 24px 60px rgba(30,36,24,.14);
+  --r:14px; --side:296px; --col:800px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme: dark;
+    --bg:#111513; --paper:#181d1a; --soft:#1f2521; --text:#e6eae4; --muted:#a7b0a9; --faint:#7b847d;
+    --line:#2b332e; --line2:#3a443e;
+    --pri:#8fc2ad; --pri-d:#b5dccb; --pri-s:rgba(143,194,173,.12);
+    --acc:#e2a15c; --acc-d:#f0c08a; --acc-s:rgba(226,161,92,.14);
+    --ink:#9cc1e3; --ink-s:rgba(156,193,227,.12);
+    --ok:#6cc488; --ok-s:rgba(108,196,136,.12); --warn:#e7b052; --warn-s:rgba(231,176,82,.12); --bad:#ee8a7f; --bad-s:rgba(238,138,127,.12); --info:#78b8e4; --info-s:rgba(120,184,228,.12);
+    --b1:#8fc2ad; --b2:#a9cf7e; --b3:#7fbddb; --b4:#e3c063; --b5:#e2a15c; --b6:#e39272; --b7:#bba3d6; --b8:#9fb4c2;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 30px rgba(0,0,0,.35); --shadow-lg:0 2px 6px rgba(0,0,0,.45),0 24px 60px rgba(0,0,0,.5);
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme: dark;
+  --bg:#111513; --paper:#181d1a; --soft:#1f2521; --text:#e6eae4; --muted:#a7b0a9; --faint:#7b847d;
+  --line:#2b332e; --line2:#3a443e;
+  --pri:#8fc2ad; --pri-d:#b5dccb; --pri-s:rgba(143,194,173,.12);
+  --acc:#e2a15c; --acc-d:#f0c08a; --acc-s:rgba(226,161,92,.14);
+  --ink:#9cc1e3; --ink-s:rgba(156,193,227,.12);
+  --ok:#6cc488; --ok-s:rgba(108,196,136,.12); --warn:#e7b052; --warn-s:rgba(231,176,82,.12); --bad:#ee8a7f; --bad-s:rgba(238,138,127,.12); --info:#78b8e4; --info-s:rgba(120,184,228,.12);
+  --b1:#8fc2ad; --b2:#a9cf7e; --b3:#7fbddb; --b4:#e3c063; --b5:#e2a15c; --b6:#e39272; --b7:#bba3d6; --b8:#9fb4c2;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 30px rgba(0,0,0,.35); --shadow-lg:0 2px 6px rgba(0,0,0,.45),0 24px 60px rgba(0,0,0,.5);
+}
+
+html[data-lang="es"] [lang="en"]:not(html), html[data-lang="en"] [lang="es"]:not(html){display:none!important}
+
+*{box-sizing:border-box}
+html,body{overflow-x:clip}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--serif);font-size:18.5px;line-height:1.66;font-optical-sizing:auto;
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;font-variant-numeric:lining-nums proportional-nums;hyphens:auto;-webkit-hyphens:auto;font-kerning:normal}
+img{max-width:100%;display:block}
+a{color:var(--pri);text-decoration-thickness:1px;text-underline-offset:3px}
+b,strong{font-weight:700}
+h1,h2,h3,h4{font-weight:700;line-height:1.16;color:var(--text);hyphens:none}
+table,.kpi b,figcaption .fn,.tnum{font-variant-numeric:lining-nums tabular-nums}
+.eyebrow{font-family:var(--sans);font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--acc)}
+math{font-family:var(--math);font-size:1.06em}
+code,pre{font-family:var(--mono)}
+code{font-size:.82em;background:var(--soft);padding:1px 6px;border-radius:5px}
+
+/* ---------- barra superior ---------- */
+.top{position:sticky;top:0;z-index:50;display:flex;align-items:center;gap:12px;padding:10px 22px;
+  background:color-mix(in srgb,var(--bg) 86%,transparent);backdrop-filter:saturate(1.4) blur(12px);-webkit-backdrop-filter:saturate(1.4) blur(12px);border-bottom:1px solid var(--line)}
+.top .brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--text);min-width:0}
+.top .brand img{width:34px;height:34px;border-radius:9px;flex:none}
+.top .brand span{font-size:17px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.top .brand i{color:var(--acc)}
+.top .brand small{color:var(--muted);font-style:italic;font-size:14.5px}
+.top .sp{flex:1}
+.seg{display:inline-flex;border:1px solid var(--line2);border-radius:999px;padding:3px;background:var(--paper)}
+.seg button{border:0;background:none;font:700 12.5px/1 var(--sans);letter-spacing:.06em;color:var(--muted);padding:7px 12px;border-radius:999px;cursor:pointer}
+.seg button.on{background:var(--pri);color:var(--paper)}
+.ib{display:inline-grid;place-items:center;width:38px;height:38px;border-radius:50%;border:1px solid var(--line2);background:var(--paper);color:var(--text);cursor:pointer;font-size:16px;text-decoration:none}
+.btn{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--pri);background:var(--pri);color:var(--paper);font:700 13.5px/1 var(--sans);letter-spacing:.02em;padding:10px 16px;border-radius:999px;cursor:pointer;text-decoration:none}
+.btn.ghost{background:var(--paper);color:var(--pri);border-color:var(--line2)}
+.btn.sm{padding:7px 12px;font-size:12.5px}
+.btn svg{width:16px;height:16px}
+#leido{position:absolute;left:0;bottom:-1px;height:2px;width:0;background:linear-gradient(90deg,var(--pri),var(--acc))}
+#menuBtn{display:none}
+
+/* ---------- maqueta ---------- */
+.layout{display:grid;grid-template-columns:var(--side) minmax(0,1fr);max-width:1340px;margin:0 auto}
+aside.toc{position:sticky;top:59px;align-self:start;height:calc(100vh - 59px);overflow:auto;padding:26px 18px 40px 22px;border-right:1px solid var(--line);font-family:var(--sans);font-size:14px}
+.search{position:relative;margin-bottom:18px}
+.search input{width:100%;padding:10px 12px 10px 36px;border:1px solid var(--line2);border-radius:10px;background:var(--paper);color:var(--text);font:14.5px var(--sans)}
+.search svg{position:absolute;left:11px;top:20px;width:16px;height:16px;transform:translateY(-50%);color:var(--faint)}
+.search .hits{font-size:12.5px;color:var(--muted);margin:6px 2px 0;min-height:1em}
+.toc ol{list-style:none;margin:0;padding:0}
+.toc li{margin:1px 0}
+.toc a{display:flex;gap:10px;align-items:baseline;padding:6px 10px;border-radius:8px;color:var(--muted);text-decoration:none;line-height:1.35}
+.toc a:hover{background:var(--soft);color:var(--text)}
+.toc a.act{background:var(--pri-s);color:var(--text);font-weight:600}
+.toc .n{flex:none;display:inline-grid;place-items:center;min-width:22px;height:22px;padding:0 4px;border-radius:11px;font-size:11.5px;font-weight:700;color:#fff;background:var(--c,var(--faint))}
+:root[data-theme="dark"] .toc .n{color:#111}
+.toc .sub a{padding-left:44px;font-size:13px}
+.toc .grp{margin:18px 10px 6px;font-size:10.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
+.toc li.hide{display:none}
+main{min-width:0;padding:0 40px 120px}
+.doc{max-width:var(--col);margin:0 auto}
+
+/* ---------- portada ---------- */
+.cover{position:relative;margin:34px auto 30px;max-width:1060px;border-radius:24px;overflow:hidden;background:var(--paper);box-shadow:var(--shadow-lg);border:1px solid var(--line)}
+.cover .band{display:flex;height:8px}.cover .band i{flex:1}
+.cover .in{display:grid;grid-template-columns:1fr 1fr;gap:34px;padding:52px 56px 40px;align-items:center}
+.cover .kick{display:flex;align-items:center;gap:12px;margin-bottom:22px}
+.cover .kick img{width:52px;height:52px;border-radius:13px}
+.cover h1{font-size:clamp(36px,4.4vw,54px);margin:0 0 6px;letter-spacing:-.018em;line-height:1.04;font-weight:600;font-variation-settings:"opsz" 60}
+.cover h1 em{font-style:italic;color:var(--pri);font-weight:500}
+.cover h1 .a{color:var(--acc)}
+.cover .sub{font-size:20px;color:var(--muted);margin:16px 0 22px;line-height:1.45;font-variation-settings:"opsz" 24}
+.cover .meta{font-family:var(--sans);font-size:13.5px;color:var(--muted);line-height:1.7}
+.cover .meta b{color:var(--text)}
+.cover .who{margin-top:24px;padding-top:18px;border-top:1px solid var(--line);font-size:16px}
+.cover .who span{color:var(--muted);font-style:italic}
+.cover .art{position:relative}
+.cover .art .eqc{position:absolute;left:4%;bottom:-6px;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:10px 16px;box-shadow:var(--shadow);font-size:17px}
+.cover .pillars{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);font-family:var(--sans)}
+.cover .pillars div{padding:16px 18px 18px;border-right:1px solid var(--line);font-size:13px;color:var(--muted);line-height:1.35}
+.cover .pillars div:last-child{border-right:0}
+.cover .pillars b{display:block;font:600 19px/1.2 var(--serif);color:var(--text);margin-bottom:4px}
+.cover .pillars i{font-style:normal;color:var(--acc);font-weight:700;letter-spacing:.1em;font-size:11px;text-transform:uppercase;display:block;margin-bottom:6px}
+
+/* ---------- capítulos ---------- */
+.chap{position:relative;margin-top:84px;padding-top:4px}
+.chap-head{position:relative;display:grid;grid-template-columns:auto 1fr;gap:4px 26px;align-items:end;padding:34px 0 26px;margin-bottom:26px;border-bottom:1px solid var(--line)}
+.chap-head .big{grid-row:span 3;font-size:116px;line-height:.8;font-weight:300;color:var(--c);letter-spacing:-.04em;font-variation-settings:"opsz" 60}
+.chap-head .eyebrow{color:var(--c)}
+.chap-head h2{font-size:clamp(30px,3.5vw,42px);margin:4px 0 0;letter-spacing:-.012em;padding-right:76px;font-variation-settings:"opsz" 48}
+.chap-head p{grid-column:2;margin:10px 0 0;color:var(--muted);font-size:19.5px;line-height:1.5;max-width:58ch}
+.chap-head .rule{position:absolute;left:0;bottom:-1px;width:120px;height:3px;background:var(--c)}
+.chap-head .ico{position:absolute;right:0;top:20px;width:62px;height:62px;color:var(--c);opacity:.9}
+.inchap{display:flex;flex-wrap:wrap;gap:6px 18px;margin:-6px 0 28px;font-family:var(--sans);font-size:13.5px}
+.inchap a{color:var(--muted);text-decoration:none}
+.inchap a::before{content:attr(data-n)" ";color:var(--c);font-weight:700}
+.inchap a:hover{color:var(--text)}
+h3{font-size:25px;margin:48px 0 12px;letter-spacing:-.006em;scroll-margin-top:84px;font-variation-settings:"opsz" 32}
+h3 .sn{font-family:var(--sans);font-size:14px;font-weight:700;color:var(--c,var(--acc));margin-right:12px;vertical-align:3px;letter-spacing:.04em}
+h4{font-size:19.5px;margin:30px 0 8px;font-variation-settings:"opsz" 24}
+p{margin:0 0 16px}
+.lead{font-size:21px;line-height:1.58;font-variation-settings:"opsz" 28}
+.lead::first-letter{float:left;font-size:3.4em;line-height:.88;padding:6px 10px 0 0;color:var(--c,var(--pri));font-weight:500}
+ul,ol{padding-left:24px;margin:0 0 18px}
+li{margin:5px 0}
+li::marker{color:var(--c,var(--acc))}
+.ui{font-family:var(--sans);font-size:.8em;font-weight:700;white-space:nowrap;padding:3px 9px;border-radius:7px;border:1px solid var(--line2);border-bottom-width:2px;background:var(--paper);color:var(--text);vertical-align:1px}
+.ui.pri{background:var(--pri);border-color:var(--pri-d);color:var(--paper)}
+.path{font-family:var(--sans);font-size:.82em;font-weight:600;color:var(--pri);white-space:nowrap}
+.path i{font-style:normal;color:var(--faint);margin:0 5px}
+.sc{font-variant:all-small-caps;letter-spacing:.05em}
+
+/* ---------- ecuaciones ---------- */
+.eq{position:relative;display:flex;align-items:center;justify-content:center;gap:20px;margin:22px 0 24px;padding:20px 64px 20px 24px;background:var(--paper);border:1px solid var(--line);border-left:3px solid var(--c,var(--ink));border-radius:12px;overflow-x:auto}
+.eq math{font-size:1.18em}
+.eq mtd{text-align:left;padding:2px 0}
+.eq mtr > mtd:first-child:not(:only-child){text-align:right;padding-right:.9em}
+.eq .no{position:absolute;right:18px;top:50%;transform:translateY(-50%);font:600 14px var(--sans);color:var(--faint)}
+.eq.left{justify-content:flex-start}
+.where{font-size:16.5px;color:var(--muted);margin:-8px 0 22px}
+.where math{font-size:1em}
+
+/* ---------- recuadros ---------- */
+.box{position:relative;margin:24px 0;padding:18px 22px 16px 62px;border-radius:var(--r);background:var(--paper);border:1px solid var(--line)}
+.box::before{content:"";position:absolute;left:0;top:14px;bottom:14px;width:3px;border-radius:0 3px 3px 0;background:var(--k)}
+.box .bi{position:absolute;left:18px;top:18px;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:var(--ks);color:var(--k);font:700 14px/1 var(--sans)}
+.box .bt{display:block;font:700 12px/1.2 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--k);margin:6px 0 8px}
+.box p:last-child,.box ul:last-child,.box ol:last-child,.box table:last-child{margin-bottom:0}
+.box.def{--k:var(--ink);--ks:var(--ink-s)}
+.box.thm{--k:var(--pri);--ks:var(--pri-s);background:linear-gradient(135deg,color-mix(in srgb,var(--pri-s) 80%,var(--paper)),var(--paper) 55%)}
+.box.warn{--k:var(--warn);--ks:var(--warn-s);background:color-mix(in srgb,var(--warn-s) 55%,var(--paper))}
+.box.case{--k:var(--acc);--ks:var(--acc-s);background:linear-gradient(135deg,color-mix(in srgb,var(--acc-s) 70%,var(--paper)),var(--paper) 60%)}
+.box.tip{--k:var(--ok);--ks:var(--ok-s)}
+.box.ref{--k:var(--faint);--ks:var(--soft);font-size:16.5px}
+
+/* ---------- tablas ---------- */
+table{width:100%;border-collapse:collapse;margin:14px 0 22px;font-size:16px}
+th{font:700 11.5px/1.3 var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:2px solid var(--line2)}
+td{padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+td.r,th.r{text-align:right}
+td.c,th.c{text-align:center}
+tr.hl td{background:var(--acc-s)}
+tr.sum td{font-weight:650;border-top:2px solid var(--line2)}
+.tbl{overflow-x:auto;margin:0 -4px}
+caption{caption-side:top;text-align:left;font:600 13px var(--sans);color:var(--muted);padding:0 0 6px}
+.badge{display:inline-block;font:700 12px/1 var(--sans);padding:5px 10px;border-radius:999px;white-space:nowrap}
+.badge.ok{background:var(--ok-s);color:var(--ok)} .badge.warn{background:var(--warn-s);color:var(--warn)} .badge.info{background:var(--info-s);color:var(--info)} .badge.bad{background:var(--bad-s);color:var(--bad)} .badge.pri{background:var(--pri-s);color:var(--pri)}
+
+/* ---------- figuras: capturas y gráficos ---------- */
+figure{margin:28px -44px 30px;padding:0}
+figure.narrow{margin-left:0;margin-right:0}
+.shot{position:relative;border-radius:12px;overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow);background:var(--paper);cursor:zoom-in}
+.shot img{width:100%;height:auto}
+.mk{position:absolute;pointer-events:none}
+.mk .ring{position:absolute;inset:-5px;border:2.5px solid var(--acc);border-radius:10px;box-shadow:0 0 0 4px color-mix(in srgb,var(--acc) 18%,transparent)}
+.mk .num{position:absolute;left:-14px;top:-14px;width:28px;height:28px;border-radius:50%;background:var(--acc);color:#fff;font:700 14px/28px var(--sans);text-align:center;box-shadow:0 2px 6px rgba(0,0,0,.25);border:2px solid #fff}
+.chart{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:22px 24px 16px;box-shadow:var(--shadow)}
+.chart svg{display:block;width:100%;height:auto;font-family:var(--sans);overflow:visible}
+.chart .ttl{font:700 12px/1.3 var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:0 0 10px}
+figcaption{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;margin:14px 44px 0;font-size:16px;color:var(--muted);line-height:1.5}
+figure.narrow figcaption{margin-left:0;margin-right:0}
+figcaption .fn{font:700 12px/1.6 var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--c,var(--acc));white-space:nowrap;padding-top:2px}
+figcaption b{color:var(--text)}
+.legend{list-style:none;counter-reset:lg;margin:14px 44px 0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px 22px;font-size:16.5px}
+.legend li{counter-increment:lg;display:grid;grid-template-columns:28px 1fr;gap:12px;margin:0;align-items:start}
+.legend li::before{content:counter(lg);display:grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--acc);color:#fff;font:700 13px/1 var(--sans);margin-top:1px}
+.legend li::marker{content:none}
+svg text{fill:var(--text)}
+svg .mut{fill:var(--muted)}
+svg .ax{stroke:var(--line2);stroke-width:1}
+svg .grid{stroke:var(--line);stroke-width:1}
+
+/* ---------- tarjetas ---------- */
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:18px 0 24px}
+.kpi{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.kpi span{display:block;font:600 11.5px/1.3 var(--sans);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.kpi b{display:block;font-size:25px;color:var(--pri-d);margin-top:4px;line-height:1.15;font-weight:600}
+.kpi small{color:var(--muted);font-size:14px}
+.spec{display:grid;grid-template-columns:repeat(2,1fr);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:var(--paper);margin:20px 0 26px}
+.spec div{padding:12px 18px;border-bottom:1px solid var(--line);display:grid;grid-template-columns:150px 1fr;gap:12px;font-size:16px}
+.spec div:nth-child(odd){border-right:1px solid var(--line)}
+.spec span{font:600 11.5px/1.5 var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--faint);padding-top:3px}
+
+/* ---------- código ---------- */
+.code{position:relative;margin:20px 0 26px;border-radius:12px;background:#17201c;color:#e4ebe6;overflow:hidden;border:1px solid #26302b}
+.code .bar{display:flex;justify-content:space-between;align-items:center;padding:8px 14px;background:#1e2924;font:600 12px var(--sans);color:#9fb0a6;letter-spacing:.06em}
+.code pre{margin:0;padding:16px 18px;overflow-x:auto;font-size:13.5px;line-height:1.6}
+.code .k{color:#e2a15c} .code .s{color:#a9cf7e} .code .c{color:#7d8f85;font-style:italic} .code .f{color:#8fc2ad}
+.copy{border:1px solid #3a4a42;background:#24302a;color:#d7e1db;border-radius:7px;padding:4px 10px;font:600 12px var(--sans);cursor:pointer}
+.methods{position:relative;margin:20px 0;padding:24px 26px 18px;border-radius:var(--r);background:var(--paper);border:1px solid var(--line);font-size:17px}
+.methods .copy{position:absolute;right:14px;top:14px;background:var(--soft);color:var(--text);border-color:var(--line2)}
+
+/* ---------- referencias ---------- */
+ol.refs{padding-left:0;list-style:none;font-size:16px}
+ol.refs li{padding-left:2em;text-indent:-2em;margin:8px 0}
+dl.glos{display:grid;grid-template-columns:minmax(170px,240px) 1fr;margin:16px 0}
+dl.glos dt,dl.glos dd{padding:10px 0;border-bottom:1px solid var(--line);margin:0}
+dl.glos dt{font-weight:650;padding-right:18px}
+dl.glos dt small{display:block;font-weight:400;font-style:italic;color:var(--muted);font-size:14.5px}
+.colophon{margin:90px 0 0;padding-top:24px;border-top:1px solid var(--line);font-size:15px;color:var(--muted)}
+.colophon p{margin:0 0 8px}
+
+#zoom{position:fixed;inset:0;z-index:100;background:rgba(10,14,12,.86);display:none;place-items:center;padding:24px;cursor:zoom-out}
+#zoom.on{display:grid}
+#zoom .zi{position:relative;max-width:min(1600px,96vw)}
+#zoom img{max-height:92vh;width:auto;border-radius:10px}
+.totop{position:fixed;right:22px;bottom:22px;z-index:40;opacity:0;pointer-events:none;transition:opacity .2s}
+.totop.on{opacity:1;pointer-events:auto}
+
+@media screen and (max-width:1100px){
+  .layout{grid-template-columns:1fr}
+  aside.toc{position:fixed;left:0;top:59px;width:min(340px,88vw);z-index:45;background:var(--bg);transform:translateX(-102%);transition:transform .25s;box-shadow:var(--shadow-lg)}
+  aside.toc.open{transform:none}
+  #menuBtn{display:inline-grid}
+  main{padding:0 28px 100px}
+  figure{margin-left:0;margin-right:0}
+  figcaption,.legend{margin-left:0;margin-right:0}
+}
+@media screen and (max-width:760px){
+  body{font-size:17.5px}
+  .top{padding:8px 14px;gap:8px}
+  .top .brand small,.top .pdf span,.top .btn.ghost{display:none}
+  .top .brand span{font-size:15.5px}
+  .seg button{padding:6px 9px}
+  .top .btn.pdf{padding:9px 11px}
+  main{padding:0 16px 80px}
+  .cover{margin:16px 0 20px;border-radius:18px}
+  .cover .in{grid-template-columns:1fr;padding:30px 22px 26px}
+  .cover h1{font-size:34px}
+  .cover .pillars{grid-template-columns:1fr 1fr}
+  .cover .pillars div:nth-child(2){border-right:0}
+  .cover .pillars div:nth-child(-n+2){border-bottom:1px solid var(--line)}
+  .chap-head{grid-template-columns:1fr}
+  .chap-head .big{grid-row:auto;font-size:74px}
+  .chap-head p{grid-column:1}
+  .chap-head .ico{width:42px;height:42px}
+  .kpis{grid-template-columns:1fr 1fr}
+  .spec{grid-template-columns:1fr}
+  .spec div{grid-template-columns:1fr;gap:2px;border-right:0!important}
+  .eq{padding:16px 48px 16px 14px;justify-content:flex-start}
+  .chart{padding:14px 12px 10px}
+  dl.glos{grid-template-columns:1fr}
+  dl.glos dt{border-bottom:0;padding-bottom:0}
+  .box{padding:16px 16px 14px 54px}
+  .box .bi{left:14px}
+  .mk .num{width:22px;height:22px;font-size:12px;line-height:22px;left:-11px;top:-11px}
+}
+
+@page{size:A4;margin:18mm 17mm 20mm}
+@page{@bottom-center{content:counter(page);font-family:"Palatino Linotype",Palatino,serif;font-size:9pt;color:#777}}
+@page :first{margin:0;@bottom-center{content:none}}
+@media print{
+  :root{--bg:#fff;--paper:#fff}
+  html{scroll-behavior:auto}
+  body{font-size:10.4pt;line-height:1.52;background:#fff;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .top,aside.toc,.totop,#zoom,.no-print,.inchap,.copy{display:none!important}
+  .layout{display:block;max-width:none}
+  main{padding:0}
+  .doc{max-width:none}
+  .cover{margin:0;border-radius:0;box-shadow:none;border:0;min-height:297mm;display:flex;flex-direction:column;page-break-after:always}
+  .cover{height:297mm;overflow:hidden}
+  .cover{position:relative}
+  .cover .in{flex:none;height:262mm;overflow:hidden;grid-template-columns:1fr;padding:18mm 18mm 4mm;gap:5mm;align-content:start}
+  .cover .pillars{position:absolute;left:0;right:0;bottom:0;height:30mm;background:#fff}
+  .cover h1{font-size:34pt}
+  .cover .sub{font-size:13pt;margin:10px 0 14px}
+  .cover .who{margin-top:14px;padding-top:12px}
+  .cover .art{width:60%;justify-self:center}
+  .cover .art .chart{padding:10px 12px 6px}
+  .chap{margin-top:0;break-before:page}
+  .chap-head{padding-top:0}
+  .chap-head .big{font-size:82pt}
+  h3{break-after:avoid;margin-top:24px}
+  figure,.box,.kpis,.spec,.eq,table,.code,.methods,.chart{break-inside:avoid}
+  figure{margin:14px 0 16px}
+  figcaption,.legend{margin-left:0;margin-right:0}
+  .shot,.chart{box-shadow:none}
+  .code{background:#f4f3ee;color:#1b221e;border-color:#ddd}
+  .code .bar{background:#e9e7df;color:#555}
+  .code .k{color:#8a5214} .code .s{color:#3f6b2a} .code .c{color:#777} .code .f{color:#1f4037}
+  a{color:inherit;text-decoration:none}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <button class="ib" id="menuBtn" aria-label="Índice / Contents">☰</button>
+  <a class="brand" href="./" title="RatioAvis">
+    <img src="logo.svg" alt="">
+    <span>Ratio<i>Avis</i> <small lang="es">· Instructivo del Científico</small><small lang="en">· Scientist Guide</small></span>
+  </a>
+  <span class="sp"></span>
+  <a class="btn ghost no-print" href="instructivo-productor.html"><span lang="es">Instructivo del Productor</span><span lang="en">Producer Guide</span></a>
+  <div class="seg" role="group" aria-label="Idioma / Language"><button data-lang="es">ES</button><button data-lang="en">EN</button></div>
+  <a class="btn pdf" id="pdfBtn" title="PDF" href="instructivo/RatioAvis-Instructivo-Cientifico.pdf" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-5-5m5 5l5-5M5 21h14"/></svg><span>PDF</span></a>
+  <button class="ib" id="temaBtn" aria-label="Tema / Theme">☾</button>
+  <div id="leido"></div>
+</header>
+
+<div class="layout">
+<aside class="toc" id="toc">
+  <div class="search">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-5-5"/></svg>
+    <input id="q" type="search" autocomplete="off" placeholder="Buscar en el instructivo…" aria-label="Buscar / Search">
+    <div class="hits" id="hits"></div>
+  </div>
+  <ol id="tocList"></ol>
+</aside>
+
+<main>
+<!-- ============================ PORTADA ============================ -->
+<section class="cover" id="portada">
+  <div class="band"><i style="background:var(--b1)"></i><i style="background:var(--b2)"></i><i style="background:var(--b3)"></i><i style="background:var(--b4)"></i><i style="background:var(--b5)"></i><i style="background:var(--b6)"></i><i style="background:var(--b7)"></i><i style="background:var(--b8)"></i></div>
+  <div class="in">
+    <div>
+      <div class="kick"><img src="logo.svg" alt="RatioAvis"><div><div class="eyebrow" lang="es">Instructivo del Científico</div><div class="eyebrow" lang="en">Scientist Guide</div><div style="font-size:15px;color:var(--muted)">RatioAvis 1.1.0</div></div></div>
+      <h1 lang="es">Del <em>modelo lineal</em> al <span class="a">certificado de optimalidad</span></h1>
+      <h1 lang="en">From the <em>linear model</em> to the <span class="a">optimality certificate</span></h1>
+      <p class="sub" lang="es">Formulación de mínimo costo para pollo de engorda: método, dualidad, lectura económica, validación con dietas publicadas y reproducibilidad.</p>
+      <p class="sub" lang="en">Least-cost broiler diet formulation: method, duality, economic reading, validation against published diets and reproducibility.</p>
+      <div class="meta">
+        <div lang="es"><b>1.ª edición</b> · octubre de 2026 · describe RatioAvis 1.1.0</div>
+        <div lang="en"><b>1st edition</b> · October 2026 · covers RatioAvis 1.1.0</div>
+        <div>DOI <a href="https://doi.org/10.5281/zenodo.23090714">10.5281/zenodo.23090714</a> · <span lang="es">Licencia MIT</span><span lang="en">MIT License</span></div>
+      </div>
+      <div class="who">Héctor Tecumshé Mojica-Zárate · Luis Ángel Barrera-Guzmán<br><span lang="es">Guía complementaria del Instructivo del Productor.</span><span lang="en">Companion to the Producer Guide.</span></div>
+    </div>
+    <div class="art">
+      <div id="coverArt"></div>
+      <div class="eqc"><math display="inline"><mrow><munder><mo movablelimits="false">min</mo><mi>𝐱</mi></munder><mspace width="0.3em"/><msup><mi>𝐜</mi><mo>⊤</mo></msup><mi>𝐱</mi><mspace width="0.6em"/><mo>⟺</mo><mspace width="0.6em"/><munder><mo movablelimits="false">max</mo><mi>𝐲</mi></munder><mspace width="0.3em"/><msup><mi>𝐛</mi><mo>⊤</mo></msup><mi>𝐲</mi></mrow></math></div>
+    </div>
+  </div>
+  <div class="pillars">
+    <div><i lang="es">Método</i><i lang="en">Method</i><b lang="es">Símplex en dos fases</b><b lang="en">Two-phase simplex</b><span lang="es">con regla de Bland y escalado de filas</span><span lang="en">with Bland’s rule and row scaling</span></div>
+    <div><i lang="es">Garantía</i><i lang="en">Guarantee</i><b lang="es">Dualidad fuerte</b><b lang="en">Strong duality</b><span lang="es">brecha primal–dual de 3.9 × 10⁻¹⁶ en el caso</span><span lang="en">primal–dual gap of 3.9 × 10⁻¹⁶ in the case</span></div>
+    <div><i lang="es">Validación</i><i lang="en">Validation</i><b>6 / 6</b><span lang="es">fórmulas publicadas reencontradas exactamente</span><span lang="en">published formulas recovered exactly</span></div>
+    <div><i lang="es">Reproducibilidad</i><i lang="en">Reproducibility</i><b lang="es">Modelo en JSON</b><b lang="en">Model as JSON</b><span lang="es">y script de verificación con SciPy</span><span lang="en">and a SciPy verification script</span></div>
+  </div>
+</section>
+
+<div class="doc">
+
+<!-- ============================ P · CÓMO LEER ============================ -->
+<section class="chap" id="leer" data-toc="P" style="--c:var(--acc)">
+  <div class="chap-head"><span class="big">P</span>
+    <div class="eyebrow" lang="es">Antes de leer</div><div class="eyebrow" lang="en">Before reading</div>
+    <h2 lang="es">Alcance, notación y cómo citar</h2><h2 lang="en">Scope, notation and citation</h2>
+    <p lang="es">Para quién es esta guía, qué supone que ya sabes y cómo están escritas las ecuaciones.</p>
+    <p lang="en">Who this guide is for, what it assumes you know and how equations are written.</p>
+    <span class="rule"></span></div>
+
+  <p class="lead" lang="es">Esta guía es para quien necesita entender, verificar o publicar lo que hace RatioAvis: investigadores, docentes de nutrición animal, estudiantes de posgrado y revisores de artículos. Explica el modelo matemático completo, cómo se resuelve, por qué el resultado es demostrablemente óptimo y cómo se validó el programa.</p>
+  <p class="lead" lang="en">This guide is for those who need to understand, verify or publish what RatioAvis does: researchers, animal-nutrition lecturers, graduate students and journal reviewers. It explains the full mathematical model, how it is solved, why the result is provably optimal and how the program was validated.</p>
+  <p lang="es">Supone nociones de nutrición de aves y de álgebra lineal. El uso paso a paso de la interfaz está en el <a href="instructivo-productor.html">Instructivo del Productor</a>; aquí se usa la vista <b>Científico</b> y el mismo caso de ejemplo: Ross 308, mixto, iniciación (0–10 d), 2,200 msnm, con el ajuste de −50 kcal/kg de EMAn.</p>
+  <p lang="en">It assumes a working knowledge of poultry nutrition and linear algebra. Step-by-step use of the interface is in the <a href="instructivo-productor.html">Producer Guide</a>; here we use the <b>Scientist</b> view and the same worked case: Ross 308, as-hatched, starter (0–10 d), 2,200 m a.s.l., with the −50 kcal/kg AMEn adjustment.</p>
+
+  <h3 id="notacion"><span lang="es">Notación</span><span lang="en">Notation</span></h3>
+  <div class="tbl"><table>
+    <thead><tr><th lang="es">Símbolo</th><th lang="en">Symbol</th><th lang="es">Significado</th><th lang="en">Meaning</th><th lang="es">Unidad</th><th lang="en">Unit</th></tr></thead>
+    <tbody>
+      <tr><td><math><mi>i</mi><mo>∈</mo><mi>I</mi></math></td><td lang="es">ingrediente seleccionado (variable de decisión)</td><td lang="en">selected ingredient (decision variable)</td><td>—</td></tr>
+      <tr><td><math><mi>j</mi><mo>∈</mo><mi>J</mi></math></td><td lang="es">nutriente con requerimiento (20 posibles)</td><td lang="en">nutrient with a requirement (20 possible)</td><td>—</td></tr>
+      <tr><td><math><msub><mi>x</mi><mi>i</mi></msub></math></td><td lang="es">inclusión del ingrediente <i>i</i> en la dieta</td><td lang="en">inclusion of ingredient <i>i</i> in the diet</td><td>% (kg/100 kg)</td></tr>
+      <tr><td><math><msub><mi>c</mi><mi>i</mi></msub></math></td><td lang="es">precio del ingrediente puesto en granja</td><td lang="en">delivered ingredient price</td><td>$/kg</td></tr>
+      <tr><td><math><msub><mi>a</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub></math></td><td lang="es">contenido del nutriente <i>j</i> en el ingrediente <i>i</i>, tal como se ofrece</td><td lang="en">content of nutrient <i>j</i> in ingredient <i>i</i>, as fed</td><td>%, kcal/kg, mg/kg</td></tr>
+      <tr><td><math><msubsup><mi>b</mi><mi>j</mi><mo>−</mo></msubsup><mo>,</mo><msubsup><mi>b</mi><mi>j</mi><mo>+</mo></msubsup></math></td><td lang="es">requerimiento mínimo y máximo de <i>j</i> en la dieta</td><td lang="en">minimum and maximum requirement of <i>j</i> in the diet</td><td lang="es">unidad de <i>j</i></td><td lang="en">unit of <i>j</i></td></tr>
+      <tr><td><math><msub><mi>l</mi><mi>i</mi></msub><mo>,</mo><msub><mi>u</mi><mi>i</mi></msub></math></td><td lang="es">límites de inclusión del ingrediente</td><td lang="en">ingredient inclusion limits</td><td>%</td></tr>
+      <tr><td><math><mi>Z</mi></math></td><td lang="es">costo de 100 kg de dieta (función objetivo)</td><td lang="en">cost of 100 kg of diet (objective)</td><td>$/100 kg</td></tr>
+      <tr><td><math><msub><mi>y</mi><mi>k</mi></msub></math></td><td lang="es">variable dual (precio sombra) de la restricción <i>k</i></td><td lang="en">dual variable (shadow price) of constraint <i>k</i></td><td lang="es">$/100 kg por unidad</td><td lang="en">$/100 kg per unit</td></tr>
+      <tr><td><math><msub><mi>d</mi><mi>i</mi></msub></math></td><td lang="es">costo reducido del ingrediente <i>i</i></td><td lang="en">reduced cost of ingredient <i>i</i></td><td lang="es">$/100 kg por punto %</td><td lang="en">$/100 kg per % point</td></tr>
+    </tbody></table></div>
+  <p lang="es">Los vectores van en negritas (<math><mi>𝐱</mi></math>, <math><mi>𝐜</mi></math>) y las ecuaciones se numeran a la derecha. Los nombres de botones y pestañas se escriben como aparecen en pantalla: <span class="ui pri">⚙ Formular</span>, <span class="path">Formulación<i>›</i>Modelo matemático y reproducibilidad</span>.</p>
+  <p lang="en">Vectors are in bold (<math><mi>𝐱</mi></math>, <math><mi>𝐜</mi></math>) and equations are numbered on the right. Button and tab names appear as on screen: <span class="ui pri">⚙ Formulate</span>, <span class="path">Formulation<i>›</i>Mathematical model and reproducibility</span>.</p>
+
+  <h3 id="recuadros"><span lang="es">Tipos de recuadro</span><span lang="en">Box types</span></h3>
+  <div class="box def"><span class="bi">≡</span><span class="bt" lang="es">Definición</span><span class="bt" lang="en">Definition</span><p lang="es">Un concepto con su significado exacto.</p><p lang="en">A concept with its exact meaning.</p></div>
+  <div class="box thm"><span class="bi">∴</span><span class="bt" lang="es">Resultado</span><span class="bt" lang="en">Result</span><p lang="es">Un teorema o propiedad que el programa aprovecha, con su consecuencia práctica.</p><p lang="en">A theorem or property the program relies on, with its practical consequence.</p></div>
+  <div class="box case"><span class="bi">◆</span><span class="bt" lang="es">En el caso</span><span class="bt" lang="en">In the case</span><p lang="es">Los números reales del caso de ejemplo, tal como los calcula la app.</p><p lang="en">The real numbers of the worked case, exactly as the app computes them.</p></div>
+  <div class="box warn"><span class="bi">!</span><span class="bt" lang="es">Precaución</span><span class="bt" lang="en">Caution</span><p lang="es">Un supuesto o límite del método que puede cambiar una conclusión.</p><p lang="en">An assumption or limitation that can change a conclusion.</p></div>
+
+  <h3 id="citar"><span lang="es">Cómo citar</span><span lang="en">How to cite</span></h3>
+  <div class="box ref"><span class="bi">“</span><span class="bt" lang="es">Programa</span><span class="bt" lang="en">Software</span>
+    <p lang="es">Mojica-Zárate, H. T., y Barrera-Guzmán, L. A. (2026). <i>RatioAvis: Guided least-cost diet formulation for broiler chickens</i> (Versión 1.1.0) [Software]. Zenodo. https://doi.org/10.5281/zenodo.23090714</p>
+    <p lang="en">Mojica-Zárate, H. T., & Barrera-Guzmán, L. A. (2026). <i>RatioAvis: Guided least-cost diet formulation for broiler chickens</i> (Version 1.1.0) [Software]. Zenodo. https://doi.org/10.5281/zenodo.23090714</p></div>
+  <div class="box ref"><span class="bi">“</span><span class="bt" lang="es">Este instructivo</span><span class="bt" lang="en">This guide</span>
+    <p lang="es">Mojica-Zárate, H. T., y Barrera-Guzmán, L. A. (2026). <i>RatioAvis. Instructivo del Científico</i> (1.ª ed.). Distribuido con RatioAvis 1.1.0. https://hectortecumshe-ai.github.io/RatioAvis/instructivo-cientifico.html</p>
+    <p lang="en">Mojica-Zárate, H. T., & Barrera-Guzmán, L. A. (2026). <i>RatioAvis. Scientist Guide</i> (1st ed.). Distributed with RatioAvis 1.1.0. https://hectortecumshe-ai.github.io/RatioAvis/instructivo-cientifico.html</p></div>
+  <p lang="es">En la sección <a href="#metodos">R.3</a> hay un párrafo listo para la sección de <i>Materiales y métodos</i> de un artículo.</p>
+  <p lang="en">Section <a href="#metodos">R.3</a> provides a ready-made paragraph for a paper’s <i>Materials and methods</i>.</p>
+</section>
+
+<!-- ============================ M · EL MODELO ============================ -->
+<section class="chap" id="modelo" data-toc="M" style="--c:var(--ink)">
+  <div class="chap-head"><span class="big">M</span>
+    <div class="eyebrow" lang="es">Fundamentos</div><div class="eyebrow" lang="en">Foundations</div>
+    <h2 lang="es">El modelo y su solución</h2><h2 lang="en">The model and its solution</h2>
+    <p lang="es">Qué problema resuelve RatioAvis, cómo lo resuelve y por qué puede garantizar que no existe una dieta más barata.</p>
+    <p lang="en">What problem RatioAvis solves, how it solves it and why it can guarantee that no cheaper diet exists.</p>
+    <svg class="ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 42V6M6 42h36"/><path d="M10 14l26 6-10 18z" fill="currentColor" fill-opacity=".14"/><circle cx="26" cy="38" r="2.6" fill="currentColor"/></svg>
+    <span class="rule"></span></div>
+  <nav class="inchap"></nav>
+
+  <h3 id="m-problema" data-n="M.1"><span lang="es">El problema de la dieta</span><span lang="en">The diet problem</span></h3>
+  <p lang="es">Formular una dieta de mínimo costo es uno de los problemas fundacionales de la investigación de operaciones. Stigler (1945) planteó la búsqueda de la dieta humana más barata que cubriera los requerimientos; Dantzig resolvió ese tipo de problemas con el método símplex (1947; Dantzig, 1963), y desde la década de 1950 la industria de alimentos balanceados formula así a diario. RatioAvis implementa ese marco clásico de forma transparente: cada número que entra y sale del modelo está a la vista.</p>
+  <p lang="en">Least-cost diet formulation is one of the founding problems of operations research. Stigler (1945) posed the search for the cheapest human diet meeting requirements; Dantzig solved such problems with the simplex method (1947; Dantzig, 1963), and since the 1950s the feed industry has formulated this way every day. RatioAvis implements that classical framework transparently: every number entering and leaving the model is visible.</p>
+  <figure data-chart="pipeline" class="narrow">
+    <figcaption><span class="fn"></span><span lang="es"><b>Arquitectura del motor de cálculo.</b> Los datos de los bloques 1 a 5 forman el modelo; la fase I busca factibilidad, la fase II el óptimo, y el certificado de dualidad valida la solución antes de mostrarla. Si no hay solución, un diagnóstico identifica qué restricción estorba.</span><span lang="en"><b>Solver architecture.</b> Data from blocks 1–5 build the model; phase I seeks feasibility, phase II the optimum, and the duality certificate validates the solution before it is shown. If there is no solution, a diagnosis identifies the conflicting constraint.</span></figcaption>
+  </figure>
+
+  <h3 id="m-formulacion" data-n="M.2"><span lang="es">Formulación matemática</span><span lang="en">Mathematical formulation</span></h3>
+  <p lang="es">Con los ingredientes seleccionados <math><mi>I</mi></math> y los nutrientes con requerimiento <math><mi>J</mi></math>, RatioAvis resuelve el programa lineal:</p>
+  <p lang="en">With the selected ingredients <math><mi>I</mi></math> and the nutrients with a requirement <math><mi>J</mi></math>, RatioAvis solves the linear program:</p>
+  <div class="eq"><math display="block">
+    <mtable columnalign="right left" rowspacing="0.55em">
+      <mtr><mtd><munder><mo movablelimits="false">min</mo><mi>𝐱</mi></munder></mtd><mtd><mi>Z</mi><mo>=</mo><munder><mo>∑</mo><mrow><mi>i</mi><mo>∈</mo><mi>I</mi></mrow></munder><msub><mi>c</mi><mi>i</mi></msub><msub><mi>x</mi><mi>i</mi></msub></mtd></mtr>
+      <mtr><mtd><mtext lang="es">sujeto a</mtext><mtext lang="en">subject to</mtext></mtd><mtd><munder><mo>∑</mo><mi>i</mi></munder><msub><mi>x</mi><mi>i</mi></msub><mo>=</mo><mn>100</mn></mtd></mtr>
+      <mtr><mtd></mtd><mtd><munder><mo>∑</mo><mi>i</mi></munder><msub><mi>a</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub><msub><mi>x</mi><mi>i</mi></msub><mo>≥</mo><mn>100</mn><mspace width="0.15em"/><msubsup><mi>b</mi><mi>j</mi><mo>−</mo></msubsup><mspace width="1em"/><mo>∀</mo><mi>j</mi><mo>:</mo><msubsup><mi>b</mi><mi>j</mi><mo>−</mo></msubsup><mtext> </mtext><mtext lang="es">definido</mtext><mtext lang="en">defined</mtext></mtd></mtr>
+      <mtr><mtd></mtd><mtd><munder><mo>∑</mo><mi>i</mi></munder><msub><mi>a</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub><msub><mi>x</mi><mi>i</mi></msub><mo>≤</mo><mn>100</mn><mspace width="0.15em"/><msubsup><mi>b</mi><mi>j</mi><mo>+</mo></msubsup><mspace width="1em"/><mo>∀</mo><mi>j</mi><mo>:</mo><msubsup><mi>b</mi><mi>j</mi><mo>+</mo></msubsup><mtext> </mtext><mtext lang="es">definido</mtext><mtext lang="en">defined</mtext></mtd></mtr>
+      <mtr><mtd></mtd><mtd><msub><mi>l</mi><mi>i</mi></msub><mo>≤</mo><msub><mi>x</mi><mi>i</mi></msub><mo>≤</mo><msub><mi>u</mi><mi>i</mi></msub><mo>,</mo><mspace width="1em"/><msub><mi>x</mi><mi>i</mi></msub><mo>≥</mo><mn>0</mn></mtd></mtr>
+    </mtable></math><span class="no">(1)</span></div>
+  <p class="where" lang="es">La primera restricción cierra la mezcla al 100 %; las siguientes imponen el mínimo y, si lo hay, el máximo de cada nutriente; la última, los límites de inclusión. Como <math><msub><mi>x</mi><mi>i</mi></msub></math> está en kg por cada 100 kg, <math><mi>Z</mi></math> es el costo de 100 kg y el costo por tonelada es <math><mn>10</mn><mi>Z</mi></math>.</p>
+  <p class="where" lang="en">The first constraint closes the blend at 100 %; the next ones impose each nutrient’s minimum and, when set, maximum; the last one the inclusion limits. Since <math><msub><mi>x</mi><mi>i</mi></msub></math> is in kg per 100 kg, <math><mi>Z</mi></math> is the cost of 100 kg and the cost per tonne is <math><mn>10</mn><mi>Z</mi></math>.</p>
+
+  <div class="box def"><span class="bi">≡</span><span class="bt" lang="es">Cómo se construye <i>a<sub>ij</sub></i></span><span class="bt" lang="en">How <i>a<sub>ij</sub></i> is built</span>
+    <ul>
+      <li lang="es"><b>Aminoácidos:</b> si la línea genética usa base digestible, se toma la columna digestible estandarizada del ingrediente (<code>dLys</code>, <code>dMet</code>…); si usa base total (NRC 1994), la total.</li>
+      <li lang="en"><b>Amino acids:</b> if the genetic line uses a digestible basis, the ingredient’s standardized digestible column is used (<code>dLys</code>, <code>dMet</code>…); on a total basis (NRC 1994), the total one.</li>
+      <li lang="es"><b>Balance electrolítico:</b> se calcula por ingrediente y entra al modelo como un nutriente lineal más (ecuación 6).</li>
+      <li lang="en"><b>Electrolyte balance:</b> computed per ingredient and entered as one more linear nutrient (equation 6).</li>
+      <li lang="es"><b>Límites:</b> un mínimo solo genera fila si es mayor que 0, y un máximo solo si es menor que 100 %.</li>
+      <li lang="en"><b>Limits:</b> a minimum only creates a row if it is above 0, and a maximum only if it is below 100 %.</li>
+    </ul></div>
+
+  <h3 id="m-geometria" data-n="M.3"><span lang="es">La geometría del óptimo</span><span lang="en">The geometry of the optimum</span></h3>
+  <p lang="es">Cada restricción es un semiespacio; su intersección, la <b>región factible</b>, es un poliedro convexo. Las líneas de igual costo son paralelas y el óptimo, si existe, está siempre en un <b>vértice</b>. Con 14 ingredientes el poliedro vive en 14 dimensiones, pero un modelo reducido de tres ingredientes (maíz, pasta de soya y aceite, con el aceite como complemento a 100 %) se puede dibujar en el plano:</p>
+  <p lang="en">Each constraint is a half-space; their intersection, the <b>feasible region</b>, is a convex polyhedron. Iso-cost lines are parallel and the optimum, if it exists, always lies at a <b>vertex</b>. With 14 ingredients the polyhedron lives in 14 dimensions, but a reduced three-ingredient model (corn, soybean meal and oil, with oil completing 100 %) can be drawn on the plane:</p>
+  <figure data-chart="region" class="narrow">
+    <figcaption><span class="fn"></span><span lang="es"><b>Región factible de un modelo didáctico reducido.</b> Maíz (<i>x</i>) y pasta de soya 46 % (<i>y</i>); aceite = 100 − <i>x</i> − <i>y</i>, con un máximo de 6 %. Requisitos: proteína ≥ 23 % y EMAn ≥ 3,050 kcal/kg, con la matriz y los precios de la app. El símplex avanza de vértice en vértice hasta <b>A</b>, donde se cruzan la energía y la proteína: 57.7 % de maíz, 40.1 % de soya y 2.2 % de aceite. Es una ilustración; el caso real tiene 14 variables y 39 restricciones.</span><span lang="en"><b>Feasible region of a reduced teaching model.</b> Corn (<i>x</i>) and soybean meal 46 % (<i>y</i>); oil = 100 − <i>x</i> − <i>y</i>, at most 6 %. Requirements: protein ≥ 23 % and AMEn ≥ 3,050 kcal/kg, using the app’s matrix and prices. Simplex moves from vertex to vertex until <b>A</b>, where energy and protein cross: 57.7 % corn, 40.1 % soybean meal and 2.2 % oil. It is an illustration; the real case has 14 variables and 39 constraints.</span></figcaption>
+  </figure>
+
+  <h3 id="m-simplex" data-n="M.4"><span lang="es">El método símplex en dos fases</span><span lang="en">The two-phase simplex method</span></h3>
+  <p lang="es">RatioAvis lleva el modelo (1) a forma estándar con variables de holgura y artificiales y lo resuelve con un símplex tabular propio, escrito en JavaScript y ejecutado en el navegador:</p>
+  <p lang="en">RatioAvis brings model (1) to standard form with slack and artificial variables and solves it with its own tableau simplex, written in JavaScript and run in the browser:</p>
+  <ol>
+    <li lang="es"><b>Escalado.</b> Cada fila se divide entre su coeficiente de mayor valor absoluto, de modo que energía (miles de kcal) y aminoácidos (centésimas) quedan en escalas comparables. Los duales se des-escalan al final.</li>
+    <li lang="en"><b>Scaling.</b> Each row is divided by its largest absolute coefficient, so that energy (thousands of kcal) and amino acids (hundredths) share comparable scales. Duals are unscaled at the end.</li>
+    <li lang="es"><b>Fase I.</b> Se minimiza la suma de las variables artificiales. Si al terminar no es cero (umbral 10⁻⁷), el problema es <b>infactible</b> y se pasa al diagnóstico (M.7).</li>
+    <li lang="en"><b>Phase I.</b> The sum of artificial variables is minimized. If it is not zero at the end (threshold 10⁻⁷), the problem is <b>infeasible</b> and the diagnosis runs (M.7).</li>
+    <li lang="es"><b>Fase II.</b> Desde esa base factible se minimiza el costo real. Entra la primera variable con costo reducido negativo y sale la de menor cociente, con desempate por el menor índice: la <b>regla de Bland</b> (1977), que garantiza que el método no cicle aun con degeneración, frecuente en dietas por los límites fijos (premezcla, colina).</li>
+    <li lang="en"><b>Phase II.</b> From that feasible basis the real cost is minimized. The first variable with a negative reduced cost enters and the minimum-ratio row leaves, ties broken by lowest index: <b>Bland’s rule</b> (1977), which guarantees no cycling even under degeneracy, common in diets because of fixed limits (premix, choline).</li>
+  </ol>
+  <figure data-chart="simplex" class="narrow">
+    <figcaption><span class="fn"></span><span lang="es"><b>Flujo del símplex en dos fases.</b> Las tolerancias son las del código fuente de RatioAvis 1.1.0.</span><span lang="en"><b>Two-phase simplex flow.</b> Tolerances are those in the RatioAvis 1.1.0 source code.</span></figcaption>
+  </figure>
+
+  <h3 id="m-dualidad" data-n="M.5"><span lang="es">Dualidad y certificado de optimalidad</span><span lang="en">Duality and the optimality certificate</span></h3>
+  <p lang="es">A todo programa lineal le corresponde un <b>problema dual</b>. Si se agrupan las restricciones de (1) como <math><mi>𝐀</mi><mi>𝐱</mi><mo>⋛</mo><mi>𝐛</mi></math>, el dual busca los precios <math><mi>𝐲</mi></math> que maximizan el valor de los requerimientos sin que ningún ingrediente quede «subvaluado»:</p>
+  <p lang="en">Every linear program has a corresponding <b>dual problem</b>. Writing the constraints of (1) as <math><mi>𝐀</mi><mi>𝐱</mi><mo>⋛</mo><mi>𝐛</mi></math>, the dual seeks the prices <math><mi>𝐲</mi></math> that maximize the value of the requirements without any ingredient being “undervalued”:</p>
+  <div class="eq"><math display="block"><mrow><munder><mo movablelimits="false">max</mo><mi>𝐲</mi></munder><mspace width="0.4em"/><mi>W</mi><mo>=</mo><msup><mi>𝐛</mi><mo>⊤</mo></msup><mi>𝐲</mi><mspace width="1.4em"/><mtext lang="es">s. a.</mtext><mtext lang="en">s.t.</mtext><mspace width="0.6em"/><msup><mi>𝐀</mi><mo>⊤</mo></msup><mi>𝐲</mi><mo>≤</mo><mi>𝐜</mi><mo>,</mo><mspace width="0.8em"/><msub><mi>y</mi><mi>k</mi></msub><mo>≥</mo><mn>0</mn><mtext lang="es">&#160;en filas ≥,&#160;</mtext><mtext lang="en">&#160;for ≥ rows,&#160;</mtext><msub><mi>y</mi><mi>k</mi></msub><mo>≤</mo><mn>0</mn><mtext lang="es">&#160;en filas ≤</mtext><mtext lang="en">&#160;for ≤ rows</mtext></mrow></math><span class="no">(2)</span></div>
+  <div class="box thm"><span class="bi">∴</span><span class="bt" lang="es">Teorema de dualidad fuerte</span><span class="bt" lang="en">Strong duality theorem</span>
+    <p lang="es">Si <math><msup><mi>𝐱</mi><mo>*</mo></msup></math> es factible en el primal, <math><msup><mi>𝐲</mi><mo>*</mo></msup></math> es factible en el dual y <math><msup><mi>𝐜</mi><mo>⊤</mo></msup><msup><mi>𝐱</mi><mo>*</mo></msup><mo>=</mo><msup><mi>𝐛</mi><mo>⊤</mo></msup><msup><mi>𝐲</mi><mo>*</mo></msup></math>, entonces ambos son óptimos. Ninguna dieta factible puede costar menos que <math><msup><mi>𝐛</mi><mo>⊤</mo></msup><msup><mi>𝐲</mi><mo>*</mo></msup></math>, porque toda solución dual factible es una cota inferior del costo (dualidad débil).</p>
+    <p lang="en">If <math><msup><mi>𝐱</mi><mo>*</mo></msup></math> is primal feasible, <math><msup><mi>𝐲</mi><mo>*</mo></msup></math> is dual feasible and <math><msup><mi>𝐜</mi><mo>⊤</mo></msup><msup><mi>𝐱</mi><mo>*</mo></msup><mo>=</mo><msup><mi>𝐛</mi><mo>⊤</mo></msup><msup><mi>𝐲</mi><mo>*</mo></msup></math>, both are optimal. No feasible diet can cost less than <math><msup><mi>𝐛</mi><mo>⊤</mo></msup><msup><mi>𝐲</mi><mo>*</mo></msup></math>, since every dual feasible solution is a lower bound on cost (weak duality).</p></div>
+  <p lang="es">RatioAvis no se limita a confiar en el símplex: después de cada formulación <b>vuelve a calcular</b> las tres condiciones con los números finales y solo marca la solución como certificada si se cumplen las tolerancias:</p>
+  <p lang="en">RatioAvis does not simply trust the simplex: after every formulation it <b>recomputes</b> the three conditions from the final numbers and only marks the solution as certified if the tolerances are met:</p>
+  <div class="tbl"><table>
+    <thead><tr><th lang="es">Comprobación</th><th lang="en">Check</th><th lang="es">Qué mide</th><th lang="en">What it measures</th><th class="r" lang="es">Tolerancia</th><th class="r" lang="en">Tolerance</th><th class="r" lang="es">En el caso</th><th class="r" lang="en">In the case</th></tr></thead>
+    <tbody>
+      <tr><td lang="es">Factibilidad primal</td><td lang="en">Primal feasibility</td><td lang="es">mayor violación de una restricción o de <i>x</i> ≥ 0</td><td lang="en">largest violation of a constraint or of <i>x</i> ≥ 0</td><td class="r">&lt; 10⁻⁶</td><td class="r">4.3 × 10⁻¹⁴</td></tr>
+      <tr><td lang="es">Factibilidad dual</td><td lang="en">Dual feasibility</td><td lang="es">signo de cada <i>y</i> y costos reducidos ≥ 0</td><td lang="en">sign of each <i>y</i> and reduced costs ≥ 0</td><td class="r">&lt; 10⁻⁶</td><td class="r">4.0 × 10⁻¹³</td></tr>
+      <tr><td lang="es">Brecha primal–dual</td><td lang="en">Primal–dual gap</td><td><math><mo>|</mo><mi>Z</mi><mo>−</mo><mi>W</mi><mo>|</mo><mo>/</mo><mo>max</mo><mo>(</mo><mn>1</mn><mo>,</mo><mo>|</mo><mi>Z</mi><mo>|</mo><mo>)</mo></math></td><td class="r">&lt; 10⁻⁷</td><td class="r">3.9 × 10⁻¹⁶</td></tr>
+    </tbody></table></div>
+  <figure data-chart="dual" class="narrow">
+    <figcaption><span class="fn"></span><span lang="es"><b>Lo que garantiza el certificado.</b> Cualquier dieta factible cuesta al menos <i>Z</i>*; cualquier vector de precios duales factible vale como mucho <i>W</i>*. Cuando ambos coinciden, el óptimo queda acorralado: en el caso, $8,805.03 por tonelada, con una diferencia relativa de 3.9 × 10⁻¹⁶, el límite de la aritmética de doble precisión.</span><span lang="en"><b>What the certificate guarantees.</b> Any feasible diet costs at least <i>Z</i>*; any feasible dual price vector is worth at most <i>W</i>*. When both meet, the optimum is pinned down: in the case, $8,805.03 per tonne, with a relative difference of 3.9 × 10⁻¹⁶, the limit of double-precision arithmetic.</span></figcaption>
+  </figure>
+
+  <h3 id="m-sensibilidad" data-n="M.6"><span lang="es">Precios sombra, costos reducidos y precio de entrada</span><span lang="en">Shadow prices, reduced costs and entry price</span></h3>
+  <div class="box def"><span class="bi">≡</span><span class="bt" lang="es">Precio sombra</span><span class="bt" lang="en">Shadow price</span>
+    <p lang="es">El valor dual <math><msub><mi>y</mi><mi>k</mi></msub></math> de una restricción es la derivada del costo óptimo respecto a su lado derecho, <math><msub><mi>y</mi><mi>k</mi></msub><mo>=</mo><mo>∂</mo><msup><mi>Z</mi><mo>*</mo></msup><mo>/</mo><mo>∂</mo><msub><mi>b</mi><mi>k</mi></msub></math>, válida mientras la base óptima no cambie. Solo las restricciones <b>activas</b> (que se cumplen con igualdad) tienen precio sombra distinto de cero: es la <b>holgura complementaria</b>.</p>
+    <p lang="en">The dual value <math><msub><mi>y</mi><mi>k</mi></msub></math> of a constraint is the derivative of the optimal cost with respect to its right-hand side, <math><msub><mi>y</mi><mi>k</mi></msub><mo>=</mo><mo>∂</mo><msup><mi>Z</mi><mo>*</mo></msup><mo>/</mo><mo>∂</mo><msub><mi>b</mi><mi>k</mi></msub></math>, valid while the optimal basis does not change. Only <b>binding</b> constraints (met with equality) have a non-zero shadow price: this is <b>complementary slackness</b>.</p></div>
+  <p lang="es">Como en (1) el lado derecho de un nutriente es <math><mn>100</mn><msub><mi>b</mi><mi>j</mi></msub></math> y <math><mi>Z</mi></math> está en $/100 kg, la app reporta en la tabla <b>Precios sombra</b> el cambio del costo <b>por tonelada</b>:</p>
+  <p lang="en">Since the right-hand side of a nutrient in (1) is <math><mn>100</mn><msub><mi>b</mi><mi>j</mi></msub></math> and <math><mi>Z</mi></math> is in $/100 kg, the app reports in the <b>Shadow prices</b> table the change in cost <b>per tonne</b>:</p>
+  <div class="eq"><math display="block"><mrow><mfrac><mrow><mo>∂</mo><mo>(</mo><mn>10</mn><msup><mi>Z</mi><mo>*</mo></msup><mo>)</mo></mrow><mrow><mo>∂</mo><msub><mi>b</mi><mi>j</mi></msub></mrow></mfrac><mo>=</mo><mn>1000</mn><mspace width="0.1em"/><msub><mi>y</mi><mi>j</mi></msub><mspace width="2em"/><mfrac><mrow><mo>∂</mo><mo>(</mo><mn>10</mn><msup><mi>Z</mi><mo>*</mo></msup><mo>)</mo></mrow><mrow><mo>∂</mo><msub><mi>u</mi><mi>i</mi></msub></mrow></mfrac><mo>=</mo><mn>10</mn><mspace width="0.1em"/><msub><mi>y</mi><mi>i</mi></msub></mrow></math><span class="no">(3)</span></div>
+  <p class="where" lang="es">a la izquierda, por unidad de requerimiento (1 kcal/kg o 1 punto %); a la derecha, por punto % de un límite de inclusión.</p>
+  <p class="where" lang="en">left, per unit of requirement (1 kcal/kg or 1 % point); right, per % point of an inclusion limit.</p>
+  <div class="box def"><span class="bi">≡</span><span class="bt" lang="es">Costo reducido y precio de entrada</span><span class="bt" lang="en">Reduced cost and entry price</span>
+    <p lang="es">El costo reducido <math><msub><mi>d</mi><mi>i</mi></msub><mo>=</mo><msub><mi>c</mi><mi>i</mi></msub><mo>−</mo><msubsup><mi>𝐚</mi><mi>i</mi><mo>⊤</mo></msubsup><mi>𝐲</mi></math> de un ingrediente fuera de la fórmula es cuánto aumentaría <math><mi>Z</mi></math> por cada punto % que se le obligara a entrar. Si su precio bajara en <math><msub><mi>d</mi><mi>i</mi></msub></math>, quedaría en el umbral de entrar; por eso la app reporta el <b>precio de entrada</b>:</p>
+    <p lang="en">The reduced cost <math><msub><mi>d</mi><mi>i</mi></msub><mo>=</mo><msub><mi>c</mi><mi>i</mi></msub><mo>−</mo><msubsup><mi>𝐚</mi><mi>i</mi><mo>⊤</mo></msubsup><mi>𝐲</mi></math> of an ingredient outside the formula is how much <math><mi>Z</mi></math> would rise per % point it were forced in. If its price fell by <math><msub><mi>d</mi><mi>i</mi></msub></math>, it would sit at the threshold of entering; hence the app reports the <b>entry price</b>:</p>
+    <div class="eq" style="margin-bottom:6px"><math display="block"><mrow><msubsup><mi>c</mi><mi>i</mi><mrow><mtext lang="es">entrada</mtext><mtext lang="en">entry</mtext></mrow></msubsup><mo>=</mo><msub><mi>c</mi><mi>i</mi></msub><mo>−</mo><msub><mi>d</mi><mi>i</mi></msub><mspace width="1.2em"/><mo>(</mo><mtext>$/kg</mtext><mo>)</mo></mrow></math><span class="no">(4)</span></div></div>
+
+  <h3 id="m-diagnostico" data-n="M.7"><span lang="es">Diagnóstico de infactibilidad</span><span lang="en">Infeasibility diagnosis</span></h3>
+  <p lang="es">Cuando la fase I termina con artificiales positivas, la app hace dos pruebas: (a) busca nutrientes con mínimo positivo que ningún ingrediente seleccionado aporta; (b) vuelve a resolver el modelo <b>quitando una restricción a la vez</b> y lista las que, por sí solas, devuelven la factibilidad. Es un diagnóstico de primer orden, rápido y fácil de interpretar.</p>
+  <p lang="en">When phase I ends with positive artificials, the app runs two tests: (a) it looks for nutrients with a positive minimum that no selected ingredient supplies; (b) it re-solves the model <b>removing one constraint at a time</b> and lists those that, on their own, restore feasibility. It is a first-order diagnosis, fast and easy to interpret.</p>
+  <div class="box warn"><span class="bi">!</span><span class="bt" lang="es">Precaución</span><span class="bt" lang="en">Caution</span>
+    <p lang="es">Si ninguna restricción aislada explica la infactibilidad, el conflicto involucra a varias a la vez. La app lo indica, pero no calcula un subsistema irreducible infactible (IIS): hay que relajar requerimientos o añadir ingredientes de manera razonada.</p>
+    <p lang="en">If no single constraint explains the infeasibility, the conflict involves several at once. The app says so, but does not compute an irreducible infeasible subsystem (IIS): requirements must be relaxed or ingredients added in a reasoned way.</p></div>
+  <figure data-fig="c_infactible">
+    <figcaption><span class="fn"></span><span lang="es"><b>Diagnóstico en la vista científica.</b> Con proteína ≥ 30 % (imposible con estos ingredientes), cinco restricciones bastan por separado para recuperar la factibilidad.</span><span lang="en"><b>Diagnosis in the scientist view.</b> With protein ≥ 30 % (impossible with these ingredients), five constraints are each enough on their own to restore feasibility.</span></figcaption>
+  </figure>
+</section>
+
+<!-- ============================ 1–5 · DATOS ============================ -->
+<section class="chap" id="datos" data-toc="1–5" style="--c:var(--b3)">
+  <div class="chap-head"><span class="big">1–5</span>
+    <div class="eyebrow" lang="es">Bloques 1 a 5 · Entradas</div><div class="eyebrow" lang="en">Blocks 1 to 5 · Inputs</div>
+    <h2 lang="es">Los datos del modelo</h2><h2 lang="en">The model’s data</h2>
+    <p lang="es">De dónde salen <i>b</i>, <i>a</i>, <i>c</i>, <i>l</i> y <i>u</i>, qué ajustes aplica la app y qué supuestos conviene declarar.</p>
+    <p lang="en">Where <i>b</i>, <i>a</i>, <i>c</i>, <i>l</i> and <i>u</i> come from, which adjustments the app applies and which assumptions to declare.</p>
+    <svg class="ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><rect x="7" y="7" width="34" height="34" rx="4"/><path d="M7 18h34M7 29h34M18 7v34M29 7v34"/></svg>
+    <span class="rule"></span></div>
+  <nav class="inchap"></nav>
+
+  <h3 id="d-req" data-n="1.1"><span lang="es">Requerimientos <i>b</i>: fuentes y ajustes</span><span lang="en">Requirements <i>b</i>: sources and adjustments</span></h3>
+  <div class="tbl"><table>
+    <thead><tr><th lang="es">Perfil</th><th lang="en">Profile</th><th lang="es">Fuente</th><th lang="en">Source</th><th lang="es">Base AA</th><th lang="en">AA basis</th><th lang="es">Estado</th><th lang="en">Status</th></tr></thead>
+    <tbody>
+      <tr><td>Ross 308 · Arbor Acres Plus</td><td>Aviagen (2022)</td><td lang="es">digestible</td><td lang="en">digestible</td><td><span class="badge ok" lang="es">oficial vigente</span><span class="badge ok" lang="en">current official</span></td></tr>
+      <tr><td>Cobb 500</td><td>Cobb-Vantress (2022)</td><td lang="es">digestible</td><td lang="en">digestible</td><td><span class="badge warn" lang="es">verificar</span><span class="badge warn" lang="en">check</span></td></tr>
+      <tr><td>Hubbard Efficiency Plus</td><td>Hubbard (2022)</td><td lang="es">digestible</td><td lang="en">digestible</td><td><span class="badge ok" lang="es">oficial vigente</span><span class="badge ok" lang="en">current official</span></td></tr>
+      <tr><td lang="es">Crecimiento lento</td><td lang="en">Slow-growing</td><td lang="es">EM y PC de Usturoi et al. (2023); AA por proteína ideal</td><td lang="en">ME and CP from Usturoi et al. (2023); AA by ideal protein</td><td lang="es">digestible</td><td lang="en">digestible</td><td><span class="badge warn" lang="es">orientativo</span><span class="badge warn" lang="en">guideline</span></td></tr>
+      <tr><td>NRC</td><td>NRC (1994)</td><td>total</td><td><span class="badge info" lang="es">histórico</span><span class="badge info" lang="en">historical</span></td></tr>
+      <tr><td lang="es">Personalizado</td><td lang="en">Custom</td><td lang="es">NASEM (2025), Rostagno et al. (2024) u otra</td><td lang="en">NASEM (2025), Rostagno et al. (2024) or other</td><td lang="es">digestible</td><td lang="en">digestible</td><td><span class="badge pri" lang="es">del usuario</span><span class="badge pri" lang="en">user</span></td></tr>
+    </tbody></table></div>
+  <p lang="es">Sobre la tabla de la fase, la app aplica ajustes explícitos y documentados:</p>
+  <p lang="en">On top of the phase table, the app applies explicit, documented adjustments:</p>
+  <div class="eq left"><math display="block"><mtable columnalign="left" rowspacing="0.6em">
+    <mtr><mtd><msubsup><mi>b</mi><mtext>AA</mtext><mo>−</mo></msubsup><mo>←</mo><msub><mi>f</mi><mtext>AA</mtext></msub><mspace width="0.15em"/><msubsup><mi>b</mi><mtext>AA</mtext><mo>−</mo></msubsup><mo>,</mo><mspace width="1em"/><msubsup><mi>b</mi><mtext>PC</mtext><mo>−</mo></msubsup><mo>←</mo><msub><mi>f</mi><mtext>PC</mtext></msub><mspace width="0.15em"/><msubsup><mi>b</mi><mtext>PC</mtext><mo>−</mo></msubsup><mspace width="1.4em"/><mo>(</mo><msub><mi>f</mi><mtext>AA</mtext></msub><mo>,</mo><msub><mi>f</mi><mtext>PC</mtext></msub><mo>)</mo><mo>=</mo><mo>{</mo><mo>(</mo><mn>1.03</mn><mo>,</mo><mn>1.02</mn><mo>)</mo><mo>,</mo><mo>(</mo><mn>0.96</mn><mo>,</mo><mn>0.98</mn><mo>)</mo><mo>}</mo></mtd></mtr>
+    <mtr><mtd><msub><mi>b</mi><mtext>EM</mtext></msub><mo>←</mo><msub><mi>b</mi><mtext>EM</mtext></msub><mo>−</mo><mn>50</mn><mspace width="1.4em"/><mtext lang="es">si altitud ≥ 1,500 msnm (al aplicar la recomendación)</mtext><mtext lang="en">if altitude ≥ 1,500 m (when the recommendation is applied)</mtext></mtd></mtr>
+    <mtr><mtd><msub><mi>b</mi><mtext>DEB</mtext></msub><mo>=</mo><mo>[</mo><mn>230</mn><mo>,</mo><mn>300</mn><mo>]</mo><mtext> mEq/kg</mtext><mspace width="1.4em"/><mtext lang="es">si temperatura ≥ 30 °C</mtext><mtext lang="en">if temperature ≥ 30 °C</mtext></mtd></mtr>
+    <mtr><mtd><msubsup><mi>b</mi><mtext>Xan</mtext><mo>−</mo></msubsup><mo>=</mo><mtext lang="es">objetivo de xantofilas (70 mg/kg por omisión) en las dos últimas fases si el pollo es pigmentado</mtext><mtext lang="en">xanthophyll target (70 mg/kg by default) in the last two phases for pigmented birds</mtext></mtd></mtr>
+  </mtable></math><span class="no">(5)</span></div>
+  <p class="where" lang="es">El primer par de factores es para machos y el segundo para hembras; las aves mixtas usan la tabla tal cual.</p>
+  <p class="where" lang="en">The first factor pair is for males and the second for females; as-hatched birds use the table as is.</p>
+  <figure data-fig="c_requer" data-marks="0">
+    <figcaption><span class="fn"></span><span lang="es"><b>Requerimientos en la vista científica.</b> Se muestran los 20 nutrientes y la columna de proteína ideal: cada aminoácido como % de la lisina.</span><span lang="en"><b>Requirements in the scientist view.</b> All 20 nutrients and the ideal-protein column: each amino acid as % of lysine.</span></figcaption>
+    <ol class="legend"><li><span lang="es"><b>% de Lis</b>: el perfil de proteína ideal de la tabla elegida.</span><span lang="en"><b>% of Lys</b>: the ideal-protein profile of the chosen table.</span></li></ol>
+  </figure>
+
+  <h3 id="d-matriz" data-n="4.1"><span lang="es">La matriz <i>a</i></span><span lang="en">The matrix <i>a</i></span></h3>
+  <p lang="es">La biblioteca tiene <b>29 ingredientes</b> en ocho categorías, cada uno con 28 columnas: materia seca, EMAn, proteína, extracto etéreo, fibra, Ca, P disponible, Na, Cl, K, ácido linoleico, ocho aminoácidos totales, sus ocho digestibles estandarizados y xantofilas. Todo está en base tal como se ofrece (≈ 88–90 % de materia seca). Las fuentes son Rostagno et al. (2017), FEDNA (2019) y NRC (1994).</p>
+  <p lang="en">The library holds <b>29 ingredients</b> in eight categories, each with 28 columns: dry matter, AMEn, protein, ether extract, fibre, Ca, available P, Na, Cl, K, linoleic acid, eight total amino acids, their eight standardized digestible values and xanthophylls. Everything is on an as-fed basis (≈ 88–90 % dry matter). Sources are Rostagno et al. (2017), FEDNA (2019) and NRC (1994).</p>
+  <figure data-fig="c_aa" data-marks="0">
+    <figcaption><span class="fn"></span><span lang="es"><b>Composición editable de la pasta de soya 46 %.</b> En la vista científica se ven y editan los aminoácidos totales y digestibles de cada ingrediente.</span><span lang="en"><b>Editable composition of soybean meal 46 %.</b> The scientist view shows and edits each ingredient’s total and digestible amino acids.</span></figcaption>
+    <ol class="legend"><li><span lang="es">Cada aminoácido tiene dos casillas: <b>total · digestible</b>.</span><span lang="en">Each amino acid has two fields: <b>total · digestible</b>.</span></li></ol>
+  </figure>
+  <p lang="es">El balance electrolítico de cada ingrediente (Mongin, 1981) se calcula con las masas atómicas de Na, K y Cl:</p>
+  <p lang="en">Each ingredient’s electrolyte balance (Mongin, 1981) is computed from the atomic masses of Na, K and Cl:</p>
+  <div class="eq"><math display="block"><mrow><mtext>DEB</mtext><mo>=</mo><mfrac><mrow><mtext>Na</mtext><mo>%</mo><mo>·</mo><msup><mn>10</mn><mn>4</mn></msup></mrow><mn>22.99</mn></mfrac><mo>+</mo><mfrac><mrow><mtext>K</mtext><mo>%</mo><mo>·</mo><msup><mn>10</mn><mn>4</mn></msup></mrow><mn>39.10</mn></mfrac><mo>−</mo><mfrac><mrow><mtext>Cl</mtext><mo>%</mo><mo>·</mo><msup><mn>10</mn><mn>4</mn></msup></mrow><mn>35.45</mn></mfrac><mspace width="1em"/><mtext>(mEq/kg)</mtext></mrow></math><span class="no">(6)</span></div>
+  <div class="box warn"><span class="bi">!</span><span class="bt" lang="es">Precaución · la matriz domina el error</span><span class="bt" lang="en">Caution · the matrix dominates the error</span>
+    <p lang="es">El cálculo es exacto; la incertidumbre está en la composición. Como muestra la validación (capítulo V), las diferencias de 5–10 % en aminoácidos entre tablas son habituales. Para publicar, reporte la matriz usada (el JSON la incluye) y, de ser posible, analice los ingredientes principales.</p>
+    <p lang="en">The calculation is exact; the uncertainty lies in composition. As the validation shows (chapter V), 5–10 % amino-acid differences between tables are common. For publication, report the matrix used (the JSON includes it) and, if possible, analyse the main ingredients.</p></div>
+
+  <h3 id="d-precios" data-n="5.1"><span lang="es">Precios <i>c</i> y límites <i>l</i>, <i>u</i></span><span lang="en">Prices <i>c</i> and limits <i>l</i>, <i>u</i></span></h3>
+  <p lang="es">Los precios precargados son ilustrativos. El Bloque 5 muestra además dos índices de eficiencia de compra:</p>
+  <p lang="en">The preloaded prices are illustrative. Block 5 also shows two purchasing-efficiency indices:</p>
+  <div class="eq"><math display="block"><mrow><mfrac><mi>$</mi><mrow><mn>1000</mn><mtext> kcal</mtext></mrow></mfrac><mo>=</mo><mfrac><msub><mi>c</mi><mi>i</mi></msub><msub><mtext>EM</mtext><mi>i</mi></msub></mfrac><mo>·</mo><mn>1000</mn><mspace width="2.4em"/><mfrac><mi>$</mi><mrow><mtext>kg PC</mtext></mrow></mfrac><mo>=</mo><mfrac><msub><mi>c</mi><mi>i</mi></msub><mrow><msub><mtext>PC</mtext><mi>i</mi></msub><mo>/</mo><mn>100</mn></mrow></mfrac></mrow></math><span class="no">(7)</span></div>
+  <p lang="es">Son útiles para ordenar fuentes, pero no sustituyen al modelo: un ingrediente puede ser la fuente de energía más barata y aun así quedar fuera por su aporte de otros nutrientes. En el caso, el sorgo da la energía a $1.56 frente a $1.63 del maíz y no entra (sección 6.4).</p>
+  <p lang="en">They help rank sources but do not replace the model: an ingredient can be the cheapest energy source and still be left out because of its other nutrients. In the case, sorghum supplies energy at $1.56 versus $1.63 for corn and does not enter (section 6.4).</p>
+</section>
+
+<!-- ============================ 6 · EL CASO ============================ -->
+<section class="chap" id="b6" data-toc="6" style="--c:var(--b6)">
+  <div class="chap-head"><span class="big">6</span>
+    <div class="eyebrow" lang="es">Bloque 6 · Formulación</div><div class="eyebrow" lang="en">Block 6 · Formulation</div>
+    <h2 lang="es">Lectura científica de una solución</h2><h2 lang="en">A scientific reading of a solution</h2>
+    <p lang="es">El caso de ejemplo resuelto e interpretado: qué restricciones mandan, cuánto vale cada una y qué tan robusta es la fórmula.</p>
+    <p lang="en">The worked case solved and interpreted: which constraints drive it, what each is worth and how robust the formula is.</p>
+    <svg class="ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M24 6v34M14 40h20M8 14h32"/><path d="M8 14l-5 12a5 5 0 0010 0zM40 14l-5 12a5 5 0 0010 0z"/></svg>
+    <span class="rule"></span></div>
+  <nav class="inchap"></nav>
+
+  <h3 id="c-sol" data-n="6.1"><span lang="es">La solución y su certificado</span><span lang="en">The solution and its certificate</span></h3>
+  <figure data-fig="c_resultado" data-marks="0,1">
+    <figcaption><span class="fn"></span><span lang="es"><b>Resultado en la vista científica.</b> En lugar del mensaje para el productor aparece el certificado, con la brecha primal–dual y la violación máxima.</span><span lang="en"><b>Result in the scientist view.</b> Instead of the producer message, the certificate appears, with the primal–dual gap and the largest violation.</span></figcaption>
+    <ol class="legend">
+      <li><span lang="es"><b>Solución óptima certificada</b> por dualidad fuerte.</span><span lang="en"><b>Certified optimal solution</b> by strong duality.</span></li>
+      <li><span lang="es">Indicadores económicos de la fase.</span><span lang="en">Economic indicators of the phase.</span></li>
+    </ol>
+  </figure>
+  <div class="kpis">
+    <div class="kpi"><span lang="es">Variables</span><span lang="en">Variables</span><b>14</b><small lang="es">ingredientes</small><small lang="en">ingredients</small></div>
+    <div class="kpi"><span lang="es">Restricciones</span><span lang="en">Constraints</span><b>39</b><small lang="es">15 activas</small><small lang="en">15 binding</small></div>
+    <div class="kpi"><span lang="es">Pivoteos</span><span lang="en">Pivots</span><b>51</b><small lang="es">fases I y II</small><small lang="en">phases I and II</small></div>
+    <div class="kpi"><span lang="es">Costo óptimo</span><span lang="en">Optimal cost</span><b>$ 8,805.03</b><small lang="es">por tonelada</small><small lang="en">per tonne</small></div>
+  </div>
+  <figure data-fig="c_nutrientes">
+    <figcaption><span class="fn"></span><span lang="es"><b>Aporte nutricional.</b> La columna <i>Estado</i> marca los nutrientes en su límite («limitante») y la última columna da su costo marginal por tonelada si el requerimiento subiera 1 %.</span><span lang="en"><b>Nutrient supply.</b> The <i>Status</i> column flags nutrients at their limit (“binding”) and the last column gives their marginal cost per tonne if the requirement rose by 1 %.</span></figcaption>
+  </figure>
+
+  <h3 id="c-sombra" data-n="6.2"><span lang="es">Qué restricciones mandan</span><span lang="en">Which constraints drive the cost</span></h3>
+  <p lang="es">Quince restricciones quedan activas: la suma a 100 %, nueve mínimos de nutrientes (EMAn, proteína, lisina, Met + Cis, treonina, valina, Ca, P disponible y Na), el máximo de cloro y los cuatro límites que fijan la premezcla y la colina. Los precios sombra por unidad de requerimiento no son comparables entre sí (kcal frente a puntos %); para compararlos se expresan como el costo de subir <b>1 % relativo</b> cada requerimiento, <math><mn>1000</mn><msub><mi>y</mi><mi>j</mi></msub><mo>·</mo><msub><mi>b</mi><mi>j</mi></msub><mo>/</mo><mn>100</mn></math>:</p>
+  <p lang="en">Fifteen constraints are binding: the 100 % sum, nine nutrient minimums (AMEn, protein, lysine, Met + Cys, threonine, valine, Ca, available P and Na), the chloride maximum and the four limits fixing premix and choline. Shadow prices per unit of requirement are not comparable (kcal versus % points); to compare them, they are expressed as the cost of raising each requirement by <b>1 % relative</b>, <math><mn>1000</mn><msub><mi>y</mi><mi>j</mi></msub><mo>·</mo><msub><mi>b</mi><mi>j</mi></msub><mo>/</mo><mn>100</mn></math>:</p>
+  <figure data-chart="sombra" class="narrow">
+    <figcaption><span class="fn"></span><span lang="es"><b>Costo de endurecer cada requerimiento activo un 1 %</b> ($/t). La energía domina: subirla 1 % (29 kcal) encarece la dieta $144.7/t, tres veces más que la proteína. El cloro es un máximo: relajarlo abarata la dieta.</span><span lang="en"><b>Cost of tightening each binding requirement by 1 %</b> ($/t). Energy dominates: raising it 1 % (29 kcal) adds $144.7/t, three times more than protein. Chloride is a maximum: relaxing it makes the diet cheaper.</span></figcaption>
+  </figure>
+  <div class="box case"><span class="bi">◆</span><span class="bt" lang="es">En el caso · el precio sombra predice el ahorro</span><span class="bt" lang="en">In the case · the shadow price predicts the saving</span>
+    <p lang="es">El precio sombra de la energía es <b>$4.948 por tonelada por kcal/kg</b>. Según (3), bajar el requerimiento 50 kcal debería ahorrar 50 × 4.948 = <b>$247.40/t</b>. Formulando con y sin el ajuste se obtienen $9,052.43 y $8,805.03: una diferencia de <b>$247.40</b>, exactamente la predicha. La base óptima no cambió en ese intervalo, y por eso la derivada vale para un cambio de 50 kcal.</p>
+    <p lang="en">The energy shadow price is <b>$4.948 per tonne per kcal/kg</b>. By (3), lowering the requirement by 50 kcal should save 50 × 4.948 = <b>$247.40/t</b>. Formulating with and without the adjustment gives $9,052.43 and $8,805.03: a difference of <b>$247.40</b>, exactly as predicted. The optimal basis did not change over that interval, which is why the derivative holds for a 50 kcal change.</p></div>
+  <div class="tbl"><table>
+    <caption lang="es">Precios sombra del caso (tabla de la app) y su lectura</caption><caption lang="en">Shadow prices in the case (app table) and their reading</caption>
+    <thead><tr><th lang="es">Restricción activa</th><th lang="en">Binding constraint</th><th class="r">∂Z/∂b · $/t</th><th lang="es">Lectura</th><th lang="en">Reading</th></tr></thead>
+    <tbody>
+      <tr><td lang="es">EMAn ≥ 2,925 kcal/kg</td><td lang="en">AMEn ≥ 2,925 kcal/kg</td><td class="r">4.948</td><td lang="es">+1 kcal/kg → +$4.95/t</td><td lang="en">+1 kcal/kg → +$4.95/t</td></tr>
+      <tr><td lang="es">Proteína cruda ≥ 23 %</td><td lang="en">Crude protein ≥ 23 %</td><td class="r">206.432</td><td lang="es">+0.1 punto → +$20.64/t</td><td lang="en">+0.1 point → +$20.64/t</td></tr>
+      <tr><td lang="es">Lisina dig. ≥ 1.32 %</td><td lang="en">Dig. lysine ≥ 1.32 %</td><td class="r">156.583</td><td lang="es">+0.01 punto → +$1.57/t</td><td lang="en">+0.01 point → +$1.57/t</td></tr>
+      <tr><td>Met + Cis ≥ 1.00 %</td><td class="r">522.293</td><td lang="es">+0.01 punto → +$5.22/t</td><td lang="en">+0.01 point → +$5.22/t</td></tr>
+      <tr><td lang="es">Treonina dig. ≥ 0.88 %</td><td lang="en">Dig. threonine ≥ 0.88 %</td><td class="r">267.642</td><td lang="es">+0.01 punto → +$2.68/t</td><td lang="en">+0.01 point → +$2.68/t</td></tr>
+      <tr><td lang="es">Valina dig. ≥ 1.00 %</td><td lang="en">Dig. valine ≥ 1.00 %</td><td class="r">738.980</td><td lang="es">+0.01 punto → +$7.39/t</td><td lang="en">+0.01 point → +$7.39/t</td></tr>
+      <tr><td lang="es">Calcio ≥ 0.95 %</td><td lang="en">Calcium ≥ 0.95 %</td><td class="r">394.540</td><td lang="es">+0.01 punto → +$3.95/t</td><td lang="en">+0.01 point → +$3.95/t</td></tr>
+      <tr><td lang="es">P disponible ≥ 0.50 %</td><td lang="en">Available P ≥ 0.50 %</td><td class="r">1,378.480</td><td lang="es">+0.01 punto → +$13.78/t</td><td lang="en">+0.01 point → +$13.78/t</td></tr>
+      <tr><td lang="es">Sodio ≥ 0.18 %</td><td lang="en">Sodium ≥ 0.18 %</td><td class="r">944.167</td><td lang="es">+0.01 punto → +$9.44/t</td><td lang="en">+0.01 point → +$9.44/t</td></tr>
+      <tr><td lang="es">Cloro ≤ 0.23 %</td><td lang="en">Chloride ≤ 0.23 %</td><td class="r">−326.888</td><td lang="es">+0.01 punto de tope → −$3.27/t</td><td lang="en">+0.01 point of ceiling → −$3.27/t</td></tr>
+    </tbody></table></div>
+  <p lang="es">El signo del cloro explica una decisión de la fórmula que a primera vista sorprende: la app usa <b>bicarbonato de sodio</b> (0.153 %) además de sal, porque el sodio es limitante y el cloro ya está en su máximo. El bicarbonato aporta sodio sin cloro.</p>
+  <p lang="en">The chloride sign explains a choice that may look surprising at first: the app uses <b>sodium bicarbonate</b> (0.153 %) besides salt, because sodium is binding and chloride is already at its ceiling. Bicarbonate supplies sodium without chloride.</p>
+  <figure data-fig="c_duales" data-marks="0">
+    <figcaption><span class="fn"></span><span lang="es"><b>Precios sombra y costos reducidos en la app,</b> con la exportación del modelo completo.</span><span lang="en"><b>Shadow prices and reduced costs in the app,</b> with the full-model export.</span></figcaption>
+    <ol class="legend"><li><span lang="es"><b>Modelo y solución (JSON)</b>: matriz, precios, límites, requerimientos y solución (capítulo R).</span><span lang="en"><b>Model and solution (JSON)</b>: matrix, prices, limits, requirements and solution (chapter R).</span></li></ol>
+  </figure>
+
+  <h3 id="c-costo" data-n="6.3"><span lang="es">Dónde está el costo</span><span lang="en">Where the cost sits</span></h3>
+  <p lang="es">La fracción de la dieta que ocupa un ingrediente y la fracción del costo que representa pueden diferir mucho. Comparar ambas orienta la negociación de compras mejor que el precio por kilo:</p>
+  <p lang="en">An ingredient’s share of the diet and its share of the cost can differ widely. Comparing both guides purchasing better than price per kilo:</p>
+  <figure data-chart="costo" class="narrow">
+    <figcaption><span class="fn"></span><span lang="es"><b>Participación en la masa frente a participación en el costo</b> de la dieta óptima del caso. La pasta de soya es el 39.5 % de la masa y el 47.2 % del costo; la DL-metionina, el 0.38 % de la masa y el 3.0 % del costo.</span><span lang="en"><b>Share of mass versus share of cost</b> in the case’s optimal diet. Soybean meal is 39.5 % of the mass and 47.2 % of the cost; DL-methionine is 0.38 % of the mass and 3.0 % of the cost.</span></figcaption>
+  </figure>
+
+  <h3 id="c-reducidos" data-n="6.4"><span lang="es">Costos reducidos: el caso del sorgo</span><span lang="en">Reduced costs: the sorghum case</span></h3>
+  <p lang="es">De los 14 ingredientes, solo el sorgo queda fuera. Su costo reducido es <b>1.571 $/t por punto %</b>, es decir, 0.1571 $/kg. Con (4), su precio de entrada es 5.00 − 0.157 = <b>$4.84/kg</b>: si el proveedor lo ofrece a ese precio o menos, conviene volver a formular. Es el número que la vista Productor traduce como «empezaría a convenirte».</p>
+  <p lang="en">Of the 14 ingredients, only sorghum is left out. Its reduced cost is <b>1.571 $/t per % point</b>, i.e., 0.1571 $/kg. By (4), its entry price is 5.00 − 0.157 = <b>$4.84/kg</b>: if the supplier offers it at that price or less, reformulating pays. This is the number the Producer view translates as “it would start to pay off”.</p>
+  <figure data-fig="c_sensib">
+    <figcaption><span class="fn"></span><span lang="es"><b>Análisis de sensibilidad.</b> Precio de entrada de los ingredientes no usados y efecto de relajar los límites de inclusión activos.</span><span lang="en"><b>Sensitivity analysis.</b> Entry price of unused ingredients and effect of relaxing binding inclusion limits.</span></figcaption>
+  </figure>
+
+  <h3 id="c-ideal" data-n="6.5"><span lang="es">Calidad de la fórmula: proteína ideal e indicadores</span><span lang="en">Formula quality: ideal protein and indicators</span></h3>
+  <p lang="es">El óptimo cumple los mínimos, pero conviene verificar relaciones que el modelo no impone como restricción. La app las calcula en <b>Indicadores de calidad</b>:</p>
+  <p lang="en">The optimum meets the minimums, but some ratios the model does not impose as constraints are worth checking. The app computes them under <b>Quality indicators</b>:</p>
+  <figure data-chart="ideal" class="narrow">
+    <figcaption><span class="fn"></span><span lang="es"><b>Perfil de proteína ideal de la dieta del caso</b> (aminoácidos digestibles como % de la lisina) frente a los intervalos de referencia que usa la app. Todos caen en su intervalo o por encima de él; la valina (75.8) queda en el borde inferior, porque es el aminoácido que la app tuvo que suplementar.</span><span lang="en"><b>Ideal-protein profile of the case diet</b> (digestible amino acids as % of lysine) against the reference ranges used by the app. All fall within or above their range; valine (75.8) sits at the lower edge, as it is the amino acid the app had to supplement.</span></figcaption>
+  </figure>
+  <div class="tbl"><table>
+    <thead><tr><th lang="es">Indicador</th><th lang="en">Indicator</th><th class="r" lang="es">Caso</th><th class="r" lang="en">Case</th><th lang="es">Referencia</th><th lang="en">Reference</th></tr></thead>
+    <tbody>
+      <tr><td lang="es">Ca : P disponible</td><td lang="en">Ca : available P</td><td class="r">1.90 : 1</td><td>1.8–2.1 : 1</td></tr>
+      <tr><td lang="es">Balance electrolítico</td><td lang="en">Electrolyte balance</td><td class="r">256 mEq/kg</td><td lang="es">200–300 (óptimo ≈ 250)</td><td lang="en">200–300 (optimum ≈ 250)</td></tr>
+      <tr><td lang="es">EM : PC</td><td lang="en">ME : CP</td><td class="r">127 kcal/%</td><td lang="es">informativo</td><td lang="en">informative</td></tr>
+      <tr><td lang="es">Grasa total (EE)</td><td lang="en">Total fat (EE)</td><td class="r">4.63 %</td><td lang="es">&lt; 7 % para buen pellet</td><td lang="en">&lt; 7 % for good pellets</td></tr>
+    </tbody></table></div>
+  <figure data-fig="c_indic">
+    <figcaption><span class="fn"></span><span lang="es"><b>Indicadores de calidad en la app.</b></span><span lang="en"><b>Quality indicators in the app.</b></span></figcaption>
+  </figure>
+</section>
+
+<!-- ============================ 7–8 ============================ -->
+<section class="chap" id="b78" data-toc="7–8" style="--c:var(--b7)">
+  <div class="chap-head"><span class="big">7–8</span>
+    <div class="eyebrow" lang="es">Bloques 7 y 8</div><div class="eyebrow" lang="en">Blocks 7 and 8</div>
+    <h2 lang="es">Programa multifase e informe</h2><h2 lang="en">Multiphase program and report</h2>
+    <p lang="es">Cómo se construye el programa completo y qué deja el informe para una bitácora o un artículo.</p>
+    <p lang="en">How the full program is built and what the report provides for a log book or a paper.</p>
+    <svg class="ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><rect x="6" y="10" width="36" height="32" rx="4"/><path d="M6 19h36M16 6v8M32 6v8M13 27h6M13 34h6M25 27h10"/></svg>
+    <span class="rule"></span></div>
+  <nav class="inchap"></nav>
+  <h3 id="p-programa" data-n="7.1"><span lang="es">Programa: un modelo por fase</span><span lang="en">Program: one model per phase</span></h3>
+  <p lang="es">El Bloque 7 resuelve un modelo (1) independiente para cada fase de la línea, con los mismos ingredientes y precios y con los ajustes de (5) por sexo, pigmentación y calor. El costo del ciclo por ave y por kilo de peso vivo es:</p>
+  <p lang="en">Block 7 solves an independent model (1) for each phase of the line, with the same ingredients and prices and the adjustments of (5) for sex, pigmentation and heat. The cycle cost per bird and per kilo of live weight is:</p>
+  <div class="eq"><math display="block"><mrow><msub><mi>C</mi><mtext>ave</mtext></msub><mo>=</mo><munder><mo>∑</mo><mi>f</mi></munder><msub><mi>q</mi><mi>f</mi></msub><mspace width="0.15em"/><msubsup><mi>p</mi><mi>f</mi><mo>*</mo></msubsup><mspace width="2.4em"/><msub><mi>C</mi><mtext>kg PV</mtext></msub><mo>=</mo><mfrac><msub><mi>C</mi><mtext>ave</mtext></msub><mrow><munder><mo>∑</mo><mi>f</mi></munder><msub><mi>g</mi><mi>f</mi></msub></mrow></mfrac></mrow></math><span class="no">(8)</span></div>
+  <p class="where" lang="es">con <math><msub><mi>q</mi><mi>f</mi></msub></math> el consumo por ave en la fase (kg), <math><msubsup><mi>p</mi><mi>f</mi><mo>*</mo></msubsup></math> el costo óptimo por kg y <math><msub><mi>g</mi><mi>f</mi></msub></math> la ganancia de peso. En el caso: $52.94 por ave y $15.04 por kg de peso vivo.</p>
+  <p class="where" lang="en">with <math><msub><mi>q</mi><mi>f</mi></msub></math> the intake per bird in the phase (kg), <math><msubsup><mi>p</mi><mi>f</mi><mo>*</mo></msubsup></math> the optimal cost per kg and <math><msub><mi>g</mi><mi>f</mi></msub></math> the weight gain. In the case: $52.94 per bird and $15.04 per kg of live weight.</p>
+  <div class="box warn"><span class="bi">!</span><span class="bt" lang="es">Precaución · supuesto de separabilidad</span><span class="bt" lang="en">Caution · separability assumption</span>
+    <p lang="es">Cada fase se optimiza por separado con consumo y ganancia fijos: el programa no modela la respuesta productiva a la densidad de nutrientes. Las ediciones manuales del Bloque 2 y el ajuste por altitud solo valen para la formulación individual; por eso la iniciación aparece aquí a $9,052/t.</p>
+    <p lang="en">Each phase is optimized separately with fixed intake and gain: the program does not model the productive response to nutrient density. Manual edits in Block 2 and the altitude adjustment only apply to the single-phase formulation; hence the starter appears here at $9,052/t.</p></div>
+  <figure data-fig="c_programa">
+    <figcaption><span class="fn"></span><span lang="es"><b>Resumen por fase y fórmulas del programa.</b> Todas las fases con certificado de optimalidad.</span><span lang="en"><b>Summary by phase and program formulas.</b> Every phase with an optimality certificate.</span></figcaption>
+  </figure>
+  <h3 id="p-informe" data-n="8.1"><span lang="es">El informe científico</span><span lang="en">The scientific report</span></h3>
+  <p lang="es">En la vista científica, el informe redacta el método (línea, fase, fuente de requerimientos, base de aminoácidos, matrices, costo, aporte y restricciones limitantes) y añade la cita del software. Es un borrador fiel de lo que se hizo, útil para una bitácora o como punto de partida para un artículo.</p>
+  <p lang="en">In the scientist view, the report writes up the method (line, phase, requirement source, amino-acid basis, matrices, cost, supply and binding constraints) and adds the software citation. It is a faithful draft of what was done, useful for a log book or as a starting point for a paper.</p>
+  <figure data-fig="c_informe">
+    <figcaption><span class="fn"></span><span lang="es"><b>Informe redactado en la vista científica,</b> con las restricciones limitantes y la referencia del programa.</span><span lang="en"><b>Written report in the scientist view,</b> with binding constraints and the software reference.</span></figcaption>
+  </figure>
+</section>
+
+<!-- ============================ V · VALIDACIÓN ============================ -->
+<section class="chap" id="validacion" data-toc="V" style="--c:var(--ok)">
+  <div class="chap-head"><span class="big">V</span>
+    <div class="eyebrow" lang="es">Evaluación de la plataforma</div><div class="eyebrow" lang="en">Platform evaluation</div>
+    <h2 lang="es">Validación</h2><h2 lang="en">Validation</h2>
+    <p lang="es">Tres pruebas independientes: el cálculo del aporte, el optimizador y la matemática del motor.</p>
+    <p lang="en">Three independent tests: supply calculation, the optimizer and the solver’s mathematics.</p>
+    <svg class="ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="24" r="18"/><path d="M15 25l6 6 12-14"/></svg>
+    <span class="rule"></span></div>
+  <nav class="inchap"></nav>
+
+  <h3 id="v-diseno" data-n="V.1"><span lang="es">Diseño de la validación</span><span lang="en">Validation design</span></h3>
+  <p lang="es">Se tomaron <b>8 dietas de 4 artículos</b> revisados por pares (México, Jordania y Estados Unidos; Ross 308, Cobb 500 y Ross 708; base total y digestible). Cada fórmula se introdujo tal como fue publicada, normalizada a 100 % si la tabla no sumaba exactamente, y se analizó con la matriz y los precios de la biblioteca de la app.</p>
+  <p lang="en"><b>Eight diets from 4 peer-reviewed papers</b> were used (Mexico, Jordan and the United States; Ross 308, Cobb 500 and Ross 708; total and digestible basis). Each formula was entered as published, normalized to 100 % when the table did not add up exactly, and analysed with the app’s library matrix and prices.</p>
+  <ol>
+    <li lang="es"><b>Cálculo del aporte.</b> Se compara el análisis calculado que reportan los autores con el que calcula la app, mediante el error absoluto porcentual medio (MAPE).</li>
+    <li lang="en"><b>Supply calculation.</b> The calculated analysis reported by the authors is compared with the app’s, using the mean absolute percentage error (MAPE).</li>
+    <li lang="es"><b>Optimizador.</b> Se pide a la app la dieta de mínimo costo que aporte, al menos, lo mismo que calcula para la fórmula publicada, con los mismos ingredientes y sus aditivos fijos. Como la fórmula publicada ya es factible, el óptimo debe igualarla o abaratarla.</li>
+    <li lang="en"><b>Optimizer.</b> The app is asked for the least-cost diet supplying at least what it computes for the published formula, with the same ingredients and their fixed additives. Since the published formula is already feasible, the optimum must match or beat it.</li>
+    <li lang="es"><b>Matemática.</b> El símplex se compara con un solucionador de referencia independiente en problemas aleatorios.</li>
+    <li lang="en"><b>Mathematics.</b> The simplex is compared with an independent reference solver on random problems.</li>
+  </ol>
+  <div class="eq"><math display="block"><mrow><mtext>MAPE</mtext><mo>=</mo><mfrac><mn>100</mn><mi>n</mi></mfrac><munderover><mo>∑</mo><mrow><mi>k</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><mfrac><mrow><mo>|</mo><msubsup><mi>v</mi><mi>k</mi><mtext>app</mtext></msubsup><mo>−</mo><msubsup><mi>v</mi><mi>k</mi><mtext>art</mtext></msubsup><mo>|</mo></mrow><msubsup><mi>v</mi><mi>k</mi><mtext>art</mtext></msubsup></mfrac></mrow></math><span class="no">(9)</span></div>
+
+  <h3 id="v-aporte" data-n="V.2"><span lang="es">Prueba 1: cálculo del aporte</span><span lang="en">Test 1: supply calculation</span></h3>
+  <div class="kpis">
+    <div class="kpi"><span lang="es">Energía metabolizable</span><span lang="en">Metabolizable energy</span><b>0.8 %</b><small lang="es">n = 6 · máx. 1.7 %</small><small lang="en">n = 6 · max 1.7 %</small></div>
+    <div class="kpi"><span lang="es">Proteína cruda</span><span lang="en">Crude protein</span><b>2.8 %</b><small lang="es">n = 8 · máx. 7.7 %</small><small lang="en">n = 8 · max 7.7 %</small></div>
+    <div class="kpi"><span lang="es">Aminoácidos</span><span lang="en">Amino acids</span><b>7.6 %</b><small lang="es">n = 31 · máx. 25.5 %</small><small lang="en">n = 31 · max 25.5 %</small></div>
+    <div class="kpi"><span lang="es">Ca, P disp. y Na</span><span lang="en">Ca, avail. P, Na</span><b>6.7 %</b><small lang="es">n = 14 · máx. 11.5 %</small><small lang="en">n = 14 · max 11.5 %</small></div>
+  </div>
+  <figure data-chart="validacion" class="narrow">
+    <figcaption><span class="fn"></span><span lang="es"><b>Diferencia relativa entre el análisis calculado por la app y el reportado por los autores,</b> en 61 comparaciones de 8 dietas (59 entran al MAPE). La banda verde marca ±3 %, lo esperable entre tablas para energía y proteína; la gris, ±10 %, lo esperable para aminoácidos y minerales. Los rombos huecos son erratas probables del artículo, excluidas del MAPE.</span><span lang="en"><b>Relative difference between the analysis computed by the app and that reported by the authors,</b> in 61 comparisons from 8 diets (59 enter the MAPE). The green band marks ±3 %, the usual spread between tables for energy and protein; the grey one ±10 %, the usual spread for amino acids and minerals. Hollow diamonds are probable typos in the paper, excluded from the MAPE.</span></figcaption>
+  </figure>
+  <p lang="es">La energía y la proteína coinciden dentro de lo normal entre tablas de composición. Las mayores diferencias aparecen en aminoácidos y minerales, y tienen explicaciones concretas: la proteína de la pasta de soya no reportada en dos artículos (se asumieron 46 % y 47 %), la base total frente a digestible y las tablas de origen distintas. El cálculo de la app es una suma ponderada exacta, así que estas diferencias reflejan la <b>matriz</b>, no el algoritmo.</p>
+  <p lang="en">Energy and protein agree within the normal spread between composition tables. The largest differences occur in amino acids and minerals, and have concrete explanations: soybean-meal protein not reported in two papers (46 % and 47 % were assumed), total versus digestible basis, and different source tables. The app’s calculation is an exact weighted sum, so these differences reflect the <b>matrix</b>, not the algorithm.</p>
+  <div class="box tip"><span class="bi">✓</span><span class="bt" lang="es">Erratas detectadas</span><span class="bt" lang="en">Typos detected</span>
+    <p lang="es">La comparación sirvió también para detectar dos valores reportados que parecen erratas: metionina 0.47 % en la finalización de Maldonado-Fuentes et al. (2020), cuando el mismo cuadro reporta 0.66 % para dietas con la misma DL-metionina, y valina 1.39 % en la iniciación de Obeidat et al. (2025), imposible con esa fórmula, cuando la fase siguiente reporta 0.35 %.</p>
+    <p lang="en">The comparison also flagged two reported values that look like typos: methionine 0.47 % in the finisher of Maldonado-Fuentes et al. (2020), while the same table reports 0.66 % for diets with the same DL-methionine; and valine 1.39 % in the starter of Obeidat et al. (2025), impossible with that formula, while the next phase reports 0.35 %.</p></div>
+
+  <h3 id="v-optim" data-n="V.3"><span lang="es">Prueba 2: el optimizador</span><span lang="en">Test 2: the optimizer</span></h3>
+  <p lang="es">En las 6 dietas con suficientes valores reportados (al menos cuatro nutrientes comparables), la app reencontró <b>exactamente la fórmula publicada</b>, con diferencias menores a 0.005 puntos en cada ingrediente y con certificado de optimalidad. Es decir: con esos ingredientes y ese aporte, cada dieta publicada ya era la de mínimo costo.</p>
+  <p lang="en">In the 6 diets with enough reported values (at least four comparable nutrients), the app recovered <b>exactly the published formula</b>, with differences below 0.005 points for every ingredient and an optimality certificate. In other words, with those ingredients and that supply, each published diet was already the least-cost one.</p>
+  <div class="tbl"><table>
+    <thead><tr><th lang="es">Artículo · fase</th><th lang="en">Paper · phase</th><th class="r" lang="es">Publicada ($/t)</th><th class="r" lang="en">Published ($/t)</th><th class="r" lang="es">App ($/t)</th><th class="r" lang="en">App ($/t)</th><th class="c" lang="es">Igual</th><th class="c" lang="en">Same</th></tr></thead>
+    <tbody id="tOpt"></tbody></table></div>
+  <p class="where" lang="es">Costos con los precios de ejemplo de la biblioteca. La app queda 2 centavos por debajo porque la prueba exige el aporte con una tolerancia relativa de 10⁻⁶.</p>
+  <p class="where" lang="en">Costs at the library’s example prices. The app comes out 2 cents lower because the test requires the supply with a relative tolerance of 10⁻⁶.</p>
+  <figure data-fig="c_reform">
+    <figcaption><span class="fn"></span><span lang="es"><b>Prueba del optimizador en la app</b> para la iniciación de Maldonado-Fuentes et al. (2020): fórmula publicada frente a fórmula de la app, ingrediente por ingrediente.</span><span lang="en"><b>Optimizer test in the app</b> for the starter of Maldonado-Fuentes et al. (2020): published versus app formula, ingredient by ingredient.</span></figcaption>
+  </figure>
+
+  <h3 id="v-mate" data-n="V.4"><span lang="es">Prueba 3: comparación con HiGHS</span><span lang="en">Test 3: comparison with HiGHS</span></h3>
+  <p lang="es">El símplex de la app se comparó con HiGHS (Huangfu y Hall, 2018), el solucionador de programación lineal que usa SciPy, en <b>400 problemas generados al azar</b> con las 6 tablas de requerimientos y la biblioteca de ingredientes, variando requerimientos (±8 %), ingredientes disponibles y precios:</p>
+  <p lang="en">The app’s simplex was compared with HiGHS (Huangfu & Hall, 2018), the linear-programming solver used by SciPy, on <b>400 randomly generated problems</b> built from the 6 requirement tables and the ingredient library, varying requirements (±8 %), available ingredients and prices:</p>
+  <div class="kpis">
+    <div class="kpi"><span lang="es">Factibles</span><span lang="en">Feasible</span><b>350 / 350</b><small lang="es">mismo costo mínimo</small><small lang="en">same minimum cost</small></div>
+    <div class="kpi"><span lang="es">Diferencia máx.</span><span lang="en">Max. difference</span><b>5 × 10⁻¹⁴</b><small lang="es">relativa</small><small lang="en">relative</small></div>
+    <div class="kpi"><span lang="es">Infactibles</span><span lang="en">Infeasible</span><b>50 / 50</b><small lang="es">detectados por ambos</small><small lang="en">flagged by both</small></div>
+    <div class="kpi"><span lang="es">Certificado</span><span lang="en">Certificate</span><b>350 / 350</b><small lang="es">soluciones aprobadas</small><small lang="en">solutions passed</small></div>
+  </div>
+  <figure data-fig="c_val">
+    <figcaption><span class="fn"></span><span lang="es"><b>Resumen de la validación en la app,</b> recalculado cada vez que se abre el bloque.</span><span lang="en"><b>Validation summary in the app,</b> recomputed every time the block is opened.</span></figcaption>
+  </figure>
+</section>
+
+<!-- ============================ R · REPRODUCIBILIDAD ============================ -->
+<section class="chap" id="repro" data-toc="R" style="--c:var(--b8)">
+  <div class="chap-head"><span class="big">R</span>
+    <div class="eyebrow" lang="es">Ciencia abierta</div><div class="eyebrow" lang="en">Open science</div>
+    <h2 lang="es">Reproducibilidad y publicación</h2><h2 lang="en">Reproducibility and publication</h2>
+    <p lang="es">Cómo exportar el modelo, verificarlo de forma independiente y describirlo en un artículo.</p>
+    <p lang="en">How to export the model, verify it independently and describe it in a paper.</p>
+    <svg class="ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 14l-9 10 9 10M32 14l9 10-9 10M27 9l-6 30"/></svg>
+    <span class="rule"></span></div>
+  <nav class="inchap"></nav>
+
+  <h3 id="json" data-n="R.1"><span lang="es">El archivo del modelo (JSON)</span><span lang="en">The model file (JSON)</span></h3>
+  <p lang="es">El botón <span class="ui">⬇ Modelo y solución (JSON)</span> guarda todo lo necesario para reproducir el cálculo sin la app:</p>
+  <p lang="en">The <span class="ui">⬇ Model and solution (JSON)</span> button saves everything needed to reproduce the calculation without the app:</p>
+  <div class="tbl"><table>
+    <thead><tr><th lang="es">Campo</th><th lang="en">Field</th><th lang="es">Contenido</th><th lang="en">Content</th></tr></thead>
+    <tbody>
+      <tr><td><code>software</code>, <code>doi</code>, <code>fecha</code></td><td lang="es">versión del programa, DOI y fecha del cálculo</td><td lang="en">program version, DOI and calculation date</td></tr>
+      <tr><td><code>genetica</code>, <code>sexo</code>, <code>fase</code>, <code>base</code></td><td lang="es">contexto; <code>base</code> es <code>dig</code> o <code>total</code></td><td lang="en">context; <code>base</code> is <code>dig</code> or <code>total</code></td></tr>
+      <tr><td><code>requerimientos</code></td><td lang="es"><code>{nutriente: [mín, máx]}</code>, con <code>null</code> si no hay límite</td><td lang="en"><code>{nutrient: [min, max]}</code>, <code>null</code> when unbounded</td></tr>
+      <tr><td><code>ingredientes[]</code></td><td lang="es"><code>id</code>, <code>nombre</code>, <code>precio</code>, <code>min</code>, <code>max</code> y <code>comp</code> (las 28 columnas de la matriz)</td><td lang="en"><code>id</code>, <code>nombre</code>, <code>precio</code>, <code>min</code>, <code>max</code> and <code>comp</code> (the 28 matrix columns)</td></tr>
+      <tr><td><code>solucion</code></td><td lang="es">costo por kg, fórmula, aporte, restricciones con duales, certificado y tamaño del modelo</td><td lang="en">cost per kg, formula, supply, constraints with duals, certificate and model size</td></tr>
+    </tbody></table></div>
+
+  <h3 id="scipy" data-n="R.2"><span lang="es">Verificación independiente con SciPy</span><span lang="en">Independent verification with SciPy</span></h3>
+  <p lang="es">Este script lee el JSON, reconstruye el modelo (1) y lo resuelve con HiGHS. Con el modelo del caso, exportado de la app, imprime <b>$8,805.03 por tonelada</b> y la misma fórmula, ingrediente por ingrediente (probado con Python 3.12, NumPy 2.5 y SciPy 1.18).</p>
+  <p lang="en">This script reads the JSON, rebuilds model (1) and solves it with HiGHS. With the case model exported from the app it prints <b>$8,805.03 per tonne</b> and the same formula, ingredient by ingredient (tested with Python 3.12, NumPy 2.5 and SciPy 1.18).</p>
+  <div class="code"><div class="bar"><span>verificar_ratioavis.py · Python ≥ 3.9 · SciPy ≥ 1.9</span><button class="copy" data-copy="py" lang="es">Copiar</button><button class="copy" data-copy="py" lang="en">Copy</button></div>
+<pre id="py"><span class="k">import</span> json
+<span class="k">import</span> numpy <span class="k">as</span> np
+<span class="k">from</span> scipy.optimize <span class="k">import</span> linprog
+
+m = json.load(open(<span class="s">"dieta_modelo.json"</span>, encoding=<span class="s">"utf-8"</span>))
+ings, req = m[<span class="s">"ingredientes"</span>], m[<span class="s">"requerimientos"</span>]
+dig = m[<span class="s">"base"</span>] == <span class="s">"dig"</span>
+AA = {<span class="s">"Lys"</span>, <span class="s">"Met"</span>, <span class="s">"MC"</span>, <span class="s">"Thr"</span>, <span class="s">"Trp"</span>, <span class="s">"Arg"</span>, <span class="s">"Ile"</span>, <span class="s">"Val"</span>}
+
+<span class="k">def</span> <span class="f">valor</span>(c, k):
+    <span class="c"># balance electrolítico (mEq/kg) o columna de la matriz</span>
+    <span class="k">if</span> k == <span class="s">"DEB"</span>:
+        <span class="k">return</span> c[<span class="s">"Na"</span>]*1e4/22.99 + c[<span class="s">"K"</span>]*1e4/39.10 - c[<span class="s">"Cl"</span>]*1e4/35.45
+    <span class="k">return</span> c.get(<span class="s">"d"</span> + k <span class="k">if</span> (dig <span class="k">and</span> k <span class="k">in</span> AA) <span class="k">else</span> k, 0)
+
+c = np.array([i[<span class="s">"precio"</span>] <span class="k">for</span> i <span class="k">in</span> ings])
+A_ub, b_ub = [], []
+<span class="k">for</span> k, (lo, hi) <span class="k">in</span> req.items():
+    a = np.array([valor(i[<span class="s">"comp"</span>], k) <span class="k">for</span> i <span class="k">in</span> ings])
+    <span class="k">if</span> lo <span class="k">is not</span> <span class="k">None</span>: A_ub.append(-a); b_ub.append(-100 * lo)
+    <span class="k">if</span> hi <span class="k">is not</span> <span class="k">None</span>: A_ub.append(a);  b_ub.append(100 * hi)
+bounds = [(i[<span class="s">"min"</span>] <span class="k">or</span> 0, 100 <span class="k">if</span> i[<span class="s">"max"</span>] <span class="k">in</span> (<span class="k">None</span>, <span class="s">""</span>) <span class="k">else</span> i[<span class="s">"max"</span>]) <span class="k">for</span> i <span class="k">in</span> ings]
+
+r = linprog(c, A_ub=A_ub, b_ub=b_ub, A_eq=[np.ones(len(ings))], b_eq=[100],
+            bounds=bounds, method=<span class="s">"highs"</span>)
+<span class="f">print</span>(<span class="s">"Costo por tonelada:"</span>, round(r.fun * 10, 2))
+<span class="k">for</span> i, x <span class="k">in</span> zip(ings, r.x):
+    <span class="k">if</span> x &gt; 1e-7:
+        <span class="f">print</span>(f<span class="s">"{i['nombre']:&lt;34}{x:9.3f} %"</span>)</pre></div>
+  <div class="box tip"><span class="bi">✓</span><span class="bt" lang="es">Para ir más lejos</span><span class="bt" lang="en">Going further</span>
+    <p lang="es">HiGHS devuelve los duales en <code>r.ineqlin.marginals</code>. Multiplicados por 1000, y con el signo cambiado en las filas de mínimo (que el script escribe como ≤ con signo negativo), coinciden con la columna <b>∂Z/∂b · $/t</b> de la app. En el caso se verificó con SciPy 1.18: los diez precios sombra de nutrientes coinciden hasta el tercer decimal.</p>
+    <p lang="en">HiGHS returns duals in <code>r.ineqlin.marginals</code>. Multiplied by 1000, and with the sign flipped for minimum rows (which the script writes as ≤ with a negative sign), they match the app’s <b>∂Z/∂b · $/t</b> column. This was verified for the case with SciPy 1.18: all ten nutrient shadow prices match to the third decimal.</p></div>
+
+  <h3 id="metodos" data-n="R.3"><span lang="es">Texto para <i>Materiales y métodos</i></span><span lang="en">Text for <i>Materials and methods</i></span></h3>
+  <p lang="es">Un párrafo base para describir el uso de RatioAvis en un artículo. Ajuste los datos entre corchetes:</p>
+  <p lang="en">A base paragraph to describe the use of RatioAvis in a paper. Adjust the bracketed data:</p>
+  <div class="methods" id="metES" lang="es"><button class="copy" data-copy="metES">Copiar</button>
+    <p>Las dietas experimentales se formularon al mínimo costo mediante programación lineal con RatioAvis versión 1.1.0 (Mojica-Zárate y Barrera-Guzmán, 2026), que resuelve el modelo con el método símplex en dos fases y la regla de Bland y verifica la optimalidad de cada solución por dualidad fuerte (brecha primal–dual relativa &lt; 10⁻⁷). Los requerimientos nutricionales correspondieron a [Aviagen (2022), Ross 308, fase de iniciación de 0 a 10 d, aves mixtas], expresando los aminoácidos en base digestible estandarizada. La composición de los ingredientes se tomó de Rostagno et al. (2017) y FEDNA (2019) [o: de análisis de laboratorio de los lotes utilizados], y se impusieron límites de inclusión de [describir]. El modelo y la solución completos se exportaron en formato JSON y se incluyen como material suplementario.</p></div>
+  <div class="methods" id="metEN" lang="en"><button class="copy" data-copy="metEN">Copy</button>
+    <p>Experimental diets were formulated at least cost by linear programming with RatioAvis version 1.1.0 (Mojica-Zárate &amp; Barrera-Guzmán, 2026), which solves the model with the two-phase simplex method under Bland’s rule and verifies the optimality of every solution by strong duality (relative primal–dual gap &lt; 10⁻⁷). Nutrient requirements followed [Aviagen (2022), Ross 308, starter phase from 0 to 10 d, as-hatched birds], with amino acids on a standardized digestible basis. Ingredient composition was taken from Rostagno et al. (2017) and FEDNA (2019) [or: from laboratory analyses of the batches used], and inclusion limits of [describe] were imposed. The full model and solution were exported in JSON format and are provided as supplementary material.</p></div>
+
+  <h3 id="ficha" data-n="R.4"><span lang="es">Ficha técnica del motor</span><span lang="en">Solver technical sheet</span></h3>
+  <div class="spec">
+    <div><span lang="es">Método</span><span lang="en">Method</span><b lang="es">Símplex tabular en dos fases</b><b lang="en">Two-phase tableau simplex</b></div>
+    <div><span lang="es">Pivoteo</span><span lang="en">Pivoting</span><b lang="es">Regla de Bland (anticiclado)</b><b lang="en">Bland’s rule (anti-cycling)</b></div>
+    <div><span lang="es">Escalado</span><span lang="en">Scaling</span><b lang="es">Por fila, entre el máx. |a|</b><b lang="en">Per row, by max |a|</b></div>
+    <div><span lang="es">Aritmética</span><span lang="en">Arithmetic</span><b lang="es">Doble precisión (IEEE 754)</b><b lang="en">Double precision (IEEE 754)</b></div>
+    <div><span lang="es">Tolerancia de pivote</span><span lang="en">Pivot tolerance</span><b>10⁻⁹</b></div>
+    <div><span lang="es">Infactibilidad</span><span lang="en">Infeasibility</span><b lang="es">Σ artificiales &gt; 10⁻⁷</b><b lang="en">Σ artificials &gt; 10⁻⁷</b></div>
+    <div><span lang="es">Restricción activa</span><span lang="en">Binding</span><b>|lhs − b| &lt; 10⁻⁶ · max(1, |b|)</b></div>
+    <div><span lang="es">Iteraciones máx.</span><span lang="en">Max. iterations</span><b>50,000</b></div>
+    <div><span lang="es">Certificado</span><span lang="en">Certificate</span><b lang="es">viol. &lt; 10⁻⁶ · dual &lt; 10⁻⁶ · brecha &lt; 10⁻⁷</b><b lang="en">viol. &lt; 10⁻⁶ · dual &lt; 10⁻⁶ · gap &lt; 10⁻⁷</b></div>
+    <div><span lang="es">Ejecución</span><span lang="en">Runtime</span><b lang="es">Navegador, sin servidor</b><b lang="en">Browser, no server</b></div>
+  </div>
+</section>
+
+<!-- ============================ L · LÍMITES ============================ -->
+<section class="chap" id="limites" data-toc="L" style="--c:var(--warn)">
+  <div class="chap-head"><span class="big">L</span>
+    <div class="eyebrow" lang="es">Uso responsable</div><div class="eyebrow" lang="en">Responsible use</div>
+    <h2 lang="es">Supuestos y limitaciones</h2><h2 lang="en">Assumptions and limitations</h2>
+    <p lang="es">Lo que el modelo supone y lo que no hace, para declararlo con honestidad.</p>
+    <p lang="en">What the model assumes and what it does not do, so it can be stated honestly.</p>
+    <span class="rule"></span></div>
+  <ul>
+    <li lang="es"><b>Linealidad y aditividad.</b> El aporte de la mezcla es la suma ponderada de sus ingredientes. No se modelan interacciones (por ejemplo, la menor EM de la grasa en pollitos se refleja solo si se edita la matriz).</li>
+    <li lang="en"><b>Linearity and additivity.</b> The blend’s supply is the weighted sum of its ingredients. Interactions are not modelled (for example, the lower ME of fat in chicks is reflected only if the matrix is edited).</li>
+    <li lang="es"><b>Composición determinista.</b> La matriz se toma como exacta; no hay formulación estocástica ni márgenes de seguridad automáticos por variabilidad. Si los necesita, súmelos al requerimiento.</li>
+    <li lang="en"><b>Deterministic composition.</b> The matrix is taken as exact; there is no stochastic formulation or automatic safety margin for variability. If needed, add them to the requirement.</li>
+    <li lang="es"><b>Relaciones no impuestas.</b> Ca:P, EM:PC y las relaciones de proteína ideal se reportan como indicadores, no como restricciones. Se pueden imponer de manera indirecta con mínimos y máximos.</li>
+    <li lang="en"><b>Ratios not imposed.</b> Ca:P, ME:CP and ideal-protein ratios are reported as indicators, not constraints. They can be imposed indirectly through minimums and maximums.</li>
+    <li lang="es"><b>Sin modelo de respuesta.</b> Consumo y ganancia son datos, no salidas: la app no predice el desempeño ante cambios de densidad.</li>
+    <li lang="en"><b>No response model.</b> Intake and gain are inputs, not outputs: the app does not predict performance under density changes.</li>
+    <li lang="es"><b>Sensibilidad local.</b> Precios sombra y costos reducidos son derivadas en el óptimo; valen mientras la base no cambie. Para cambios grandes, vuelva a formular.</li>
+    <li lang="en"><b>Local sensitivity.</b> Shadow prices and reduced costs are derivatives at the optimum; they hold while the basis does not change. For large changes, reformulate.</li>
+    <li lang="es"><b>Herramienta de apoyo.</b> Los resultados deben ser revisados por un profesional en nutrición animal antes de fabricar.</li>
+    <li lang="en"><b>Decision support.</b> Results should be reviewed by a qualified animal nutritionist before manufacturing.</li>
+  </ul>
+</section>
+
+<!-- ============================ A · APÉNDICES ============================ -->
+<section class="chap" id="apendices" data-toc="A" style="--c:var(--faint)">
+  <div class="chap-head"><span class="big">A</span>
+    <div class="eyebrow" lang="es">Consulta</div><div class="eyebrow" lang="en">Reference</div>
+    <h2 lang="es">Apéndices</h2><h2 lang="en">Appendices</h2>
+    <p lang="es">Glosario técnico español–inglés y referencias.</p>
+    <p lang="en">Spanish–English technical glossary and references.</p>
+    <span class="rule"></span></div>
+  <nav class="inchap"></nav>
+  <h3 id="a-glosario" data-n="A.1"><span lang="es">Glosario español–inglés</span><span lang="en">Spanish–English glossary</span></h3>
+  <dl class="glos" id="glos"></dl>
+  <h3 id="a-refs" data-n="A.2"><span lang="es">Referencias</span><span lang="en">References</span></h3>
+  <ol class="refs">
+    <li>Aviagen. (2022). <i>Ross broiler nutrition specifications</i>; <i>Arbor Acres broiler nutrition specifications</i>. Aviagen.</li>
+    <li>Bauer, M. M., Ao, T., Jacob, J. P., et al. (2025). The performance, energy and nutrient utilization, and bone mineralization of broiler chickens fed corn-soybean meal-based diets with reduced metabolizable energy, calcium, and available phosphorus supplemented with exogenous enzymes. <i>Animals, 15</i>(22), 3254. https://doi.org/10.3390/ani15223254</li>
+    <li>Bland, R. G. (1977). New finite pivoting rules for the simplex method. <i>Mathematics of Operations Research, 2</i>(2), 103–107.</li>
+    <li>Cobb-Vantress. (2022). <i>Cobb500 broiler performance &amp; nutrition supplement</i>. Cobb-Vantress.</li>
+    <li>Dantzig, G. B. (1963). <i>Linear programming and extensions</i>. Princeton University Press.</li>
+    <li>FEDNA. (2019). <i>Tablas FEDNA de composición y valor nutritivo de alimentos</i> (4.ª ed.). FEDNA.</li>
+    <li>Gregg, C. R., Tejeda, O. J., Spencer, L. F., et al. (2022). Effect of dietary choline chloride supplementation on growth performance and carcass characteristics of broiler chickens reared to 32 days of age. <i>Poultry, 1</i>(2), 66–73. https://doi.org/10.3390/poultry1020007</li>
+    <li>Huangfu, Q., &amp; Hall, J. A. J. (2018). Parallelizing the dual revised simplex method. <i>Mathematical Programming Computation, 10</i>(1), 119–142.</li>
+    <li>Hubbard. (2022). <i>Efficiency Plus broiler guide and nutrient specifications</i>. Hubbard.</li>
+    <li>Maldonado-Fuentes, A., Cuca-García, J. M., Pro-Martínez, A., González-Cerón, F., Herrera-Haro, J. G., Sosa-Montes, E., &amp; Domínguez-Martínez, P. A. (2020). Pasta de higuerilla desintoxicada en dietas para pollos de engorda. <i>Revista Mexicana de Ciencias Pecuarias, 11</i>(3), 605–619. https://doi.org/10.22319/rmcp.v11i3.5797</li>
+    <li>Mongin, P. (1981). Recent advances in dietary anion-cation balance: Applications in poultry. <i>Proceedings of the Nutrition Society, 40</i>, 285–294.</li>
+    <li>National Academies of Sciences, Engineering, and Medicine. (2025). <i>Nutrient requirements of poultry</i> (10th rev. ed.). The National Academies Press. https://doi.org/10.17226/25395</li>
+    <li>National Research Council. (1994). <i>Nutrient requirements of poultry</i> (9th rev. ed.). National Academy Press.</li>
+    <li>Obeidat, M. D., Alzoubi, S. Q., Nusairat, B. M., Obeidat, B. S., &amp; Riley, D. G. (2025). Effects of fermented soybean meal supplementation on growth, carcass quality, and intestinal morphology in Ross 308 and Indian River broilers. <i>Animals, 15</i>(18), 2659. https://doi.org/10.3390/ani15182659</li>
+    <li>Rostagno, H. S., et al. (2017; 2024). <i>Tabelas brasileiras para aves e suínos</i> (4.ª y 5.ª ed.). Universidade Federal de Viçosa.</li>
+    <li>Stigler, G. J. (1945). The cost of subsistence. <i>Journal of Farm Economics, 27</i>(2), 303–314.</li>
+    <li>Usturoi, M. G., et al. (2023). Impact of different levels of crude protein on production performance and meat quality in broiler selected for slow growth. <i>Agriculture, 13</i>, 427.</li>
+    <li>Virtanen, P., Gommers, R., Oliphant, T. E., et al. (2020). SciPy 1.0: Fundamental algorithms for scientific computing in Python. <i>Nature Methods, 17</i>, 261–272.</li>
+  </ol>
+</section>
+
+<div class="colophon">
+  <p lang="es"><b>RatioAvis · Instructivo del Científico</b>, 1.ª edición, octubre de 2026. Describe RatioAvis 1.1.0. Las capturas son de la app real; los gráficos son originales y se generan con los resultados numéricos de la app para el caso descrito. Los precios son ilustrativos.</p>
+  <p lang="en"><b>RatioAvis · Scientist Guide</b>, 1st edition, October 2026. Covers RatioAvis 1.1.0. Screenshots come from the real app; charts are original and generated from the app’s numerical results for the case described. Prices are illustrative.</p>
+  <p lang="es">© 2026 Héctor Tecumshé Mojica-Zárate y Luis Ángel Barrera-Guzmán. El programa se distribuye con licencia MIT.</p>
+  <p lang="en">© 2026 Héctor Tecumshé Mojica-Zárate and Luis Ángel Barrera-Guzmán. The software is distributed under the MIT License.</p>
+</div>
+
+</div>
+</main>
+</div>
+
+<a class="ib totop" href="#portada" aria-label="Arriba / Top">↑</a>
+<div id="zoom" role="dialog" aria-label="Imagen ampliada / Enlarged image"><div class="zi"></div></div>
+
+<script src="instructivo/capturas.js"></script>
+<script>
+"use strict";
+const $ = (s, el = document) => el.querySelector(s), $$ = (s, el = document) => [...el.querySelectorAll(s)];
+const CAP = window.CAPTURAS || {};
+const T = (es, en) => LANG === 'es' ? es : en;
+const NF = (v, d = 0) => Number(v).toLocaleString(LANG === 'es' ? 'es-MX' : 'en-US', { minimumFractionDigits: d, maximumFractionDigits: d });
+
+/* =====================================================================
+   DATOS DEL CASO (resultados de RatioAvis 1.1.0 · Ross 308, iniciación,
+   2,200 msnm, ajuste −50 kcal). Fuente: app, vista científica.
+   ===================================================================== */
+const FORMULA = [ // [es, en, % inclusión, $/kg]
+  ['Pasta de soya 46 %', 'Soybean meal 46 %', 39.546, 10.5], ['Maíz amarillo', 'Yellow corn', 53.804, 5.5],
+  ['Aceite de soya', 'Soybean oil', 2.076, 30], ['Fosfato dicálcico', 'Dicalcium phosphate', 2.055, 20],
+  ['DL-Metionina 99 %', 'DL-Methionine 99 %', 0.378, 70], ['Premezcla vit.-min.', 'Vit.–min. premix', 0.25, 60],
+  ['L-Lisina HCl', 'L-Lysine HCl', 0.234, 38], ['L-Treonina', 'L-Threonine', 0.123, 45], ['L-Valina', 'L-Valine', 0.039, 90],
+  ['Cloruro de colina', 'Choline chloride', 0.08, 25], ['Bicarbonato de sodio', 'Sodium bicarbonate', 0.153, 12],
+  ['Carbonato de calcio', 'Limestone', 0.955, 1.5], ['Sal común', 'Salt', 0.306, 4]
+];
+const SOMBRA = [ // [es, en, ∂Z/∂b $/t por unidad, requerimiento]
+  ['EMAn', 'AMEn', 4.948, 2925], ['Proteína cruda', 'Crude protein', 206.432, 23], ['Valina', 'Valine', 738.98, 1],
+  ['P disponible', 'Available P', 1378.48, 0.5], ['Met + Cis', 'Met + Cys', 522.293, 1], ['Calcio', 'Calcium', 394.54, 0.95],
+  ['Treonina', 'Threonine', 267.642, 0.88], ['Lisina', 'Lysine', 156.583, 1.32], ['Sodio', 'Sodium', 944.167, 0.18],
+  ['Cloro (máx.)', 'Chloride (max)', -326.888, 0.23]
+];
+const IDEAL = [ // [es, en, valor, ref mín, ref máx]
+  ['Met + Cis', 'Met + Cys', 75.8, 74, 78], ['Treonina', 'Threonine', 66.7, 65, 68], ['Valina', 'Valine', 75.8, 76, 80],
+  ['Arginina', 'Arginine', 108.3, 105, 110], ['Isoleucina', 'Isoleucine', 67.7, 67, 69], ['Triptófano', 'Tryptophan', 18.8, 16, 17]
+];
+const VAL = [ // [artículo, fase, [[nutriente, artículo, app, %, errata]]]
+  ['Maldonado-Fuentes 2020', 'Ini', [['EM',3025,3041.3,0.54],['PC',21,21.42,1.98],['Ca',.96,1.045,8.82],['Pd',.48,.488,1.74],['Lys',1.44,1.387,-3.69],['Met',.83,.8,-3.57],['MC',1.08,1.139,5.45],['Thr',.97,.928,-4.33],['Trp',.3,.253,-15.56]]],
+  ['Maldonado-Fuentes 2020', 'Fin', [['EM',3100,3106.4,0.21],['PC',19,19.22,1.15],['Ca',.8,.871,8.84],['Pd',.4,.406,1.57],['Lys',1.15,1.104,-4.03],['Met',.47,.631,34.16,1],['MC',.9,.946,5.11],['Thr',.78,.747,-4.22],['Trp',.18,.226,25.49]]],
+  ['Obeidat 2025', 'Ini', [['EM',3000,2977.9,-0.74],['PC',21.7,21.58,-0.55],['Ca',.9,1.003,11.48],['Pd',.45,.402,-10.68],['Na',.2,.215,7.55],['Lys',1.26,1.151,-8.64],['Met',.55,.557,1.31],['MC',.89,.859,-3.45],['Thr',.82,.72,-12.14],['Trp',.26,.236,-9.12],['Arg',1.47,1.352,-8.03],['Ile',.98,.844,-13.83],['Val',1.39,.913,-34.34,1]]],
+  ['Obeidat 2025', 'Cre', [['EM',3050,3054.3,0.14],['PC',21,20.87,-0.63],['Ca',.9,.998,10.9],['Pd',.45,.401,-10.89],['Na',.2,.214,6.91],['Lys',1.2,1.089,-9.27],['Met',.54,.548,1.4],['MC',.87,.841,-3.33],['Thr',.8,.704,-11.95],['Trp',.25,.228,-9],['Arg',1.32,1.304,-1.25],['Ile',.95,.815,-14.19]]],
+  ['Bauer 2025', 'Pre', [['EM',2975,2925.2,-1.68],['PC',21.5,21.06,-2.04],['Ca',.9,.889,-1.23],['Pd',.45,.424,-5.81],['Lys',1.2,1.267,5.58],['Met',.55,.584,6.1],['MC',.8,.88,10.06],['Thr',.66,.696,5.43]]],
+  ['Bauer 2025', 'Ini', [['EM',3057,3007.4,-1.62],['PC',19.5,19.12,-1.93],['Ca',.8,.792,-1.03],['Pd',.4,.373,-6.78],['Lys',1.13,1.182,4.61],['Met',.53,.561,5.79],['MC',.76,.833,9.65],['Thr',.6,.665,10.77]]],
+  ['Gregg 2022', 'Ini', [['PC',22,23.7,7.73]]],
+  ['Gregg 2022', 'Cre', [['PC',20,21.2,6]]]
+];
+const OPT = [ // [artículo, fase es, fase en, publicada $/t, app $/t]
+  ['Maldonado-Fuentes et al. (2020)', 'Iniciación', 'Starter', 8982.85, 8982.83], ['Maldonado-Fuentes et al. (2020)', 'Finalización', 'Finisher', 9345.90, 9345.88],
+  ['Obeidat et al. (2025)', 'Iniciación', 'Starter', 8395.21, 8395.19], ['Obeidat et al. (2025)', 'Crecimiento', 'Grower', 8573.13, 8573.11],
+  ['Bauer et al. (2025)', 'Preiniciación', 'Pre-starter', 7916.56, 7916.54], ['Bauer et al. (2025)', 'Iniciación', 'Starter', 7777.62, 7777.60]
+];
+
+/* =====================================================================
+   GRÁFICOS (SVG generado, en el idioma activo y con los colores del tema)
+   ===================================================================== */
+const svgEl = (w, h, body, label) => `<svg viewBox="0 0 ${w} ${h}" role="img" aria-label="${label}">${body}</svg>`;
+const tx = (x, y, s, o = {}) => `<text x="${x}" y="${y}" ${o.a ? `text-anchor="${o.a}"` : ''} font-size="${o.fs || 13}" ${o.w ? `font-weight="${o.w}"` : ''} ${o.c ? `class="${o.c}"` : ''} ${o.fill ? `style="fill:${o.fill}"` : ''} ${o.it ? 'font-style="italic"' : ''} ${o.ff ? `font-family="${o.ff}"` : ''}>${s}</text>`;
+
+const CHARTS = {
+  /* ---- región factible del modelo didáctico ---- */
+  region(big) {
+    const W = 680, H = big ? 470 : 440, L = 64, R = 24, Tp = 20, B = 52;
+    const x0 = 30, x1 = 66, y0 = 34, y1 = 62;
+    const X = x => L + (x - x0) / (x1 - x0) * (W - L - R), Y = y => H - B - (y - y0) / (y1 - y0) * (H - Tp - B);
+    const P = x => (2300 - 7.9 * x) / 46, E = x => (574000 - 5410 * x) / 6530, S2 = x => 94 - x, S1 = x => 100 - x;
+    const cross = (f, g) => { let a = x0, b = x1; for (let k = 0; k < 80; k++) { const m = (a + b) / 2; ((f(a) - g(a)) * (f(m) - g(m)) <= 0) ? b = m : a = m; } return [(a + b) / 2, f((a + b) / 2)]; };
+    const A = cross(P, E), Bv = cross(P, S2), C = cross(E, S2);
+    const k = p => 24.5 * p[0] + 19.5 * p[1];
+    const costo = p => 10 * (3000 - k(p));
+    const line = (f, cls, col, dash) => `<line x1="${X(x0)}" y1="${Y(f(x0))}" x2="${X(x1)}" y2="${Y(f(x1))}" stroke="${col}" stroke-width="${cls}" ${dash ? `stroke-dasharray="${dash}"` : ''}/>`;
+    const u = big ? 'p' : 'f';  // ids únicos: la portada y la figura dibujan el mismo gráfico
+    let s = `<defs><clipPath id="cr${u}"><rect x="${L}" y="${Tp}" width="${W - L - R}" height="${H - Tp - B}"/></clipPath>
+      <marker id="ar${u}" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" style="fill:var(--acc)"/></marker>
+      <linearGradient id="gf${u}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" style="stop-color:var(--pri);stop-opacity:.26"/><stop offset="1" style="stop-color:var(--pri);stop-opacity:.08"/></linearGradient></defs>`;
+    for (let x = 30; x <= 66; x += 6) s += `<line class="grid" x1="${X(x)}" y1="${Tp}" x2="${X(x)}" y2="${H - B}"/>` + tx(X(x), H - B + 20, x, { a: 'middle', c: 'mut', fs: 12 });
+    for (let y = 34; y <= 62; y += 4) s += `<line class="grid" x1="${L}" y1="${Y(y)}" x2="${W - R}" y2="${Y(y)}"/>` + tx(L - 10, Y(y) + 4, y, { a: 'end', c: 'mut', fs: 12 });
+    s += `<g clip-path="url(#cr${u})">`;
+    s += `<polygon points="${[A, C, Bv].map(p => X(p[0]) + ',' + Y(p[1])).join(' ')}" style="fill:url(#gf${u});stroke:var(--pri);stroke-width:1.5"/>`;
+    [1950, 2080, k(A)].forEach((kk, n) => { const f = x => (kk - 24.5 * x) / 19.5; s += `<line x1="${X(x0)}" y1="${Y(f(x0))}" x2="${X(x1)}" y2="${Y(f(x1))}" style="stroke:var(--acc);stroke-width:${n === 2 ? 2 : 1.2};stroke-dasharray:${n === 2 ? '0' : '5 5'};opacity:${n === 2 ? 1 : .7}"/>`; });
+    s += line(P, 2.2, 'var(--b3)') + line(E, 2.2, 'var(--b6)') + line(S2, 1.6, 'var(--b7)', '7 4') + line(S1, 1.2, 'var(--faint)', '2 4');
+    s += `</g>`;
+    s += `<path d="M${X(C[0]) + 10} ${Y(C[1]) + 6} L${X(A[0]) - 12} ${Y(A[1]) - 8}" style="stroke:var(--acc);stroke-width:1.6;fill:none;stroke-dasharray:3 4" marker-end="url(#ar${u})"/>`;
+    const lab = (x, y, t, col, a) => tx(x, y, t, { fs: 12.5, w: 700, fill: col, a });
+    s += lab(X(37.2), Y(P(37.2)) + 18, T('PC ≥ 23 %', 'CP ≥ 23 %'), 'var(--b3)');
+    s += lab(X(61.2), Y(E(61.2)) - 9, T('EMAn ≥ 3,050', 'AMEn ≥ 3,050'), 'var(--b6)', 'end');
+    s += lab(X(31.2), Y(S2(31.2)) - 8, T('aceite ≤ 6 %', 'oil ≤ 6 %'), 'var(--b7)');
+    s += lab(X(37), Y(S1(37)) - 8, T('aceite ≥ 0', 'oil ≥ 0'), 'var(--faint)');
+    s += tx(X(39.4) + 8, Y((2080 - 24.5 * 39.4) / 19.5) + 4, T('isocosto', 'iso-cost'), { fs: 11.5, fill: 'var(--acc)', it: 1 });
+    [[A, 'A', 14, -10], [Bv, 'B', 12, 18], [C, 'C', -16, -8]].forEach(([p, n, dx, dy]) => {
+      s += `<circle cx="${X(p[0])}" cy="${Y(p[1])}" r="${n === 'A' ? 6.5 : 4.5}" style="fill:${n === 'A' ? 'var(--acc)' : 'var(--paper)'};stroke:${n === 'A' ? 'var(--paper)' : 'var(--pri)'};stroke-width:2"/>` + tx(X(p[0]) + dx, Y(p[1]) + dy, n, { fs: 15, w: 700, a: 'middle', ff: 'var(--serif)' });
+    });
+    const bx = X(30.8), by = Y(40.6);
+    s += `<rect x="${bx}" y="${by}" width="${big ? 250 : 236}" height="74" rx="10" style="fill:var(--paper);stroke:var(--line2)"/>`;
+    s += tx(bx + 14, by + 22, T('Óptimo A', 'Optimum A'), { fs: 12, w: 700, fill: 'var(--acc)' });
+    s += tx(bx + 14, by + 42, T(`maíz ${NF(A[0], 1)} % · soya ${NF(A[1], 1)} %`, `corn ${NF(A[0], 1)} % · SBM ${NF(A[1], 1)} %`), { fs: 12.5 });
+    s += tx(bx + 14, by + 61, T(`aceite ${NF(100 - A[0] - A[1], 1)} % · $${NF(costo(A))} /t`, `oil ${NF(100 - A[0] - A[1], 1)} % · $${NF(costo(A))} /t`), { fs: 12.5 });
+    s += tx((L + W - R) / 2, H - 10, T('Maíz, x (% de la dieta)', 'Corn, x (% of diet)'), { a: 'middle', fs: 13, w: 600 });
+    s += `<text transform="translate(16 ${(Tp + H - B) / 2}) rotate(-90)" text-anchor="middle" font-size="13" font-weight="600">${T('Pasta de soya 46 %, y (%)', 'Soybean meal 46 %, y (%)')}</text>`;
+    return svgEl(W, H, s, T('Región factible del modelo didáctico', 'Feasible region of the teaching model'));
+  },
+
+  /* ---- arquitectura del motor ---- */
+  pipeline() {
+    const W = 760, H = 300;
+    const box = (x, y, w, h, t1, t2, col, fill) => `<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="12" style="fill:${fill || 'var(--paper)'};stroke:${col};stroke-width:1.6"/>` + tx(x + w / 2, y + (t2 ? h / 2 - 3 : h / 2 + 5), t1, { a: 'middle', fs: 14, w: 700, ff: 'var(--serif)' }) + (t2 ? tx(x + w / 2, y + h / 2 + 15, t2, { a: 'middle', fs: 11.5, c: 'mut' }) : '');
+    const arr = (x1, y1, x2, y2, col = 'var(--line2)') => `<path d="M${x1} ${y1} L${x2} ${y2}" style="stroke:${col};stroke-width:2;fill:none" marker-end="url(#ap)"/>`;
+    let s = `<defs><marker id="ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0L10 5L0 10z" style="fill:var(--faint)"/></marker></defs>`;
+    const ins = [[T('Requerimientos b', 'Requirements b'), T('Bloques 1–3', 'Blocks 1–3')], [T('Matriz a', 'Matrix a'), T('Bloque 4', 'Block 4')], [T('Precios c · límites l, u', 'Prices c · limits l, u'), T('Bloque 5', 'Block 5')]];
+    ins.forEach((t, i) => { s += box(8, 22 + i * 88, 170, 66, t[0], t[1], 'var(--b3)'); s += arr(178, 55 + i * 88, 222, 124 + i * 23); });
+    s += box(224, 108, 120, 78, T('Modelo (1)', 'Model (1)'), T('escalado por fila', 'row scaling'), 'var(--ink)', 'var(--ink-s)');
+    s += arr(344, 147, 376, 147);
+    s += box(378, 108, 104, 78, T('Fase I', 'Phase I'), T('factibilidad', 'feasibility'), 'var(--pri)');
+    s += arr(482, 147, 514, 147);
+    s += box(516, 108, 104, 78, T('Fase II', 'Phase II'), 'Bland', 'var(--pri)');
+    s += arr(620, 147, 640, 147);
+    s += box(642, 96, 110, 102, T('Certificado', 'Certificate'), T('dualidad fuerte', 'strong duality'), 'var(--ok)', 'var(--ok-s)');
+    s += arr(430, 186, 430, 228, 'var(--bad)');
+    s += box(352, 230, 156, 56, T('Diagnóstico', 'Diagnosis'), T('una restricción a la vez', 'one constraint at a time'), 'var(--bad)', 'var(--bad-s)');
+    s += tx(440, 210, T('infactible', 'infeasible'), { fs: 11.5, fill: 'var(--bad)', it: 1 });
+    s += arr(697, 198, 697, 228, 'var(--ok)');
+    s += box(560, 230, 192, 56, T('Resultados', 'Results'), T('x*, y*, d, JSON', 'x*, y*, d, JSON'), 'var(--acc)', 'var(--acc-s)');
+    return svgEl(W, H, s, T('Arquitectura del motor de cálculo', 'Solver architecture'));
+  },
+
+  /* ---- flujo del símplex ---- */
+  simplex() {
+    const W = 760, H = 250;
+    const st = (x, y, w, h, t, sub, col) => `<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="10" style="fill:var(--paper);stroke:${col};stroke-width:1.6"/>` + tx(x + w / 2, y + 24, t, { a: 'middle', fs: 13.5, w: 700 }) + sub.map((l, i) => tx(x + w / 2, y + 44 + i * 16, l, { a: 'middle', fs: 11.5, c: 'mut' })).join('');
+    const dia = (cx, cy, t) => `<path d="M${cx} ${cy - 30} L${cx + 52} ${cy} L${cx} ${cy + 30} L${cx - 52} ${cy}Z" style="fill:var(--soft);stroke:var(--line2);stroke-width:1.4"/>` + tx(cx, cy + 4, t, { a: 'middle', fs: 11.5, w: 700 });
+    const arr = (d, col = 'var(--faint)') => `<path d="${d}" style="stroke:${col};stroke-width:1.8;fill:none" marker-end="url(#as)"/>`;
+    let s = `<defs><marker id="as" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0L10 5L0 10z" style="fill:var(--faint)"/></marker></defs>`;
+    s += st(6, 70, 150, 92, T('Forma estándar', 'Standard form'), [T('holguras s ≥ 0', 'slacks s ≥ 0'), T('artificiales r ≥ 0', 'artificials r ≥ 0')], 'var(--ink)');
+    s += arr('M156 116 L190 116');
+    s += st(192, 70, 156, 92, T('Fase I', 'Phase I'), [T('min Σ r', 'min Σ r'), T('base inicial = r', 'initial basis = r')], 'var(--pri)');
+    s += arr('M348 116 L380 116');
+    s += dia(434, 116, 'Σ r > 10⁻⁷ ?');
+    s += arr('M434 146 L434 196', 'var(--bad)') + tx(442, 176, T('sí', 'yes'), { fs: 11.5, fill: 'var(--bad)', it: 1 });
+    s += `<rect x="372" y="198" width="124" height="40" rx="10" style="fill:var(--bad-s);stroke:var(--bad)"/>` + tx(434, 223, T('infactible', 'infeasible'), { a: 'middle', fs: 13, w: 700, fill: 'var(--bad)' });
+    s += arr('M486 116 L522 116', 'var(--ok)') + tx(502, 106, 'no', { fs: 11.5, fill: 'var(--ok)', it: 1, a: 'middle' });
+    s += st(524, 62, 228, 108, T('Fase II · regla de Bland', 'Phase II · Bland’s rule'), [T('entra: menor índice con dⱼ < −10⁻⁹', 'enters: lowest index with dⱼ < −10⁻⁹'), T('sale: menor cociente; empate →', 'leaves: min ratio; tie →'), T('menor índice básico', 'lowest basic index')], 'var(--pri)');
+    s += arr('M638 170 L638 196', 'var(--ok)');
+    s += `<rect x="560" y="198" width="156" height="40" rx="10" style="fill:var(--ok-s);stroke:var(--ok)"/>` + tx(638, 223, T('óptimo x*, y*', 'optimum x*, y*'), { a: 'middle', fs: 13, w: 700, fill: 'var(--ok)' });
+    s += `<path d="M752 92 C790 92 790 140 752 140" style="stroke:var(--faint);stroke-width:1.6;fill:none" marker-end="url(#as)"/>` + tx(756, 82, T('pivoteo', 'pivot'), { fs: 11.5, it: 1, c: 'mut' });
+    return svgEl(W, H, s, T('Flujo del símplex en dos fases', 'Two-phase simplex flow'));
+  },
+
+  /* ---- dualidad ---- */
+  dual() {
+    const W = 760, H = 170, y = 86, L = 40, R = 40;
+    let s = `<defs><linearGradient id="gp" x1="0" x2="1"><stop offset="0" style="stop-color:var(--pri);stop-opacity:0"/><stop offset="1" style="stop-color:var(--pri);stop-opacity:.35"/></linearGradient>
+      <linearGradient id="gd" x1="1" x2="0"><stop offset="0" style="stop-color:var(--acc);stop-opacity:0"/><stop offset="1" style="stop-color:var(--acc);stop-opacity:.35"/></linearGradient></defs>`;
+    const mid = W / 2;
+    s += `<rect x="${L}" y="${y - 14}" width="${mid - L}" height="28" style="fill:url(#gd)"/><rect x="${mid}" y="${y - 14}" width="${W - R - mid}" height="28" style="fill:url(#gp)"/>`;
+    s += `<line x1="${L}" y1="${y}" x2="${W - R}" y2="${y}" class="ax"/>`;
+    s += `<line x1="${mid}" y1="${y - 34}" x2="${mid}" y2="${y + 34}" style="stroke:var(--text);stroke-width:2"/>`;
+    s += tx(mid, y - 44, 'Z* = W* = $8,805.03 /t', { a: 'middle', fs: 14, w: 700, ff: 'var(--serif)' });
+    s += tx(mid, y + 56, T('brecha relativa 3.9 × 10⁻¹⁶', 'relative gap 3.9 × 10⁻¹⁶'), { a: 'middle', fs: 12, c: 'mut' });
+    s += tx(mid + 22, y - 20, T('costo de cualquier dieta factible  →', 'cost of any feasible diet  →'), { fs: 12.5, fill: 'var(--pri)', w: 600 });
+    s += tx(mid - 22, y + 30, T('←  valor de cualquier vector dual factible', '←  value of any feasible dual vector'), { fs: 12.5, fill: 'var(--acc-d)', w: 600, a: 'end' });
+    s += tx(W - R, y + 30, T('primal: c⊤x ≥ Z*', 'primal: c⊤x ≥ Z*'), { a: 'end', fs: 12, c: 'mut', it: 1 });
+    s += tx(L, y - 20, T('dual: b⊤y ≤ W*', 'dual: b⊤y ≤ W*'), { fs: 12, c: 'mut', it: 1 });
+    return svgEl(W, H, s, T('Dualidad fuerte', 'Strong duality'));
+  },
+
+  /* ---- costo de endurecer requerimientos ---- */
+  sombra() {
+    const d = SOMBRA.map(r => [T(r[0], r[1]), r[2] * r[3] / 100]).sort((a, b) => b[1] - a[1]);
+    const W = 700, rowH = 30, Tp = 10, L = 150, R = 70, H = Tp + d.length * rowH + 30;
+    const max = 150, min = -10, X = v => L + (v - min) / (max - min) * (W - L - R);
+    let s = '';
+    [0, 25, 50, 75, 100, 125, 150].forEach(v => s += `<line class="grid" x1="${X(v)}" y1="${Tp}" x2="${X(v)}" y2="${H - 26}"/>` + tx(X(v), H - 8, '$' + v, { a: 'middle', c: 'mut', fs: 11.5 }));
+    d.forEach((r, i) => {
+      const y = Tp + i * rowH, neg = r[1] < 0, x0 = X(0), x1 = X(r[1]);
+      s += tx(L - 12, y + 19, r[0], { a: 'end', fs: 13 });
+      s += `<rect x="${Math.min(x0, x1)}" y="${y + 6}" width="${Math.abs(x1 - x0)}" height="${rowH - 12}" rx="4" style="fill:${neg ? 'var(--ok)' : i === 0 ? 'var(--b6)' : 'var(--pri)'};opacity:${i === 0 || neg ? 1 : .8}"/>`;
+      s += tx(neg ? x0 + 6 : x1 + 6, y + 19, (neg ? '−$' : '$') + NF(Math.abs(r[1]), 2), { fs: 12, w: 700 });
+    });
+    s += `<line x1="${X(0)}" y1="${Tp}" x2="${X(0)}" y2="${H - 26}" style="stroke:var(--text);stroke-width:1.2"/>`;
+    return svgEl(W, H, s, T('Costo de endurecer cada requerimiento 1 %', 'Cost of tightening each requirement by 1 %'));
+  },
+
+  /* ---- masa frente a costo ---- */
+  costo() {
+    const tot = FORMULA.reduce((a, r) => a + r[2] * r[3], 0);
+    const d = FORMULA.map(r => [T(r[0], r[1]), r[2], 100 * r[2] * r[3] / tot]);
+    const W = 700, rowH = 30, Tp = 34, L = 168, R = 60, H = Tp + d.length * rowH + 26, max = 60, X = v => L + v / max * (W - L - R);
+    let s = '';
+    s += `<rect x="${L}" y="6" width="12" height="12" rx="3" style="fill:var(--b4)"/>` + tx(L + 18, 16, T('% de la masa', '% of mass'), { fs: 12, w: 600 });
+    s += `<rect x="${L + 130}" y="6" width="12" height="12" rx="3" style="fill:var(--b6)"/>` + tx(L + 148, 16, T('% del costo', '% of cost'), { fs: 12, w: 600 });
+    [0, 10, 20, 30, 40, 50, 60].forEach(v => s += `<line class="grid" x1="${X(v)}" y1="${Tp - 4}" x2="${X(v)}" y2="${H - 22}"/>` + tx(X(v), H - 6, v + ' %', { a: 'middle', c: 'mut', fs: 11.5 }));
+    d.forEach((r, i) => {
+      const y = Tp + i * rowH;
+      s += tx(L - 12, y + 18, r[0], { a: 'end', fs: 12.5 });
+      s += `<rect x="${L}" y="${y + 4}" width="${Math.max(1.5, X(r[1]) - L)}" height="10" rx="3" style="fill:var(--b4)"/>`;
+      s += `<rect x="${L}" y="${y + 15}" width="${Math.max(1.5, X(r[2]) - L)}" height="10" rx="3" style="fill:var(--b6)"/>`;
+      s += tx(Math.max(X(r[1]), X(r[2])) + 6, y + 19, `${NF(r[1], r[1] < 1 ? 2 : 1)} · ${NF(r[2], 1)}`, { fs: 11, c: 'mut' });
+    });
+    return svgEl(W, H, s, T('Participación en la masa y en el costo', 'Share of mass and of cost'));
+  },
+
+  /* ---- proteína ideal ---- */
+  ideal() {
+    const W = 700, rowH = 46, Tp = 8, L = 128, R = 40, H = Tp + IDEAL.length * rowH + 8;
+    let s = '';
+    IDEAL.forEach((r, i) => {
+      const y = Tp + i * rowH + 24, lo = Math.min(r[3], r[2]) - 6, hi = Math.max(r[4], r[2]) + 6, X = v => L + (v - lo) / (hi - lo) * (W - L - R);
+      const ok = r[2] >= r[3] - 1;
+      s += tx(L - 14, y + 5, T(r[0], r[1]), { a: 'end', fs: 13.5, w: 600 });
+      s += `<line x1="${L}" y1="${y}" x2="${W - R}" y2="${y}" class="ax"/>`;
+      s += `<rect x="${X(r[3])}" y="${y - 9}" width="${X(r[4]) - X(r[3])}" height="18" rx="9" style="fill:var(--ok-s);stroke:var(--ok);stroke-width:1"/>`;
+      s += tx(X(r[3]), y + 24, r[3], { a: 'middle', fs: 11, c: 'mut' }) + tx(X(r[4]), y + 24, r[4], { a: 'middle', fs: 11, c: 'mut' });
+      s += `<circle cx="${X(r[2])}" cy="${y}" r="7" style="fill:${ok ? 'var(--pri)' : 'var(--warn)'};stroke:var(--paper);stroke-width:2"/>`;
+      s += tx(X(r[2]), y - 13, NF(r[2], 1), { a: 'middle', fs: 12, w: 700 });
+    });
+    return svgEl(W, H, s, T('Perfil de proteína ideal', 'Ideal-protein profile'));
+  },
+
+  /* ---- validación ---- */
+  validacion() {
+    const grupos = [['EM', T('Energía', 'Energy'), ['EM']], ['PC', T('Proteína', 'Protein'), ['PC']], ['AA', T('Aminoácidos', 'Amino acids'), ['Lys', 'Met', 'MC', 'Thr', 'Trp', 'Arg', 'Ile', 'Val']], ['Min', T('Ca, P disp., Na', 'Ca, avail. P, Na'), ['Ca', 'Pd', 'Na']]];
+    const papers = ['Maldonado-Fuentes 2020', 'Obeidat 2025', 'Bauer 2025', 'Gregg 2022'], cols = ['var(--b1)', 'var(--b5)', 'var(--b3)', 'var(--b7)'];
+    const W = 720, rowH = 64, Tp = 34, L = 140, R = 20, H = Tp + grupos.length * rowH + 30, lim = 30, X = v => L + (Math.max(-lim, Math.min(lim, v)) + lim) / (2 * lim) * (W - L - R);
+    let s = '';
+    const lx = [0, 178, 290, 392]; papers.forEach((p, i) => { s += `<circle cx="${L + lx[i] + 6}" cy="12" r="5.5" style="fill:${cols[i]}"/>` + tx(L + lx[i] + 16, 16, p, { fs: 11.5 }); });
+    grupos.forEach((g, gi) => {
+      const y = Tp + gi * rowH, band = (g[0] === 'EM' || g[0] === 'PC') ? 3 : 10;
+      s += `<rect x="${X(-10)}" y="${y + 6}" width="${X(10) - X(-10)}" height="${rowH - 12}" style="fill:var(--soft)"/>`;
+      s += `<rect x="${X(-3)}" y="${y + 6}" width="${X(3) - X(-3)}" height="${rowH - 12}" style="fill:var(--ok-s)"/>`;
+      s += tx(L - 14, y + rowH / 2 + 5, g[1], { a: 'end', fs: 13, w: 600 });
+      let n = 0;
+      VAL.forEach(v => v[2].forEach(c => {
+        if (!g[2].includes(c[0])) return;
+        const pi = papers.indexOf(v[0]), jitter = ((n++ * 37) % 9 - 4) * 4.2, cx = X(c[3]), cy = y + rowH / 2 + jitter;
+        s += c[4] ? `<path d="M${cx} ${cy - 7} L${cx + 7} ${cy} L${cx} ${cy + 7} L${cx - 7} ${cy}Z" style="fill:none;stroke:${cols[pi]};stroke-width:1.8"/>`
+          : `<circle cx="${cx}" cy="${cy}" r="5.2" style="fill:${cols[pi]};opacity:.88;stroke:var(--paper);stroke-width:1"/>`;
+      }));
+    });
+    [-30, -20, -10, -3, 0, 3, 10, 20, 30].forEach(v => s += tx(X(v), H - 8, (v === -30 ? '≤ ' : v === 30 ? '≥ ' : '') + (v > 0 ? '+' : v < 0 ? '−' : '') + Math.abs(v) + ' %', { a: 'middle', fs: 11, c: 'mut' }));
+    s += `<line x1="${X(0)}" y1="${Tp}" x2="${X(0)}" y2="${H - 24}" style="stroke:var(--text);stroke-width:1"/>`;
+    return svgEl(W, H, s, T('Diferencias de la validación', 'Validation differences'));
+  }
+};
+function drawCharts(){
+  $$('figure[data-chart]').forEach(f => {
+    let box = f.querySelector('.chart');
+    if (!box) { box = document.createElement('div'); box.className = 'chart'; f.insertBefore(box, f.firstChild); }
+    box.innerHTML = CHARTS[f.dataset.chart]();
+  });
+  $('#coverArt').innerHTML = `<div class="chart" style="box-shadow:var(--shadow-lg)">${CHARTS.region(true)}</div>`;
+  $('#tOpt').innerHTML = OPT.map(o => `<tr><td>${o[0]} · ${T(o[1], o[2])}</td><td class="r">${NF(o[3], 2)}</td><td class="r"><b>${NF(o[4], 2)}</b></td><td class="c"><span class="badge ok">✓</span></td></tr>`).join('');
+}
+
+/* =====================================================================
+   IDIOMA, TEMA, FIGURAS, ÍNDICE, BÚSQUEDA (mismo esqueleto que el
+   Instructivo del Productor)
+   ===================================================================== */
+function getLang(){
+  const u = new URLSearchParams(location.search).get('lang');
+  if (u === 'es' || u === 'en') return u;
+  try { const s = localStorage.getItem('ratioavis_lang'); if (s === 'es' || s === 'en') return s; } catch (_) {}
+  return (navigator.language || 'es').toLowerCase().startsWith('es') ? 'es' : 'en';
+}
+let LANG = getLang();
+function setLang(l){
+  LANG = l; document.documentElement.lang = l; document.documentElement.dataset.lang = l;
+  $$('.seg button').forEach(b => b.classList.toggle('on', b.dataset.lang === l));
+  $('#q').placeholder = l === 'es' ? 'Buscar en el instructivo…' : 'Search the guide…';
+  document.title = l === 'es' ? 'RatioAvis · Instructivo del Científico' : 'RatioAvis · Scientist Guide';
+  $('#pdfBtn').href = l === 'es' ? 'instructivo/RatioAvis-Instructivo-Cientifico.pdf' : 'instructivo/RatioAvis-Scientist-Guide.pdf';
+  try { localStorage.setItem('ratioavis_lang', l); } catch (_) {}
+  drawCharts(); buildToc(); numberFigures(); buscar();
+}
+$$('.seg button').forEach(b => b.addEventListener('click', () => setLang(b.dataset.lang)));
+
+function setTheme(t){
+  if (t) document.documentElement.dataset.theme = t; else delete document.documentElement.dataset.theme;
+  const dark = t ? t === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
+  $('#temaBtn').textContent = dark ? '☀' : '☾';
+}
+try { setTheme(localStorage.getItem('ratioavis_tema')); } catch (_) { setTheme(null); }
+$('#temaBtn').addEventListener('click', () => {
+  const cur = document.documentElement.dataset.theme || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  const nt = cur === 'dark' ? 'light' : 'dark'; setTheme(nt); try { localStorage.setItem('ratioavis_tema', nt); } catch (_) {}
+});
+
+$$('figure[data-fig]').forEach(fig => {
+  const id = fig.dataset.fig, cap = fig.querySelector('figcaption');
+  const order = (fig.dataset.marks || '').split(',').filter(Boolean).map(Number);
+  const holder = document.createElement('div');
+  ['es', 'en'].forEach(l => {
+    const shot = document.createElement('div'); shot.className = 'shot'; shot.lang = l;
+    const img = new Image(); img.src = `instructivo/img/${id}-${l}.jpg`; img.loading = new URLSearchParams(location.search).has('eager') ? 'eager' : 'lazy'; img.decoding = 'async';
+    img.alt = (cap ? cap.querySelector(`[lang="${l}"] b`)?.textContent : '') || id;
+    shot.appendChild(img);
+    const data = CAP[`${id}-${l}`];
+    order.forEach((mi, n) => {
+      const m = data && data.marks && data.marks[mi]; if (!m) return;
+      const mk = document.createElement('span'); mk.className = 'mk';
+      mk.style.left = m.l + '%'; mk.style.top = m.t + '%'; mk.style.width = (m.r - m.l) + '%'; mk.style.height = (m.b - m.t) + '%';
+      mk.innerHTML = `<span class="ring"></span><span class="num">${n + 1}</span>`;
+      shot.appendChild(mk);
+    });
+    shot.addEventListener('click', () => { const z = $('#zoom .zi'); z.innerHTML = ''; const c = shot.cloneNode(true); c.querySelector('img').loading = 'eager'; z.appendChild(c); $('#zoom').classList.add('on'); });
+    holder.appendChild(shot);
+  });
+  fig.insertBefore(holder, fig.firstChild);
+});
+$('#zoom').addEventListener('click', () => $('#zoom').classList.remove('on'));
+document.addEventListener('keydown', e => { if (e.key === 'Escape') { $('#zoom').classList.remove('on'); $('#toc').classList.remove('open'); } });
+
+function numberFigures(){
+  let i = 0;
+  $$('figure .fn').forEach(fn => { i++; fn.textContent = (LANG === 'es' ? 'Figura ' : 'Figure ') + i; });
+}
+const GRUPOS = { leer: ['Preliminares', 'Front matter'], modelo: ['Método', 'Method'], datos: ['El caso', 'The case'], validacion: ['Evidencia y uso', 'Evidence and use'] };
+function txt(el){ const x = el.querySelector(`[lang="${LANG}"]`); return (x || el).textContent.trim(); }
+function buildToc(){
+  const ol = $('#tocList'); ol.innerHTML = '';
+  $$('section.chap').forEach(sec => {
+    const g = GRUPOS[sec.id]; if (g) { const li = document.createElement('li'); li.className = 'grp'; li.textContent = g[LANG === 'es' ? 0 : 1]; ol.appendChild(li); }
+    const h2 = sec.querySelector('h2[lang="' + LANG + '"]') || sec.querySelector('h2');
+    const li = document.createElement('li'); li.dataset.sec = sec.id;
+    li.innerHTML = `<a href="#${sec.id}" style="--c:${getComputedStyle(sec).getPropertyValue('--c')}"><span class="n">${sec.dataset.toc}</span><span>${h2 ? h2.textContent : ''}</span></a>`;
+    ol.appendChild(li);
+    const subs = $$('h3[id][data-n]', sec);
+    if (subs.length) {
+      const so = document.createElement('ol'); so.className = 'sub';
+      subs.forEach(h => { const s = document.createElement('li'); s.dataset.sec = h.id; s.innerHTML = `<a href="#${h.id}">${txt(h)}</a>`; so.appendChild(s); });
+      li.appendChild(so);
+    }
+    const nav = sec.querySelector('.inchap');
+    if (nav) nav.innerHTML = subs.map(h => `<a href="#${h.id}" data-n="${h.dataset.n}">${txt(h)}</a>`).join('');
+    subs.forEach(h => { if (!h.querySelector('.sn')) h.insertAdjacentHTML('afterbegin', `<span class="sn">${h.dataset.n}</span>`); });
+  });
+  spy();
+}
+$('#tocList').addEventListener('click', e => { if (e.target.closest('a')) $('#toc').classList.remove('open'); });
+$('#menuBtn').addEventListener('click', () => $('#toc').classList.toggle('open'));
+function spy(){
+  const y = scrollY + 120; let cur = null;
+  $$('section.chap, h3[id]').forEach(el => { if (el.getBoundingClientRect().top + scrollY <= y) cur = el.id; });
+  $$('#tocList a').forEach(a => a.classList.toggle('act', a.getAttribute('href') === '#' + cur));
+  const h = document.documentElement.scrollHeight - innerHeight;
+  $('#leido').style.width = (h > 0 ? 100 * scrollY / h : 0) + '%';
+  $('.totop').classList.toggle('on', scrollY > 900);
+}
+addEventListener('scroll', spy, { passive: true });
+
+const norm = s => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+function buscar(){
+  const q = norm($('#q').value.trim()), hits = $('#hits');
+  const items = $$('#tocList > li[data-sec]');
+  if (q.length < 2) { items.forEach(li => { li.classList.remove('hide'); $$('.sub li', li).forEach(s => s.classList.remove('hide')); }); hits.textContent = ''; return; }
+  let n = 0;
+  items.forEach(li => {
+    const sec = document.getElementById(li.dataset.sec);
+    let any = false;
+    $$('.sub li', li).forEach(s => {
+      const h = document.getElementById(s.dataset.sec); let seg = '', el = h;
+      do { seg += ' ' + (el.matches && el.matches(`[lang="${LANG}"]`) ? el.textContent : $$(`[lang="${LANG}"]`, el).map(x => x.textContent).join(' ')); el = el.nextElementSibling; } while (el && el.tagName !== 'H3');
+      const ok = norm(seg).includes(q); s.classList.toggle('hide', !ok); if (ok) { any = true; n++; }
+    });
+    const self = norm($$(`[lang="${LANG}"]`, sec).map(x => x.textContent).join(' ')).includes(q); if (self && !any) n++;
+    li.classList.toggle('hide', !(self || any));
+  });
+  hits.textContent = n ? (LANG === 'es' ? `${n} coincidencia${n > 1 ? 's' : ''}` : `${n} match${n > 1 ? 'es' : ''}`) : (LANG === 'es' ? 'Sin coincidencias' : 'No matches');
+}
+$('#q').addEventListener('input', buscar);
+$('#q').addEventListener('keydown', e => { if (e.key === 'Enter') { const a = $('#tocList li:not(.hide) .sub li:not(.hide) a') || $('#tocList li:not(.hide) a'); if (a) a.click(); } });
+
+const GLOS = [
+  ['Base óptima', 'Optimal basis', 'Conjunto de variables básicas en el óptimo; mientras no cambie, precios sombra y costos reducidos son constantes.', 'Set of basic variables at the optimum; while it does not change, shadow prices and reduced costs stay constant.'],
+  ['Brecha primal–dual', 'Primal–dual gap', 'Diferencia relativa entre el costo de la dieta y el valor dual; cero en el óptimo.', 'Relative difference between diet cost and dual value; zero at the optimum.'],
+  ['Costo reducido', 'Reduced cost', 'Aumento del costo por punto % que se obligue a entrar a un ingrediente fuera de la base.', 'Cost increase per % point a non-basic ingredient is forced in.'],
+  ['Degeneración', 'Degeneracy', 'Vértice con alguna variable básica en cero; puede provocar ciclos sin una regla anticiclado.', 'Vertex with a basic variable at zero; may cause cycling without an anti-cycling rule.'],
+  ['Digestible ileal estandarizado (DIE)', 'Standardized ileal digestible (SID)', 'Fracción del aminoácido absorbida al final del íleon, corregida por pérdidas endógenas basales.', 'Fraction of the amino acid absorbed by the end of the ileum, corrected for basal endogenous losses.'],
+  ['Factibilidad', 'Feasibility', 'Existencia de al menos una dieta que cumple todas las restricciones.', 'Existence of at least one diet meeting every constraint.'],
+  ['Holgura complementaria', 'Complementary slackness', 'Una restricción no activa tiene precio sombra cero, y viceversa.', 'A non-binding constraint has a zero shadow price, and vice versa.'],
+  ['Precio de entrada', 'Entry price', 'Precio por debajo del cual un ingrediente no usado entraría a la fórmula: c − d.', 'Price below which an unused ingredient would enter the formula: c − d.'],
+  ['Precio sombra', 'Shadow price', 'Variable dual: cambio del costo óptimo por unidad de lado derecho de una restricción.', 'Dual variable: change in optimal cost per unit of a constraint’s right-hand side.'],
+  ['Programación lineal', 'Linear programming', 'Optimización de una función lineal sujeta a restricciones lineales.', 'Optimization of a linear function subject to linear constraints.'],
+  ['Proteína ideal', 'Ideal protein', 'Perfil de aminoácidos esenciales expresado como % de la lisina.', 'Essential amino-acid profile expressed as % of lysine.'],
+  ['Regla de Bland', 'Bland’s rule', 'Criterio de pivoteo por menor índice que evita ciclos en el símplex.', 'Lowest-index pivoting rule that prevents cycling in simplex.'],
+  ['Restricción activa', 'Binding constraint', 'Restricción que se cumple con igualdad en el óptimo.', 'Constraint met with equality at the optimum.'],
+  ['Variable artificial', 'Artificial variable', 'Variable auxiliar de la fase I para obtener una base inicial factible.', 'Auxiliary phase-I variable used to obtain an initial feasible basis.']
+];
+$('#glos').innerHTML = GLOS.map(g => `<dt><span lang="es">${g[0]}<small>${g[1]}</small></span><span lang="en">${g[1]}<small>${g[0]}</small></span></dt><dd><span lang="es">${g[2]}</span><span lang="en">${g[3]}</span></dd>`).join('');
+
+document.addEventListener('click', e => {
+  const b = e.target.closest('[data-copy]'); if (!b) return;
+  const el = document.getElementById(b.dataset.copy); const t = el.querySelector('p') ? el.querySelector('p').innerText : el.innerText;
+  try { navigator.clipboard.writeText(t); const o = b.textContent; b.textContent = LANG === 'es' ? 'Copiado ✓' : 'Copied ✓'; setTimeout(() => b.textContent = o, 1400); } catch (_) {}
+});
+addEventListener('beforeprint', () => $$('img[loading="lazy"]').forEach(i => i.loading = 'eager'));
+matchMedia('(prefers-color-scheme: dark)').addEventListener('change', drawCharts);
+
+setLang(LANG);
+addEventListener('load', () => { const h = decodeURIComponent(location.hash.slice(1)); const el = h && document.getElementById(h); if (el) { document.documentElement.style.scrollBehavior = 'auto'; el.scrollIntoView(); document.documentElement.style.scrollBehavior = ''; } });
+</script>
+</body>
+</html>

@@ -10,6 +10,8 @@
 
 📘 **Instructivo del Productor · Producer Guide:** https://hectortecumshe-ai.github.io/RatioAvis/instructivo-productor.html — [PDF ES](instructivo/RatioAvis-Instructivo-Productor.pdf) · [PDF EN](instructivo/RatioAvis-Producer-Guide.pdf)
 
+🔬 **Instructivo del Científico · Scientist Guide:** https://hectortecumshe-ai.github.io/RatioAvis/instructivo-cientifico.html — [PDF ES](instructivo/RatioAvis-Instructivo-Cientifico.pdf) · [PDF EN](instructivo/RatioAvis-Scientist-Guide.pdf)
+
 *Ratio* (latín): razón, cálculo, origen de la palabra «ración». *Avis*: ave.
 
 ---
