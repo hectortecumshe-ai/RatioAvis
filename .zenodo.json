@@ -10,6 +10,9 @@
     },
     {
       "name": "Barrera-Guzmán, Luis Ángel"
+    },
+    {
+      "name": "Velázquez-Vázquez, Guadalupe"
     }
   ],
   "description": "Bilingual (Spanish/English) single-file web application for least-cost broiler diet formulation by linear programming (two-phase simplex with duality optimality certificate). Includes genetic lines (Ross 308, Arbor Acres Plus, Cobb 500, Hubbard Efficiency Plus, slow-growing birds, NRC 1994, custom profile), production conditions, editable ingredient library, multiphase feeding program, reports and validation against published diets. Two views: producer (plain language, mixing sheet) and scientist (explicit LP model, shadow prices, reduced costs, duality certificate, reproducible JSON export).",

@@ -11,6 +11,8 @@ authors:
     family-names: "Mojica-Zárate"
   - given-names: "Luis Ángel"
     family-names: "Barrera-Guzmán"
+  - given-names: "Guadalupe"
+    family-names: "Velázquez-Vázquez"
 repository-code: "https://github.com/hectortecumshe-ai/RatioAvis"
 url: "https://hectortecumshe-ai.github.io/RatioAvis/"
 keywords: [broiler, least-cost formulation, linear programming, poultry nutrition, pollo de engorda]
