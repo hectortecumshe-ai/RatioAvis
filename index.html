@@ -608,7 +608,7 @@ const CONFIG = {
   version: '1.1.1',
   anio: 2026,
   autores: 'Héctor Tecumshé Mojica Zárate · Luis Ángel Barrera Guzmán · Guadalupe Velázquez Vázquez',
-  citaAutores: {es:'Mojica-Zárate, H. T., Barrera-Guzmán, L. A., y Velázquez-Vázquez, G.', en:'Mojica-Zárate, H. T., Barrera-Guzmán, L. A., & Velázquez-Vázquez, G.'},
+  citaAutores: {es:'Mojica-Zárate, H. T., Barrera-Guzmán, L. Á., y Velázquez-Vázquez, G.', en:'Mojica-Zárate, H. T., Barrera-Guzmán, L. Á., & Velázquez-Vázquez, G.'},
   titulo: {es:'Formulación guiada de dietas de mínimo costo para pollo de engorda', en:'Guided least-cost diet formulation for broiler chickens'},
   repo: 'https://github.com/hectortecumshe-ai/RatioAvis',
   doi: '10.5281/zenodo.23123050'   // ← cuando Zenodo asigne el DOI, escríbelo aquí (p. ej. '10.5281/zenodo.1234567')
@@ -1309,7 +1309,7 @@ function renderInicio(el){
     ['informe','i-report',T('Informe','Report'),T('Resumen redactado, PDF, tablas en CSV y el proyecto completo en un archivo.','Written summary, PDF, CSV tables and the whole project in one file.')],
     ['validacion','i-check',T('Validación','Validation'),T('Reproduce dietas de artículos científicos (México, MDPI) y muestra qué tanto coincide.','Reproduces diets from scientific papers (Mexico, MDPI) and shows how closely it matches.')]
   ];
-  const cita = `${esc(tx(CONFIG.citaAutores))} (${CONFIG.anio}). <i>${CONFIG.app}: ${esc(tx(CONFIG.titulo))}</i> (${T('Versión','Version')} ${CONFIG.version}) [Software]. ${CONFIG.doi?`https://doi.org/${CONFIG.doi}`:esc(CONFIG.repo)}`;
+  const cita = `${esc(tx(CONFIG.citaAutores))} (${CONFIG.anio}). <i>${CONFIG.app}: ${esc(tx(CONFIG.titulo))}</i> (${T('Versión','Version')} ${CONFIG.version}) [Software]. Zenodo. ${CONFIG.doi?`https://doi.org/${CONFIG.doi}`:esc(CONFIG.repo)}`;
   el.innerHTML = `
   <section class="hero">
     <div>
@@ -1385,7 +1385,7 @@ function renderInicio(el){
       <p class="muted" style="margin:0">${T('Resolver el problema matemático de una dieta es lo fácil. Lo que decide si la dieta funciona son las decisiones de alrededor: qué tabla de requerimientos usar, qué matriz de ingredientes, qué límites de inclusión, cómo ajustar por altitud o calor. RatioAvis pone el argumento técnico junto al número que lo justifica, en el momento en que hay que decidir, y muestra con dietas publicadas qué tanto puedes confiar en el resultado.','Solving the maths of a diet is the easy part. What makes a diet work are the decisions around it: which requirement table, which ingredient matrix, which inclusion limits, how to adjust for altitude or heat. RatioAvis places the technical argument next to the number that justifies it, right when the decision is made, and shows with published diets how far you can trust the result.')}</p>
     </div>
     <div class="cite">
-      <div class="k">${T('SI LA USAS EN UN TRABAJO, CÍTALA','IF YOU USE IT IN YOUR WORK, PLEASE CITE IT')}</div>
+      <div class="k">${T('¿CÓMO CITARLA? (APA, 7.ª ED.)','HOW TO CITE IT? (APA 7TH ED.)')}</div>
       <p style="margin:0 0 10px" id="citaTxt">${cita}</p>
       <div class="row"><button class="btn ghost sm" id="copiarCita">⧉ ${T('Copiar referencia','Copy reference')}</button>${CONFIG.doi?`<a class="doi" href="https://doi.org/${CONFIG.doi}" target="_blank" rel="noopener"><span>DOI</span><span>${CONFIG.doi}</span></a>`:''}</div>
     </div>
@@ -1842,7 +1842,7 @@ function renderInforme(el){
     resumen = `<div class="card"><div class="row between"><div><h2 style="margin:0 0 4px">${esc(S.proyecto.nombre||T('Dieta para pollo de engorda','Broiler diet'))}</h2>
       <p class="muted small" style="margin-top:0">${S.proyecto.granja?esc(S.proyecto.granja)+' · ':''}${S.proyecto.autor?esc(S.proyecto.autor)+' · ':''}${new Date(r.fecha).toLocaleDateString(LOC())} · RatioAvis ${CONFIG.version}</p></div><svg style="width:54px;height:54px"><use href="#i-logo" width="100%" height="100%"/></svg></div>
       <p style="max-width:88ch">${SCI()?textoSci:textoProd}</p>
-      <p class="small muted sci" style="max-width:88ch">${T('Cítese el software como','Cite the software as')}: ${esc(tx(CONFIG.citaAutores))} (${CONFIG.anio}). <i>${CONFIG.app}: ${esc(tx(CONFIG.titulo))}</i> (${T('Versión','Version')} ${CONFIG.version}) [Software]. ${CONFIG.doi?'https://doi.org/'+CONFIG.doi:esc(CONFIG.repo)}</p>
+      <p class="small muted sci" style="max-width:88ch">${T('Cómo citarla (APA, 7.ª ed.)','How to cite it (APA 7th ed.)')}: ${esc(tx(CONFIG.citaAutores))} (${CONFIG.anio}). <i>${CONFIG.app}: ${esc(tx(CONFIG.titulo))}</i> (${T('Versión','Version')} ${CONFIG.version}) [Software]. Zenodo. ${CONFIG.doi?'https://doi.org/'+CONFIG.doi:esc(CONFIG.repo)}</p>
       <div class="tbl"><table><thead><tr><th>${T('Ingrediente','Ingredient')}</th><th class="r">%</th><th class="r">kg / t</th></tr></thead><tbody>
       ${usados.map(x=>`<tr><td>${esc(nombre(x))}</td><td class="r">${fmt(x.pct,3)}</td><td class="r">${fmt(x.pct*10,2)}</td></tr>`).join('')}</tbody></table></div></div>`;
   }
